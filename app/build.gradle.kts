@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.swimminginstructorlocator"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -59,4 +59,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
