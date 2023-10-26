@@ -1,29 +1,32 @@
-package com.example.swimminginstructorlocator.ui.dashboard
+package com.example.swimminginstructorlocator.ui.instructor.detail
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.swimminginstructorlocator.databinding.FragmentDashboardBinding
+import com.example.swimminginstructorlocator.R
+import com.example.swimminginstructorlocator.databinding.FragmentInstructorDetailBinding
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
 import java.lang.Exception
 
-class DashboardFragment : BaseViewBindingFragment<FragmentDashboardBinding>(),
-    DashboardContract.View {
-
-    private lateinit var dashboardPresenter: DashboardPresenter
+class InstructorDetailFragment : BaseViewBindingFragment<FragmentInstructorDetailBinding>(),
+    InstructorDetailContract.View {
 
     override fun createBindingFragment(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentDashboardBinding {
-        return FragmentDashboardBinding.inflate(inflater, container, false)
+    ): FragmentInstructorDetailBinding {
+        return FragmentInstructorDetailBinding.inflate(inflater, container, false)
     }
 
     override fun initData() {
-//        TODO("Not yet implemented")
     }
 
     override fun initView() {
+    }
+
+    override fun onSearchInstructor() {
 //        TODO("Not yet implemented")
     }
 
@@ -33,6 +36,6 @@ class DashboardFragment : BaseViewBindingFragment<FragmentDashboardBinding>(),
 
     companion object {
         @JvmStatic
-        fun newInstance() = DashboardFragment()
+        fun newInstance() = InstructorDetailFragment()
     }
 }

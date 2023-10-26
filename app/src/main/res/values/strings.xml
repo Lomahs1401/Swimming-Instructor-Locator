@@ -6,4 +6,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_instructor">Search Instructor</string>
     <string name="instructor_name">Nguyễn Thị Ánh Viên</string>
+    <string name="detail">Detail</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,6 +1,10 @@
 package com.example.swimminginstructorlocator.data.model
 
-data class Teacher(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Instructor(
     val name: String,
     val avatar: String,
     val email: String,
@@ -10,4 +14,4 @@ data class Teacher(
     val weight: String,
     val height: String,
     val id: String
-)
+) : Parcelable

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.teacher.detail.TeacherDetailFragment">
+    tools:context=".ui.instructor.detail.InstructorDetailFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
