@@ -3,6 +3,7 @@ package com.example.swimminginstructorlocator
 import androidx.fragment.app.Fragment
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
+import com.example.swimminginstructorlocator.ui.course.list.CourseListFragment
 import com.example.swimminginstructorlocator.ui.dashboard.DashboardFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
 import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
