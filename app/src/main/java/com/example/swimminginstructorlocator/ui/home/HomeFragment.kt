@@ -1,42 +1,56 @@
 package com.example.swimminginstructorlocator.ui.home
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.repo.InstructorRepo
+import com.example.swimminginstructorlocator.data.repo.source.remote.InstructorRemoteDataSource
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
+import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import java.lang.Exception
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View {
 
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var homePresenter: HomePresenter
+    private var listInstructors: MutableList<Instructor> = mutableListOf()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-        return root
+    override fun createBindingFragment(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun initData() {
+        homePresenter = HomePresenter(
+            InstructorRepo.getInstanceInstructorRemoteRepo(InstructorRemoteDataSource.getInstance())
+        )
+        homePresenter.setView(this)
+    }
+
+    override fun initView() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onGetListInstructor() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onSearchInstructor() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onViewMoreInstructors() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onError(exception: Exception?) {
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = HomeFragment()
     }
 }

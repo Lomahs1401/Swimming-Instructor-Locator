@@ -1,4 +1,4 @@
-package com.example.swimminginstructorlocator.data.repo.source.fetchjson
+package com.example.swimminginstructorlocator.data.repo.source.remote.fetchjson
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

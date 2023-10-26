@@ -3,8 +3,11 @@ package com.example.swimminginstructorlocator
 import androidx.fragment.app.Fragment
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
-import com.example.swimminginstructorlocator.ui.teacher.detail.TeacherDetailFragment
-import com.example.swimminginstructorlocator.ui.teacher.search.SearchTeacherFragment
+import com.example.swimminginstructorlocator.ui.dashboard.DashboardFragment
+import com.example.swimminginstructorlocator.ui.home.HomeFragment
+import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
+import com.example.swimminginstructorlocator.ui.instructor.search.SearchInstructorFragment
+import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
@@ -37,34 +40,13 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     override fun initData() {
     }
 
-
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-////        val navView: BottomNavigationView = binding.navView
-////
-////        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-////        // Passing each menu ID as a set of Ids because each
-////        // menu should be considered as top level destinations.
-////        val appBarConfiguration = AppBarConfiguration(setOf(
-////                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-////        setupActionBarWithNavController(navController, appBarConfiguration)
-////        navView.setupWithNavController(navController)
-//
-//
-//    }
-
     private fun getFragmentList(): List<Fragment> {
         return listOf(
-            HomeFragment.newInstance("Param 1", "Param 2"),
-            HomeFragment.newInstance("Param 1", "Param 2"),
-            HomeFragment.newInstance("Param 1", "Param 2"),
-            SearchTeacherFragment.newInstance("Param 1", "Param 2"),
-            TeacherDetailFragment.newInstance("Param 1", "Param 2"),
+            HomeFragment.newInstance(),
+            DashboardFragment.newInstance(),
+            NotificationsFragment.newInstance(),
+            SearchInstructorFragment.newInstance(),
+            InstructorDetailFragment.newInstance(),
         )
     }
 }
