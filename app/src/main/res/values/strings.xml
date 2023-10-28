@@ -8,4 +8,12 @@
     <string name="instructor_name">Nguyễn Thị Ánh Viên</string>
     <string name="detail">Detail</string>
     <string name="search">Search</string>
+    <string name="loading">Loading…</string>
+    <string name="popular_course">Popular Course</string>
+    <string name="see_all">See all ➜</string>
+    <string name="course_name">Beginner Swim Class</string>
+    <string name="course_instructor">Instructor: John Doe</string>
+    <string name="course_date">Date: 2023-10-30</string>
+    <string name="course_locator">Location: Community Pool</string>
+    <string name="course_description">Description: Learn the basics of swimming.</string>
 </resources>
