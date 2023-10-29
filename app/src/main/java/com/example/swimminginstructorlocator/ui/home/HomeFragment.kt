@@ -2,21 +2,31 @@ package com.example.swimminginstructorlocator.ui.home
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.HomeChildAdapter
+import com.example.swimminginstructorlocator.api.InstructorApi
+import com.example.swimminginstructorlocator.api.UserApi
+import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
-import com.example.swimminginstructorlocator.data.service.local.InstructorServiceLocal
 import com.example.swimminginstructorlocator.data.service.remote.InstructorServiceRemote
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
 import com.example.swimminginstructorlocator.listener.OnInstructorItemClickListener
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.lang.Exception
 
 class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View, OnInstructorItemClickListener {
@@ -27,8 +37,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     private var listCenters: MutableList<Center> = mutableListOf()
     private var listCourses: MutableList<Course> = mutableListOf()
     private var listInstructors: MutableList<Instructor> = mutableListOf()
-
-
 
     private val homeChildAdapter: HomeChildAdapter by lazy {
         HomeChildAdapter(
@@ -60,9 +68,34 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
         dialog.dismiss()
     }
 
+    private fun getUsers() {
+        UserApi.userApi.getUsers().enqueue(object : Callback<UserApi.ApiResponse> {
+            override fun onResponse(
+                call: Call<UserApi.ApiResponse>,
+                response: Response<UserApi.ApiResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val apiResponse = response.body()
+                    val listUsers = apiResponse?.user
+                    listUsers?.let {
+                        for (user in it) {
+                            Log.i(Constant.TAG, "onResponse: ${user.username}")
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserApi.ApiResponse>, t: Throwable) {
+                Log.e(Constant.TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
     override fun initView() {
         homeChildAdapter.setData(getListHomeChild())
         binding.rcvHomeParent.adapter = homeChildAdapter
+
+        getUsers()
     }
 
     override fun onGetListCenters(listCenters: MutableList<Center>) {

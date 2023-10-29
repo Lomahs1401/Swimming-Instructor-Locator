@@ -6,13 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
+    @SerializedName("_id")
     val id: String,
-    @SerializedName("name")
     val username: String,
     val password: String,
     val avatar: String,
     val email: String,
-    @SerializedName("sex")
     val gender: Int,
     val address: String,
     val phone: String,

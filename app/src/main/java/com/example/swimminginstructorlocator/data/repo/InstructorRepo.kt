@@ -17,10 +17,10 @@ import retrofit2.http.GET
 
 class InstructorRepo private constructor() {
 
-    @GET("/class/?fbclid=IwAR3xSih2xRKMq2BKlMGM7LzB2qV28gm-H_0ZbV6A6p6j3SdlKYDrgIxFGRQ")
+    @GET("/user")
     fun getInstructors() {
         val api = Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL_USER)
+            .baseUrl(Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(InstructorApi::class.java)
