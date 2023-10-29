@@ -10,4 +10,5 @@
     <color name="primary_color">#E2EBF6</color>
     <color name="yellow">#FFC153</color>
     <color name="gray">#A6A4A4</color>
+    <color name="lightDarkLayout">#994E4A4A</color>
 </resources>
