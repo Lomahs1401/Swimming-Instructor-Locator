@@ -12,7 +12,8 @@ import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
-import com.example.swimminginstructorlocator.data.repo.source.remote.InstructorRemoteDataSource
+import com.example.swimminginstructorlocator.data.service.local.InstructorServiceLocal
+import com.example.swimminginstructorlocator.data.service.remote.InstructorServiceRemote
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
 import com.example.swimminginstructorlocator.listener.OnInstructorItemClickListener
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
@@ -26,6 +27,8 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     private var listCenters: MutableList<Center> = mutableListOf()
     private var listCourses: MutableList<Course> = mutableListOf()
     private var listInstructors: MutableList<Instructor> = mutableListOf()
+
+
 
     private val homeChildAdapter: HomeChildAdapter by lazy {
         HomeChildAdapter(
@@ -44,7 +47,8 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
 
     override fun initData() {
         homePresenter = HomePresenter(
-            InstructorRepo.getInstanceInstructorRemoteRepo(InstructorRemoteDataSource.getInstance())
+            null,
+            InstructorServiceRemote.getInstance(InstructorRepo.getInstance())
         )
         homePresenter.setView(this)
 
@@ -52,6 +56,8 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
             setTitle(getString(R.string.loading))
             show()
         }
+
+        dialog.dismiss()
     }
 
     override fun initView() {

@@ -1,43 +1,56 @@
 package com.example.swimminginstructorlocator.data.repo
 
 import android.content.ContentResolver
+import android.util.Log
+import com.example.swimminginstructorlocator.api.InstructorApi
+import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.Instructor
-import com.example.swimminginstructorlocator.data.repo.source.InstructorDataSource
+import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import retrofit2.http.GET
 
-class InstructorRepo private constructor(
-    private val local: InstructorDataSource.Local?,
-    private val remote: InstructorDataSource.Remote?,
-) : InstructorDataSource.Local, InstructorDataSource.Remote {
-    override fun getInstructorsLocal(
-        contentResolver: ContentResolver,
-        listener: OnResultListener<MutableList<Instructor>>
-    ) {
-        local?.getInstructorsLocal(contentResolver, listener)
-    }
+class InstructorRepo private constructor() {
 
-    override fun getInstructorsRemote(listener: OnResultListener<MutableList<Instructor>>) {
-        remote?.getInstructorsRemote(listener)
-    }
+    @GET("/class/?fbclid=IwAR3xSih2xRKMq2BKlMGM7LzB2qV28gm-H_0ZbV6A6p6j3SdlKYDrgIxFGRQ")
+    fun getInstructors() {
+        val api = Retrofit.Builder()
+            .baseUrl(Constant.BASE_URL_USER)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(InstructorApi::class.java)
 
-    override fun searchInstructor(listener: OnResultListener<MutableList<Instructor>>) {
-        remote?.searchInstructor(listener)
+        api.getInstructors().enqueue(object : Callback<MutableList<Instructor>> {
+            override fun onResponse(
+                call: Call<MutableList<Instructor>>,
+                response: Response<MutableList<Instructor>>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        for (instructor in it) {
+                            Log.i(Constant.TAG, "onResponse: ${instructor.name}")
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<Instructor>>, t: Throwable) {
+                Log.e(Constant.TAG, "onFailure: ${t.message}")
+            }
+        })
     }
 
     companion object {
         private var instance: InstructorRepo? = null
 
-        fun getInstanceInstructorLocalRepo(local: InstructorDataSource.Local): InstructorRepo {
+        fun getInstance(): InstructorRepo {
             return synchronized(this) {
-                instance ?: InstructorRepo(local, null).also {
-                    instance = it
-                }
-            }
-        }
-
-        fun getInstanceInstructorRemoteRepo(remote: InstructorDataSource.Remote): InstructorRepo {
-            return synchronized(this) {
-                instance ?: InstructorRepo(null, remote).also {
+                instance ?: InstructorRepo().also {
                     instance = it
                 }
             }
