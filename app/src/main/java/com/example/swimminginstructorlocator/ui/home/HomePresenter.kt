@@ -1,9 +1,15 @@
 package com.example.swimminginstructorlocator.ui.home
 
-import com.example.swimminginstructorlocator.data.repo.InstructorRepo
+import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
+import com.example.swimminginstructorlocator.data.service.local.InstructorServiceLocal
+import com.example.swimminginstructorlocator.data.service.remote.InstructorServiceRemote
+import com.example.swimminginstructorlocator.listener.OnResultListener
+import java.lang.Exception
 
 class HomePresenter(
-    private val instructorRepo: InstructorRepo
+    private val instructorServiceLocal: InstructorServiceLocal?,
+    private val instructorServiceRemote: InstructorServiceRemote?,
 ) : HomeContract.Presenter {
 
     private var view: HomeContract.View? = null
@@ -20,11 +26,31 @@ class HomePresenter(
         this.view = view
     }
 
-    override fun getListInstructors() {
+    override fun getListCenters() {
 //        TODO("Not yet implemented")
     }
 
-    override fun searchInstructor() {
+    override fun getListCourses() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun getListInstructors() {
+        instructorServiceRemote?.getInstructors(object : OnResultListener<MutableList<Instructor>> {
+            override fun onSuccess(dataResult: MutableList<Instructor>) {
+//                TODO("Not yet implemented")
+            }
+
+            override fun onError(exception: Exception?) {
+//                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    override fun viewMoreCenters() {
+//        TODO("Not yet implemented")
+    }
+
+    override fun viewMoreCourses() {
 //        TODO("Not yet implemented")
     }
 
