@@ -16,4 +16,9 @@
     <string name="course_date">Date: 2023-10-30</string>
     <string name="course_locator">Location: Community Pool</string>
     <string name="course_description">Description: Learn the basics of swimming.</string>
+    <string name="top_instructors">Top Instructors</string>
+    <string name="top_centers">Top Centers</string>
+    <string name="center_name">Trung tâm dạy bơi kèm Đà Nẵng BP - Swimming Center</string>
+    <string name="center_phone">(+84) 0935 468 419</string>
+    <string name="center_address">962 Ngô Quyền - Sơn Trà</string>
 </resources>
