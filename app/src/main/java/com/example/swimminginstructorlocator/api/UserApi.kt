@@ -13,7 +13,7 @@ interface UserApi {
 
     data class ApiResponse(
         val message: String,
-        val user: MutableList<User>
+        val users: MutableList<User>
     )
 
     companion object {

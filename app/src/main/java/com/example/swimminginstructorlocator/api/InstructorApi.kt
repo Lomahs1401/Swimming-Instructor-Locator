@@ -5,7 +5,13 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface InstructorApi {
-    @GET
-    fun getInstructors(): Call<MutableList<Instructor>>
+
+    data class ApiResponse(
+        val message: String,
+        val data: MutableList<Instructor>
+    )
+
+    @GET("teacher")
+    fun getInstructors(): Call<ApiResponse>
 
 }

@@ -8,12 +8,12 @@ import kotlinx.parcelize.Parcelize
 data class Instructor(
     @SerializedName("_id")
     val id: String,
-    val name: String,
-    val avatar: String,
-    val email: String,
-    val gender: Int,
-    val address: String,
-    val phone: String,
-    val weight: String,
-    val height: String,
+    @SerializedName("teacher_name")
+    val instructorName: String,
+    var image: String,
+    val description: String,
+    val certificate: String,
+    val graduate: String,
+    @SerializedName("experience")
+    val yearExperiences: Int,
 ) : Parcelable

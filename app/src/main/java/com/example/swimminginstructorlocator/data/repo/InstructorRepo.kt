@@ -1,45 +1,49 @@
 package com.example.swimminginstructorlocator.data.repo
 
-import android.content.ContentResolver
 import android.util.Log
 import com.example.swimminginstructorlocator.api.InstructorApi
 import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.Instructor
-import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.GET
 
-class InstructorRepo private constructor() {
+class InstructorRepo {
 
-    @GET("/user")
-    fun getInstructors() {
+    fun getInstructors(listener: OnResultListener<MutableList<Instructor>>) {
         val api = Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(InstructorApi::class.java)
 
-        api.getInstructors().enqueue(object : Callback<MutableList<Instructor>> {
+        api.getInstructors().enqueue(object : Callback<InstructorApi.ApiResponse> {
             override fun onResponse(
-                call: Call<MutableList<Instructor>>,
-                response: Response<MutableList<Instructor>>
+                call: Call<InstructorApi.ApiResponse>,
+                response: Response<InstructorApi.ApiResponse>
             ) {
+                val instructorResponse = response.body()
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        for (instructor in it) {
-                            Log.i(Constant.TAG, "onResponse: ${instructor.name}")
+                    instructorResponse?.let {
+                        val listInstructors = mutableListOf<Instructor>()
+                        for (instructor in it.data) {
+                            instructor.image = Constant.INSTRUCTOR_ICON_URL
+                            listInstructors.add(instructor)
                         }
+                        listener.onSuccess(listInstructors)
                     }
+                    instructorResponse?.let { Log.i(Constant.TAG, it.message) }
+                } else {
+                    instructorResponse?.let { Log.i(Constant.TAG, it.message) }
                 }
             }
 
-            override fun onFailure(call: Call<MutableList<Instructor>>, t: Throwable) {
+            override fun onFailure(call: Call<InstructorApi.ApiResponse>, t: Throwable) {
+                val ex = Exception("Oops.. Please try again")
+                listener.onError(ex)
                 Log.e(Constant.TAG, "onFailure: ${t.message}")
             }
         })

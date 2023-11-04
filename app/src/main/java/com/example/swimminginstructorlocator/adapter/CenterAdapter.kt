@@ -1,9 +1,11 @@
 package com.example.swimminginstructorlocator.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.ItemCenterBinding
 
 class CenterAdapter : RecyclerView.Adapter<CenterAdapter.CenterViewHolder>() {
@@ -23,7 +25,14 @@ class CenterAdapter : RecyclerView.Adapter<CenterAdapter.CenterViewHolder>() {
         holder.bindData(listCenters[position])
     }
 
-    inner class CenterViewHolder(private val binding: ItemCenterBinding) : RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(listCenters: MutableList<Center>) {
+        this.listCenters = listCenters
+        notifyDataSetChanged()
+    }
+
+    inner class CenterViewHolder(private val binding: ItemCenterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindData(center: Center) {
 
         }
