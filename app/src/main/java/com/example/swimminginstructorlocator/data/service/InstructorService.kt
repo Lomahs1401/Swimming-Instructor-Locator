@@ -1,15 +1,15 @@
-package com.example.swimminginstructorlocator.data.service.remote
+package com.example.swimminginstructorlocator.data.service
 
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
 
-class InstructorServiceRemote private constructor(
+class InstructorService(
     private val instructorRepo: InstructorRepo
-) : InstructorServiceImpl.Remote {
+) : InstructorServiceImpl {
     override fun getInstructors(listener: OnResultListener<MutableList<Instructor>>) {
-        instructorRepo.getInstructors()
+        instructorRepo.getInstructors(listener)
     }
 
     override fun searchInstructor(listener: OnResultListener<MutableList<Instructor>>) {
@@ -17,10 +17,10 @@ class InstructorServiceRemote private constructor(
     }
 
     companion object {
-        private var instance: InstructorServiceRemote? = null
+        private var instance: InstructorService? = null
 
         fun getInstance(instructorRepo: InstructorRepo) = synchronized(this) {
-            instance ?: InstructorServiceRemote(instructorRepo).also {
+            instance ?: InstructorService(instructorRepo).also {
                 instance = it
             }
         }

@@ -5,7 +5,9 @@ import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.HomeChild
+import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.LayoutCenterHomeChildBinding
 import com.example.swimminginstructorlocator.databinding.LayoutCourseHomeChildBinding
 import com.example.swimminginstructorlocator.databinding.LayoutInstructorHomeChildBinding
@@ -14,8 +16,6 @@ import com.example.swimminginstructorlocator.ui.home.HomePresenter
 import com.example.swimminginstructorlocator.utils.base.BaseViewHolder
 
 class HomeChildAdapter(
-    private val resources: Resources,
-    private val presenter: HomePresenter,
     private val instructorItemClickListener: OnInstructorItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -80,6 +80,15 @@ class HomeChildAdapter(
         (holder as BaseViewHolder).bindHomeChildData(listHomeChild[position])
     }
 
+    fun setCenters(listCenters: MutableList<Center>) {
+        centerAdapter.setData(listCenters)
+    }
+
+    fun setInstructors(listInstructors: MutableList<Instructor>) {
+        print(listInstructors.size)
+        instructorAdapter.setData(listInstructors)
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setData(listHomeChild: MutableList<HomeChild>) {
         this.listHomeChild = listHomeChild
@@ -103,7 +112,7 @@ class HomeChildAdapter(
     inner class HomeInstructorViewHolder(private val binding: LayoutInstructorHomeChildBinding) :
         BaseViewHolder(binding) {
         override fun bindHomeChildData(itemBinding: HomeChild) {
-//            TODO("Not yet implemented")
+            binding.rcvInstructor.adapter = instructorAdapter
         }
     }
 

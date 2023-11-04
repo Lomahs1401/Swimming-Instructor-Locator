@@ -1,6 +1,7 @@
 package com.example.swimminginstructorlocator.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,8 +40,9 @@ class InstructorAdapter(
     inner class InstructorViewHolder(private val binding: ItemInstructorBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(instructor: Instructor) {
-            binding.instructorName.text = instructor.name
-            instructor.avatar.notNull {
+            Log.e("FUck YOU", "Ngu nhu con cac :)")
+            binding.instructorName.text = instructor.instructorName
+            instructor.image.notNull {
                 binding.instructorImg.loadImageWithUrl(it)
             }
         }
