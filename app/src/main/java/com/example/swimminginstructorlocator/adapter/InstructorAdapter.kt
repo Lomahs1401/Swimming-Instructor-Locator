@@ -40,7 +40,6 @@ class InstructorAdapter(
     inner class InstructorViewHolder(private val binding: ItemInstructorBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(instructor: Instructor) {
-            Log.e("FUck YOU", "Ngu nhu con cac :)")
             binding.instructorName.text = instructor.instructorName
             instructor.image.notNull {
                 binding.instructorImg.loadImageWithUrl(it)
