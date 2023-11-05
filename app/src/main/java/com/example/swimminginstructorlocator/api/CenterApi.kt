@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.Call
 
 interface CenterApi {
-    data class  ApiResponse(
+    data class ApiResponse(
         val message: String,
         val data: MutableList<Center>
     )

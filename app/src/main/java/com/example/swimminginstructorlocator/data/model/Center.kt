@@ -11,7 +11,7 @@ data class Center(
     @SerializedName("center_name")
     val centerName: String,
     @SerializedName("manager")
-    val managerId: User,
+    val managerId: String,
     val email: String,
     val address: String,
     val description: String,

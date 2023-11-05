@@ -25,6 +25,9 @@ class CenterRepo {
                 if (response.isSuccessful) {
                     centerResponse?.let {
                         val listCenters = mutableListOf<Center>()
+                        for (center in it.data) {
+                            listCenters.add(center)
+                        }
                         listener.onSuccess(listCenters)
                     }
                     centerResponse?.let { android.util.Log.i(Constant.TAG, it.message) }
