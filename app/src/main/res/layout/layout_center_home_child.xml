@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.031" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_course"
+        android:id="@+id/rcv_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

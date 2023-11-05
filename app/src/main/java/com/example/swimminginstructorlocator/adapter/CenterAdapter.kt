@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.ItemCenterBinding
+import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
+import com.example.swimminginstructorlocator.utils.ext.notNull
 
 class CenterAdapter : RecyclerView.Adapter<CenterAdapter.CenterViewHolder>() {
 
@@ -34,7 +36,12 @@ class CenterAdapter : RecyclerView.Adapter<CenterAdapter.CenterViewHolder>() {
     inner class CenterViewHolder(private val binding: ItemCenterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(center: Center) {
-
+            binding.centerName.text = center.centerName
+            binding.centerAddress.text = center.address
+            binding.centerPhone.text = center.phone
+            center.image.notNull {
+                binding.imgCenter.loadImageWithUrl(it)
+            }
         }
     }
 }

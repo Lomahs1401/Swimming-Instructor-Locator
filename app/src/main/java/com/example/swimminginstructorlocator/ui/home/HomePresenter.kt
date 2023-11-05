@@ -1,12 +1,15 @@
 package com.example.swimminginstructorlocator.ui.home
 
+import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.service.CenterService
 import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
 import java.lang.Exception
 
 class HomePresenter(
     private val instructorService: InstructorServiceImpl,
+    private val centerService: CenterService
 ) : HomeContract.Presenter {
 
     private var view: HomeContract.View? = null
@@ -24,7 +27,15 @@ class HomePresenter(
     }
 
     override fun getListCenters() {
-//        TODO("Not yet implemented")
+        centerService.getCenters(object : OnResultListener<MutableList<Center>> {
+            override fun onSuccess(dataResult: MutableList<Center>) {
+                view?.onGetListCenters(dataResult)
+            }
+
+            override fun onError(exception: Exception?) {
+                view?.onError(exception)
+            }
+        })
     }
 
     override fun getListCourses() {

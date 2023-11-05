@@ -81,6 +81,7 @@ class HomeChildAdapter(
     }
 
     fun setCenters(listCenters: MutableList<Center>) {
+        print(listCenters.size)
         centerAdapter.setData(listCenters)
     }
 
@@ -98,7 +99,7 @@ class HomeChildAdapter(
     inner class HomeCenterViewHolder(private val binding: LayoutCenterHomeChildBinding) :
         BaseViewHolder(binding) {
         override fun bindHomeChildData(itemBinding: HomeChild) {
-//            TODO("Not yet implemented")
+            binding.rcvCenter.adapter = centerAdapter
         }
     }
 

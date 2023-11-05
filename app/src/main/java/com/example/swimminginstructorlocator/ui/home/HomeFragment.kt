@@ -11,8 +11,10 @@ import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.repo.CenterRepo
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
+import com.example.swimminginstructorlocator.data.service.CenterService
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
 import com.example.swimminginstructorlocator.listener.OnInstructorItemClickListener
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
@@ -40,10 +42,12 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
 
     override fun initData() {
         homePresenter = HomePresenter(
-            InstructorService.getInstance(InstructorRepo.getInstance())
+            InstructorService.getInstance(InstructorRepo.getInstance()),
+            CenterService.getInstance(CenterRepo.getInstance())
         )
         homePresenter.setView(this)
         homePresenter.getListInstructors()
+        homePresenter.getListCenters()
 
         dialog = ProgressDialog(context).apply {
             setTitle(getString(R.string.loading))
@@ -54,11 +58,12 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     override fun initView() {
         homeChildAdapter.setData(getListHomeChild())
         binding.rcvHomeParent.adapter = homeChildAdapter
-
     }
 
     override fun onGetListCenters(listCenters: MutableList<Center>) {
-//        TODO("Not yet implemented")
+        this.listCenters = listCenters
+        homeChildAdapter.setCenters(listCenters)
+        dialog.dismiss()
     }
 
     override fun onGetListCourses(listCourse: MutableList<Course>) {
@@ -68,7 +73,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     override fun onGetListInstructors(listInstructors: MutableList<Instructor>) {
         this.listInstructors = listInstructors
         homeChildAdapter.setInstructors(listInstructors)
-
         dialog.dismiss()
     }
 
