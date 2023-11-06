@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.HomeChildAdapter
 import com.example.swimminginstructorlocator.data.model.Center
-import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.CenterRepo
@@ -16,21 +15,23 @@ import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.data.service.CenterService
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
-import com.example.swimminginstructorlocator.listener.OnInstructorItemClickListener
+import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.ui.viewMore.viewMoreCenter.ViewMoreCenterFragment
+import com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor.ViewMoreInstructorFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import com.example.swimminginstructorlocator.utils.ext.addFragment
 import java.lang.Exception
 
-class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View, OnInstructorItemClickListener {
+class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View, OnItemClickListener {
 
     private lateinit var dialog: ProgressDialog
     private lateinit var homePresenter: HomePresenter
 
     private var listCenters: MutableList<Center> = mutableListOf()
-    private var listCourses: MutableList<Course> = mutableListOf()
     private var listInstructors: MutableList<Instructor> = mutableListOf()
 
     private val homeChildAdapter: HomeChildAdapter by lazy {
-        HomeChildAdapter(instructorItemClickListener = this)
+        HomeChildAdapter(presenter = homePresenter, itemClickListener = this)
     }
 
     override fun createBindingFragment(
@@ -66,10 +67,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
         dialog.dismiss()
     }
 
-    override fun onGetListCourses(listCourse: MutableList<Course>) {
-//        TODO("Not yet implemented")
-    }
-
     override fun onGetListInstructors(listInstructors: MutableList<Instructor>) {
         this.listInstructors = listInstructors
         homeChildAdapter.setInstructors(listInstructors)
@@ -77,14 +74,24 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onViewMoreCenters() {
-//        TODO("Not yet implemented")
-    }
-
-    override fun onViewMoreCourses() {
-//        TODO("Not yet implemented")
+        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance(listCenters)
+        addFragment(
+            R.id.fragment_home_container,
+            viewMoreCenterFragment,
+            addToBackStack = true
+        )
     }
 
     override fun onViewMoreInstructors() {
+        val viewMoreInstructorFragment = ViewMoreInstructorFragment.newInstance(listInstructors)
+        addFragment(
+            R.id.fragment_home_container,
+            viewMoreInstructorFragment,
+            addToBackStack = true
+        )
+    }
+
+    override fun onCenterImageClick(center: Center) {
 //        TODO("Not yet implemented")
     }
 
@@ -105,7 +112,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     private fun getListHomeChild(): MutableList<HomeChild> {
         return mutableListOf(
             HomeChild(HomeChildAdapter.HOME_CENTER_VIEW),
-            HomeChild(HomeChildAdapter.HOME_COURSE_VIEW),
             HomeChild(HomeChildAdapter.HOME_INSTRUCTOR_VIEW)
         )
     }

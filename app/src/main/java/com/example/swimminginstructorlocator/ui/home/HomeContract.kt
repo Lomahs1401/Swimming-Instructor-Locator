@@ -12,10 +12,8 @@ class HomeContract {
      */
     interface View {
         fun onGetListCenters(listCenters: MutableList<Center>)
-        fun onGetListCourses(listCourse: MutableList<Course>)
         fun onGetListInstructors(listInstructors: MutableList<Instructor>)
         fun onViewMoreCenters()
-        fun onViewMoreCourses()
         fun onViewMoreInstructors()
         fun onError(exception: Exception?)
     }
@@ -25,10 +23,8 @@ class HomeContract {
      */
     interface Presenter : BasePresenter<View> {
         fun getListCenters()
-        fun getListCourses()
         fun getListInstructors()
         fun viewMoreCenters()
-        fun viewMoreCourses()
         fun viewMoreInstructors()
     }
 }
