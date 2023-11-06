@@ -16,13 +16,16 @@ import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.data.service.CenterService
 import com.example.swimminginstructorlocator.databinding.FragmentHomeBinding
 import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.ui.center.detail.CenterDetailFragment
+import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
 import com.example.swimminginstructorlocator.ui.viewMore.viewMoreCenter.ViewMoreCenterFragment
 import com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor.ViewMoreInstructorFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
 import com.example.swimminginstructorlocator.utils.ext.addFragment
 import java.lang.Exception
 
-class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View, OnItemClickListener {
+class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContract.View,
+    OnItemClickListener {
 
     private lateinit var dialog: ProgressDialog
     private lateinit var homePresenter: HomePresenter
@@ -92,11 +95,21 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onCenterImageClick(center: Center) {
-//        TODO("Not yet implemented")
+        val centerDetailFragment = CenterDetailFragment.newInstance(center)
+        addFragment(
+            R.id.fragment_home_container,
+            centerDetailFragment,
+            addToBackStack = true
+        )
     }
 
     override fun onInstructorImageClick(instructor: Instructor) {
-//        TODO("Not yet implemented")
+        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor)
+        addFragment(
+            R.id.fragment_home_container,
+            instructorDetailFragment,
+            addToBackStack = true
+        )
     }
 
     override fun onError(exception: Exception?) {
