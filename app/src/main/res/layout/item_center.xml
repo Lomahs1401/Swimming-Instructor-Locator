@@ -5,9 +5,7 @@
     android:id="@+id/center_item_container"
     android:layout_width="@dimen/dp_340"
     android:layout_height="@dimen/dp_240"
-    android:layout_marginTop="@dimen/dp_20"
-    android:layout_marginEnd="@dimen/dp_12"
-    android:layout_marginBottom="@dimen/dp_8">
+    android:layout_marginEnd="@dimen/dp_12">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -102,7 +100,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img_serving"
+                android:id="@+id/img_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_home_24"
@@ -116,7 +114,7 @@
 
             <TextView
                 android:id="@+id/center_address"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_270"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
@@ -124,38 +122,38 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.086"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.18"
+                app:layout_constraintStart_toEndOf="@id/img_address"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.88" />
+                app:layout_constraintVertical_bias="0.794" />
 
             <ImageView
-                android:id="@+id/img_like"
+                android:id="@+id/img_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_phone_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.604"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintVertical_bias="0.943"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/center_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_270"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:text="@string/center_phone"
                 android:textColor="@color/black"
-                android:ellipsize="end"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.884"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.18"
+                app:layout_constraintStart_toEndOf="@id/img_phone"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.88" />
+                app:layout_constraintVertical_bias="0.932" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

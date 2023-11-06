@@ -1,7 +1,6 @@
 package com.example.swimminginstructorlocator.adapter
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,14 +8,14 @@ import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.LayoutCenterHomeChildBinding
-import com.example.swimminginstructorlocator.databinding.LayoutCourseHomeChildBinding
 import com.example.swimminginstructorlocator.databinding.LayoutInstructorHomeChildBinding
-import com.example.swimminginstructorlocator.listener.OnInstructorItemClickListener
+import com.example.swimminginstructorlocator.listener.OnItemClickListener
 import com.example.swimminginstructorlocator.ui.home.HomePresenter
 import com.example.swimminginstructorlocator.utils.base.BaseViewHolder
 
 class HomeChildAdapter(
-    private val instructorItemClickListener: OnInstructorItemClickListener
+    private val presenter: HomePresenter,
+    private val itemClickListener: OnItemClickListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listHomeChild: MutableList<HomeChild> = mutableListOf()
@@ -25,12 +24,8 @@ class HomeChildAdapter(
         CenterAdapter()
     }
 
-    private val courseAdapter: CourseAdapter by lazy {
-        CourseAdapter()
-    }
-
     private val instructorAdapter: InstructorAdapter by lazy {
-        InstructorAdapter(instructorItemClickListener)
+        InstructorAdapter(itemClickListener)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -43,16 +38,6 @@ class HomeChildAdapter(
             HOME_CENTER_VIEW -> {
                 HomeCenterViewHolder(
                     LayoutCenterHomeChildBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
-
-            HOME_COURSE_VIEW -> {
-                HomeCourseViewHolder(
-                    LayoutCourseHomeChildBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -100,13 +85,10 @@ class HomeChildAdapter(
         BaseViewHolder(binding) {
         override fun bindHomeChildData(itemBinding: HomeChild) {
             binding.rcvCenter.adapter = centerAdapter
-        }
-    }
 
-    inner class HomeCourseViewHolder(private val binding: LayoutCourseHomeChildBinding) :
-        BaseViewHolder(binding) {
-        override fun bindHomeChildData(itemBinding: HomeChild) {
-//            TODO("Not yet implemented")
+            binding.tvSeeAll.setOnClickListener {
+                presenter.viewMoreCenters()
+            }
         }
     }
 
@@ -114,12 +96,15 @@ class HomeChildAdapter(
         BaseViewHolder(binding) {
         override fun bindHomeChildData(itemBinding: HomeChild) {
             binding.rcvInstructor.adapter = instructorAdapter
+
+            binding.tvSeeAll.setOnClickListener {
+                presenter.viewMoreInstructors()
+            }
         }
     }
 
     companion object {
         const val HOME_CENTER_VIEW = 1
-        const val HOME_COURSE_VIEW = 2
-        const val HOME_INSTRUCTOR_VIEW = 3
+        const val HOME_INSTRUCTOR_VIEW = 2
     }
 }

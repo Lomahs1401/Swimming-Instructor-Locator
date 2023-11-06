@@ -38,10 +38,6 @@ class HomePresenter(
         })
     }
 
-    override fun getListCourses() {
-//        TODO("Not yet implemented")
-    }
-
     override fun getListInstructors() {
         instructorService.getInstructors(object : OnResultListener<MutableList<Instructor>> {
             override fun onSuccess(dataResult: MutableList<Instructor>) {
@@ -55,14 +51,11 @@ class HomePresenter(
     }
 
     override fun viewMoreCenters() {
-//        TODO("Not yet implemented")
+        view?.onViewMoreCenters()
     }
 
-    override fun viewMoreCourses() {
-//        TODO("Not yet implemented")
-    }
 
     override fun viewMoreInstructors() {
-//        TODO("Not yet implemented")
+        view?.onViewMoreInstructors()
     }
 }

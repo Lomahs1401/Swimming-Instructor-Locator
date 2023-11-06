@@ -21,4 +21,9 @@
     <string name="center_name">Trung tâm dạy bơi kèm Đà Nẵng BP - Swimming Center</string>
     <string name="center_phone">(+84) 0935 468 419</string>
     <string name="center_address">962 Ngô Quyền - Sơn Trà</string>
+    <string name="view_all_instructors">View All Instructors</string>
+    <string name="instructor_email">anhvien@gmail.com</string>
+    <string name="instructor_address">TP.Cần Thơ</string>
+    <string name="view_all_centers">View All Centers</string>
+    <string name="center_email">bpswimming@gmail.com</string>
 </resources>
