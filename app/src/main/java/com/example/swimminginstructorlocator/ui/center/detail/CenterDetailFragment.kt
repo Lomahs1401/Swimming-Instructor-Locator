@@ -1,60 +1,66 @@
 package com.example.swimminginstructorlocator.ui.center.detail
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.swimminginstructorlocator.R
+import androidx.core.os.bundleOf
+import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.repo.CenterRepo
+import com.example.swimminginstructorlocator.data.service.CenterService
+import com.example.swimminginstructorlocator.databinding.FragmentCenterDetailBinding
+import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import com.example.swimminginstructorlocator.utils.ext.goBackFragment
+import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
+import com.example.swimminginstructorlocator.utils.ext.notNull
+import java.lang.Exception
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CenterDetailFragment : BaseViewBindingFragment<FragmentCenterDetailBinding>(), CenterDetailContract.View {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CenterDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CenterDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var centerDetailPresenter: CenterDetailPresenter
+    private var centerDetail: Center? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun createBindingFragment(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentCenterDetailBinding {
+        return FragmentCenterDetailBinding.inflate(inflater, container, false)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_center_detail, container, false)
+    override fun initData() {
+        centerDetailPresenter = CenterDetailPresenter(
+            CenterService.getInstance(CenterRepo.getInstance())
+        )
+        centerDetailPresenter.setView(this)
+    }
+
+    override fun initView() {
+        arguments?.run {
+            centerDetail = getParcelable(CENTER_DETAIL)
+        }
+
+        binding.imgBackButton.setOnClickListener {
+            goBackFragment()
+        }
+
+        centerDetail?.image.notNull {
+            centerDetail?.image?.let { image -> binding.imgCenter.loadImageWithUrl(image) }
+        }
+        binding.tvCenterName.text = centerDetail?.centerName
+        binding.tvCenterDescription.text = centerDetail?.description
+        binding.tvCenterPhone.text = centerDetail?.phone
+        binding.tvCenterAddress.text = centerDetail?.address
+        binding.tvCenterEmail.text = centerDetail?.email
+    }
+
+    override fun onError(exception: Exception?) {
+//        TODO("Not yet implemented")
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CenterDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+        private const val CENTER_DETAIL = "CENTER_DETAIL"
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CenterDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance(centerDetail: Center) = CenterDetailFragment().apply {
+            arguments = bundleOf(CENTER_DETAIL to centerDetail)
+        }
     }
 }

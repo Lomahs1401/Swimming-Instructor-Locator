@@ -21,7 +21,7 @@ class HomeChildAdapter(
     private var listHomeChild: MutableList<HomeChild> = mutableListOf()
 
     private val centerAdapter: CenterAdapter by lazy {
-        CenterAdapter()
+        CenterAdapter(itemClickListener)
     }
 
     private val instructorAdapter: InstructorAdapter by lazy {

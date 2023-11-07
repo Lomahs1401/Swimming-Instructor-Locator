@@ -1,321 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_instructor_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.instructor.detail.InstructorDetailFragment">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/dp_4">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        tools:layout_editor_absoluteX="0dp">
 
-        <!-- Header -->
-        <LinearLayout
-            android:id="@+id/header"
+        <ImageView
+            android:id="@+id/img_back_button"
+            android:layout_width="@dimen/dp_34"
+            android:layout_height="@dimen/dp_34"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.042"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.02"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_instructor_profile"
+            android:layout_width="@dimen/dp_280"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/instructor_profile"
+            android:textSize="@dimen/sp_26"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/img_notification"
+            android:layout_width="@dimen/dp_34"
+            android:layout_height="@dimen/dp_34"
+            android:src="@drawable/ic_notifications_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.957"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022"
+            tools:ignore="ContentDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Teacher Profile -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_profile_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:cardElevation="@dimen/dp_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_layout_header"
+        app:layout_constraintVertical_bias="0.038"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/dp_15">
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10">
 
-            <ImageView
-                android:id="@+id/img_back_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/baseline_arrow_back_ios_24"
-                tools:ignore="ContentDescription" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_instructor"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:src="@drawable/instructor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
 
             <TextView
-                android:id="@+id/tv_view_all_recipes"
-                android:layout_width="0dp"
+                android:id="@+id/tv_instructor_name"
+                android:layout_width="@dimen/dp_250"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Teacher's Profile"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="@dimen/dp_12"
+                android:ellipsize="marquee"
+                android:text="@string/instructor_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.76"
+                app:layout_constraintStart_toEndOf="@+id/img_instructor"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.505" />
 
-            <ImageView
-                android:id="@+id/img_notification"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_notifications_black_24dp"
-                tools:ignore="ContentDescription" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-        <!-- Scrollable Content -->
-        <ScrollView
+    <!--    Profile Information-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_profile_information_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_210"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_profile_container"
+        app:layout_constraintVertical_bias="0.049"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/header">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_profile"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10">
+                android:text="@string/profile"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.046"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.085" />
 
-                <!-- Teacher Profile -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#E2EBF6"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.244" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
+            <TextView
+                android:id="@+id/tv_instructor_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.075"
+                app:layout_constraintStart_toEndOf="@id/tv_gender"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.244" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:contentDescription="Teacher Avatar"
-                            android:src="@drawable/instructor" />
+            <TextView
+                android:id="@+id/tv_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.42" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:text="@string/instructor_name"
-                            android:textColor="#020203"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_instructor_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age_value"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.133"
+                app:layout_constraintStart_toEndOf="@id/tv_age"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.42" />
 
-                <!-- Profile Information -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#F1F5FA"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+            <TextView
+                android:id="@+id/tv_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.611" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+            <TextView
+                android:id="@+id/tv_instructor_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height_value"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.082"
+                app:layout_constraintStart_toEndOf="@id/tv_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.611" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Profile"
-                            android:textColor="#3583D8"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
+            <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.803" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_instructor_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight_value"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.078"
+                app:layout_constraintStart_toEndOf="@id/tv_weight"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.803" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Gender: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.596"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.085" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Female"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_instructor_description"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="wrap_content"
+                android:text="@string/instructor_description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.962"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.605" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_180"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.43"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="Age: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="26"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+    <!-- Background Information -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_background_information_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_profile_information_container"
+        app:layout_constraintVertical_bias="0.084"
+        tools:layout_editor_absoluteX="0dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="Height: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_background_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/background_information"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.163" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="175 cm"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_graduate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/graduate"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.046"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_instructor_graduate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructor_graduate"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.204"
+                app:layout_constraintStart_toEndOf="@id/tv_graduate"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="Weight: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/experience"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.046"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.867" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="8dp"
-                                android:text="70 kg"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_instructor_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/since_value"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.058"
+                app:layout_constraintStart_toEndOf="@id/tv_experience"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.867" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Background Information -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#F1F5FA"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+    </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Background Information"
-                            android:textColor="#3583D8"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
+    <!-- Contact Information -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_contact_information_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_140"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_background_information_container">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Since: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.135" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Feb 2022"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                        <!-- Add other background information here -->
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.389" />
 
-                <!-- Contact Information -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#F1F5FA"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+            <TextView
+                android:id="@+id/tv_instructor_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructor_phone"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.09"
+                app:layout_constraintStart_toEndOf="@+id/tv_phone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.389" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mail"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Contact"
-                            android:textColor="#3583D8"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
+            <TextView
+                android:id="@+id/tv_instructor_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructor_email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.182"
+                app:layout_constraintStart_toEndOf="@+id/tv_email"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:orientation="horizontal">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Phone: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0909.222.555"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Mail: "
-                                android:textColor="#9B9CA1"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="anhvien@gmail.com"
-                                android:textColor="#020203"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </ScrollView>
-    </RelativeLayout>
-</FrameLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
