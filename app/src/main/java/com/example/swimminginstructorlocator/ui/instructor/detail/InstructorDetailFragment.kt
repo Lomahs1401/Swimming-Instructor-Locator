@@ -51,7 +51,12 @@ class InstructorDetailFragment : BaseViewBindingFragment<FragmentInstructorDetai
                 binding.imgInstructor.loadImageWithUrl(instructorDetail!!.image)
             }
         }
+        binding.tvInstructorName.text = instructorDetail?.instructorName
+        binding.tvInstructorDescription.text = instructorDetail?.description
 
+        binding.tvInstructorGraduate.text = instructorDetail?.graduate
+        binding.tvInstructorCertification.text = instructorDetail?.certificate
+        binding.tvInstructorExperience.text = instructorDetail?.yearExperiences.toString()
     }
 
     override fun onSearchInstructor() {

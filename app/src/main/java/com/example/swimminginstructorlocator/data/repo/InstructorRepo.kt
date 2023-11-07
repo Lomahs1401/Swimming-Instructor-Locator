@@ -30,7 +30,6 @@ class InstructorRepo {
                     instructorResponse?.let {
                         val listInstructors = mutableListOf<Instructor>()
                         for (instructor in it.data) {
-                            instructor.image = Constant.INSTRUCTOR_ICON_URL
                             listInstructors.add(instructor)
                         }
                         listener.onSuccess(listInstructors)

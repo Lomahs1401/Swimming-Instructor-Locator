@@ -29,7 +29,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 R.id.navigation_home -> binding.viewPager.currentItem = 0
                 R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
                 R.id.navigation_notifications -> binding.viewPager.currentItem = 2
-                R.id.action_teacher_detail -> binding.viewPager.currentItem = 3
             }
 
             return@setOnItemSelectedListener true
@@ -45,7 +44,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
             HomeFragment.newInstance(),
             DashboardFragment.newInstance(),
             NotificationsFragment.newInstance(),
-            SearchInstructorFragment.newInstance(),
         )
     }
 }

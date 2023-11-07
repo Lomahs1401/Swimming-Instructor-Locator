@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.ItemViewMoreInstructorBinding
 import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
+import com.example.swimminginstructorlocator.utils.ext.notNull
 
 class ViewMoreInstructorAdapter(
     private val itemClickListener: OnItemClickListener
@@ -36,10 +38,13 @@ class ViewMoreInstructorAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bindData(instructor: Instructor) {
+            instructor.image.notNull {
+                binding.imgInstructor.loadImageWithUrl(it)
+            }
             binding.tvName.text = instructor.instructorName
             binding.tvEmail.text = instructor.instructorName
-            binding.tvPhone.text = instructor.instructorName
-            binding.tvAddress.text = instructor.instructorName
+            binding.tvPhone.text = "000.000.0000"
+            binding.tvAddress.text = "123 Street, City, State, 00000"
 
             binding.imgInstructor.setOnClickListener {
                 itemClickListener.onInstructorImageClick(instructor)
