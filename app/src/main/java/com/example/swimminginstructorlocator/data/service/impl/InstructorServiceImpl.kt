@@ -5,5 +5,5 @@ import com.example.swimminginstructorlocator.listener.OnResultListener
 
 interface InstructorServiceImpl {
     fun getInstructors(listener: OnResultListener<MutableList<Instructor>>)
-    fun searchInstructor(listener: OnResultListener<MutableList<Instructor>>)
+    fun searchInstructor(searchValue: String, listener: OnResultListener<MutableList<Instructor>>)
 }

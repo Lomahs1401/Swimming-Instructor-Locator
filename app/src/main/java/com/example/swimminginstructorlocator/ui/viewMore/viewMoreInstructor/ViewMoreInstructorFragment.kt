@@ -1,6 +1,7 @@
 package com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
@@ -37,7 +38,7 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
     }
 
     override fun initData() {
-        val viewMoreInstructorPresenter = ViewMoreInstructorPresenter(
+        viewMoreInstructorPresenter = ViewMoreInstructorPresenter(
             InstructorService.getInstance(InstructorRepo.getInstance())
         )
         viewMoreInstructorPresenter.setView(this)
@@ -91,7 +92,15 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
     }
 
     override fun onSearchInstructors(listInstructors: MutableList<Instructor>) {
-//        TODO("Not yet implemented")
+        if (listInstructors.size == 0) {
+            binding.tvNoInstructorFound.visibility = View.VISIBLE
+            binding.rcvInstructor.visibility = View.GONE
+        } else {
+            viewMoreInstructorAdapter.setData(listInstructors)
+            binding.tvNoInstructorFound.visibility = View.GONE
+            binding.rcvInstructor.visibility = View.VISIBLE
+            binding.rcvInstructor.adapter = viewMoreInstructorAdapter
+        }
     }
 
     override fun onError(exception: Exception?) {
