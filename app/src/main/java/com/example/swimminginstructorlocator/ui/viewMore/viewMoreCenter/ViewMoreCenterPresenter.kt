@@ -1,6 +1,9 @@
 package com.example.swimminginstructorlocator.ui.viewMore.viewMoreCenter
 
+import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.service.impl.CenterServiceImpl
+import com.example.swimminginstructorlocator.listener.OnResultListener
+import java.lang.Exception
 
 class ViewMoreCenterPresenter(
     private val centerService: CenterServiceImpl,
@@ -20,7 +23,18 @@ class ViewMoreCenterPresenter(
         this.view = view
     }
 
-    override fun searchCenter(searchValue: String) {
-//        TODO("Not yet implemented")
+    override fun searchCenters(searchValue: String) {
+        centerService.searchCenters(
+            searchValue,
+            object : OnResultListener<MutableList<Center>> {
+                override fun onSuccess(dataResult: MutableList<Center>) {
+                    view?.onSearchCenters(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
     }
 }

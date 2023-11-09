@@ -5,8 +5,6 @@ import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
 import com.example.swimminginstructorlocator.ui.dashboard.DashboardFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
-import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
-import com.example.swimminginstructorlocator.ui.instructor.search.SearchInstructorFragment
 import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 

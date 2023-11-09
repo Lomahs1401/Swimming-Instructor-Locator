@@ -11,6 +11,11 @@ class CenterService(
     override fun getCenters(listener: OnResultListener<MutableList<Center>>) {
         centerRepo.getCenters(listener)
     }
+
+    override fun searchCenters(searchValue: String, listener: OnResultListener<MutableList<Center>>) {
+        centerRepo.searchCenters(searchValue, listener)
+    }
+
     companion object {
         private var instance: CenterService? = null
 
