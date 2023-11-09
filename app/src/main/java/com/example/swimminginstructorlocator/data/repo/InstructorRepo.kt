@@ -1,8 +1,10 @@
 package com.example.swimminginstructorlocator.data.repo
 
 import android.util.Log
+import com.example.swimminginstructorlocator.api.CenterApi
 import com.example.swimminginstructorlocator.api.InstructorApi
 import com.example.swimminginstructorlocator.constant.Constant
+import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.listener.OnResultListener
 import retrofit2.Call
@@ -46,6 +48,45 @@ class InstructorRepo {
                 Log.e(Constant.TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun searchInstructors(searchValue: String, listener: OnResultListener<MutableList<Instructor>>) {
+        if (searchValue.isEmpty()) {
+            getInstructors(listener)
+        } else {
+            val api = Retrofit.Builder()
+                .baseUrl(Constant.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(InstructorApi::class.java)
+
+            // Xây dựng URL đầy đủ với path và query parameter
+            val url = "search/teacher/q=$searchValue"
+
+            api.searchInstructors(url).enqueue(object : Callback<InstructorApi.SearchApiResponse> {
+                override fun onResponse(
+                    call: Call<InstructorApi.SearchApiResponse>,
+                    response: Response<InstructorApi.SearchApiResponse>
+                ) {
+                    val instructorResponse = response.body()
+                    if (response.isSuccessful) {
+                        instructorResponse?.let {
+                            val listInstructors = it.data.teachers.toMutableList()
+                            listener.onSuccess(listInstructors)
+                        }
+                        instructorResponse?.let { Log.i(Constant.TAG, it.message) }
+                    } else {
+                        instructorResponse?.let { Log.i(Constant.TAG, it.message) }
+                    }
+                }
+
+                override fun onFailure(call: Call<InstructorApi.SearchApiResponse>, t: Throwable) {
+                    val ex = Exception("Oops.. Please try again")
+                    listener.onError(ex)
+                    Log.e(Constant.TAG, "onFailure: ${t.message}")
+                }
+            })
+        }
     }
 
     companion object {

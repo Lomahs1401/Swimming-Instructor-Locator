@@ -12,8 +12,8 @@ class InstructorService(
         instructorRepo.getInstructors(listener)
     }
 
-    override fun searchInstructor(listener: OnResultListener<MutableList<Instructor>>) {
-//        TODO("Not yet implemented")
+    override fun searchInstructor(searchValue: String, listener: OnResultListener<MutableList<Instructor>>) {
+        instructorRepo.searchInstructors(searchValue, listener)
     }
 
     companion object {

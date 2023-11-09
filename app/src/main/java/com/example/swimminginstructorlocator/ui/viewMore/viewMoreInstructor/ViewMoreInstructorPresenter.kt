@@ -1,6 +1,9 @@
 package com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor
 
+import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
+import com.example.swimminginstructorlocator.listener.OnResultListener
+import java.lang.Exception
 
 class ViewMoreInstructorPresenter(
     private val instructorService: InstructorServiceImpl,
@@ -21,6 +24,17 @@ class ViewMoreInstructorPresenter(
     }
 
     override fun searchInstructor(searchValue: String) {
-//        TODO("Not yet implemented")
+        instructorService.searchInstructor(
+            searchValue,
+            object : OnResultListener<MutableList<Instructor>> {
+                override fun onSuccess(dataResult: MutableList<Instructor>) {
+                    view?.onSearchInstructors(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
     }
 }

@@ -48,49 +48,23 @@ class CenterRepo {
     }
 
     fun searchCenters(searchValue: String, listener: OnResultListener<MutableList<Center>>) {
-        val api = Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CenterApi::class.java)
-
-        // Xây dựng URL đầy đủ với path và query parameter
-        val url = "search/center/q=$searchValue"
-
         if (searchValue.isEmpty()) {
-            api.getCenters().enqueue(object : Callback<CenterApi.ApiResponse> {
-                override fun onResponse(
-                    call: Call<CenterApi.ApiResponse>,
-                    response: Response<CenterApi.ApiResponse>
-                ) {
-                    val centerResponse = response.body()
-                    if (response.isSuccessful) {
-                        centerResponse?.let {
-                            val listCenters = mutableListOf<Center>()
-                            for (center in it.data) {
-                                listCenters.add(center)
-                            }
-                            listener.onSuccess(listCenters)
-                        }
-                        centerResponse?.let { Log.i(Constant.TAG, it.message) }
-                    } else {
-                        centerResponse?.let { Log.i(Constant.TAG, it.message) }
-                    }
-                }
-
-                override fun onFailure(call: Call<CenterApi.ApiResponse>, t: Throwable) {
-                    val ex = Exception("Oops.. Please try again")
-                    listener.onError(ex)
-                    Log.e(Constant.TAG, "onFailure: ${t.message}")
-                }
-            })
+            getCenters(listener)
         } else {
+            val api = Retrofit.Builder()
+                .baseUrl(Constant.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(CenterApi::class.java)
+
+            // Xây dựng URL đầy đủ với path và query parameter
+            val url = "search/center/q=$searchValue"
+
             api.searchCenters(url).enqueue(object : Callback<CenterApi.SearchApiResponse> {
                 override fun onResponse(
                     call: Call<CenterApi.SearchApiResponse>,
                     response: Response<CenterApi.SearchApiResponse>
                 ) {
-                    Log.i(Constant.TAG, "LMAOMOMWEQWE")
                     val centerResponse = response.body()
                     if (response.isSuccessful) {
                         centerResponse?.let {
