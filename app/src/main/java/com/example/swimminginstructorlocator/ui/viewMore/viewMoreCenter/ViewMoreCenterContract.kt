@@ -10,7 +10,7 @@ class ViewMoreCenterContract {
      * View
      */
     interface View {
-        fun onSearchCenter(listCenters: MutableList<Center>)
+        fun onSearchCenters(listCenters: MutableList<Center>)
         fun onError(exception: Exception?)
     }
 
@@ -18,6 +18,6 @@ class ViewMoreCenterContract {
      * Presenter
      */
     interface Presenter : BasePresenter<View> {
-        fun searchCenter(searchValue: String)
+        fun searchCenters(searchValue: String)
     }
 }

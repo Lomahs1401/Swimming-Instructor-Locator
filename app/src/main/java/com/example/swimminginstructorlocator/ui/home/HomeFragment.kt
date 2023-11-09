@@ -76,24 +76,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
         dialog.dismiss()
     }
 
-    override fun onViewMoreCenters() {
-        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance(listCenters)
-        addFragment(
-            R.id.fragment_home_container,
-            viewMoreCenterFragment,
-            addToBackStack = true
-        )
-    }
-
-    override fun onViewMoreInstructors() {
-        val viewMoreInstructorFragment = ViewMoreInstructorFragment.newInstance(listInstructors)
-        addFragment(
-            R.id.fragment_home_container,
-            viewMoreInstructorFragment,
-            addToBackStack = true
-        )
-    }
-
     override fun onCenterImageClick(center: Center) {
         val centerDetailFragment = CenterDetailFragment.newInstance(center)
         addFragment(
@@ -108,6 +90,24 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
         addFragment(
             R.id.fragment_home_container,
             instructorDetailFragment,
+            addToBackStack = true
+        )
+    }
+
+    override fun onViewMoreCenters() {
+        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance(listCenters)
+        addFragment(
+            R.id.fragment_home_container,
+            viewMoreCenterFragment,
+            addToBackStack = true
+        )
+    }
+
+    override fun onViewMoreInstructors() {
+        val viewMoreInstructorFragment = ViewMoreInstructorFragment.newInstance(listInstructors)
+        addFragment(
+            R.id.fragment_home_container,
+            viewMoreInstructorFragment,
             addToBackStack = true
         )
     }

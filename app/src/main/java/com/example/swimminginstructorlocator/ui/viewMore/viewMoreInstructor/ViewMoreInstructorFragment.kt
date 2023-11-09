@@ -4,14 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
 import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.databinding.FragmentViewMoreInstructorBinding
 import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import com.example.swimminginstructorlocator.utils.ext.addFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import java.lang.Exception
 
@@ -78,7 +82,12 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
     }
 
     override fun onInstructorImageClick(instructor: Instructor) {
-//        TODO("Not yet implemented")
+        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor)
+        addFragment(
+            R.id.fragment_home_container,
+            instructorDetailFragment,
+            addToBackStack = true
+        )
     }
 
     override fun onSearchInstructors(listInstructors: MutableList<Instructor>) {

@@ -57,6 +57,7 @@
         android:insetTop="@dimen/dp_0"
         android:insetRight="@dimen/dp_0"
         android:insetBottom="@dimen/dp_0"
+        android:backgroundTint="@color/blue"
         android:padding="@dimen/dp_0"
         app:cornerRadius="@dimen/dp_14"
         app:icon="@drawable/black_baseline_search_24"

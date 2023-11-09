@@ -76,6 +76,7 @@
         app:iconGravity="textStart"
         app:iconPadding="@dimen/dp_0"
         app:iconSize="@dimen/dp_24"
+        android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"

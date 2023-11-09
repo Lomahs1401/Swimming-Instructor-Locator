@@ -1,26 +1,18 @@
 package com.example.swimminginstructorlocator.ui.viewMore.viewMoreCenter
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
-import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreCenterAdapter
-import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.CenterRepo
-import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.CenterService
-import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.databinding.FragmentViewMoreCenterBinding
-import com.example.swimminginstructorlocator.databinding.FragmentViewMoreInstructorBinding
 import com.example.swimminginstructorlocator.listener.OnItemClickListener
-import com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor.ViewMoreInstructorFragment
-import com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor.ViewMoreInstructorPresenter
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import java.lang.Exception
@@ -43,7 +35,7 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
     }
 
     override fun initData() {
-        val viewMoreCenterPresenter = ViewMoreCenterPresenter(
+        viewMoreCenterPresenter = ViewMoreCenterPresenter(
             CenterService.getInstance(CenterRepo.getInstance())
         )
         viewMoreCenterPresenter.setView(this)
@@ -54,7 +46,7 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
             listCenters = getParcelableArrayList(LIST_CENTERS)
         }
         listCenters?.let { viewMoreCenterAdapter.setData(it) }
-        binding.rcvInstructor.adapter = viewMoreCenterAdapter
+        binding.rcvCenter.adapter = viewMoreCenterAdapter
 
         binding.imgBackButton.setOnClickListener {
             goBackFragment()
@@ -62,7 +54,7 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
 
         var searchValue = ""
 
-        binding.searchInstructor.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchCenter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -75,12 +67,12 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
         })
 
         binding.btnSearch.setOnClickListener {
-            handleClickSearchInstructor(searchValue)
+            handleClickSearchCenter(searchValue)
         }
     }
 
-    private fun handleClickSearchInstructor(searchValue: String) {
-        listCenters?.let { viewMoreCenterPresenter.searchCenter(searchValue) }
+    private fun handleClickSearchCenter(searchValue: String) {
+        listCenters?.let { viewMoreCenterPresenter.searchCenters(searchValue) }
     }
 
     override fun onCenterImageClick(center: Center) {
@@ -91,12 +83,20 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
 //        TODO("Not yet implemented")
     }
 
-    override fun onSearchCenter(listCenters: MutableList<Center>) {
-//        TODO("Not yet implemented")
+    override fun onSearchCenters(listCenters: MutableList<Center>) {
+        if (listCenters.size == 0) {
+            binding.tvNoCenterFound.visibility = View.VISIBLE
+            binding.rcvCenter.visibility = View.GONE
+        } else {
+            viewMoreCenterAdapter.setData(listCenters)
+            binding.tvNoCenterFound.visibility = View.GONE
+            binding.rcvCenter.visibility = View.VISIBLE
+            binding.rcvCenter.adapter = viewMoreCenterAdapter
+        }
     }
 
     override fun onError(exception: Exception?) {
-//        TODO("Not yet implemented")
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

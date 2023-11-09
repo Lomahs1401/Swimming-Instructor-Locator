@@ -37,6 +37,12 @@ fun Fragment.replaceFragment(
             if (addToBackStack) {
                 addToBackStack(tag)
             }
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_in_right,
+                R.anim.slide_out_right,
+                R.anim.slide_out_right
+            )
             replace(containerId, fragment, tag)
         }.commit()
     }
