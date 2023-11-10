@@ -1,13 +1,9 @@
 package com.example.swimminginstructorlocator.ui.instructor.detail
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import com.example.swimminginstructorlocator.R
-import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.databinding.FragmentInstructorDetailBinding
@@ -17,11 +13,13 @@ import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
 import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.lang.Exception
 
-class InstructorDetailFragment : BaseViewBindingFragment<FragmentInstructorDetailBinding>(),
+class InstructorDetailFragment(
+    private val id: String,
+) : BaseViewBindingFragment<FragmentInstructorDetailBinding>(),
     InstructorDetailContract.View {
 
     private lateinit var instructorDetailPresenter: InstructorDetailPresenter
-    private var instructorDetail: Instructor? = null
+    private var instructorId: String? = null
 
     override fun createBindingFragment(
         inflater: LayoutInflater,
@@ -35,32 +33,33 @@ class InstructorDetailFragment : BaseViewBindingFragment<FragmentInstructorDetai
             InstructorService.getInstance(InstructorRepo.getInstance())
         )
         instructorDetailPresenter.setView(this)
+        instructorDetailPresenter.getInstructorDetail(id)
     }
 
     override fun initView() {
-        arguments?.run {
-            instructorDetail = getParcelable(INSTRUCTOR_DETAIL)
-        }
-
         binding.imgBackButton.setOnClickListener {
             goBackFragment()
         }
-
-        instructorDetail?.image.notNull {
-            instructorDetail?.image?.let {
-                binding.imgInstructor.loadImageWithUrl(instructorDetail!!.image)
-            }
-        }
-        binding.tvInstructorName.text = instructorDetail?.instructorName
-        binding.tvInstructorDescription.text = instructorDetail?.description
-
-        binding.tvInstructorGraduate.text = instructorDetail?.graduate
-        binding.tvInstructorCertification.text = instructorDetail?.certificate
-        binding.tvInstructorExperience.text = instructorDetail?.yearExperiences.toString()
     }
 
-    override fun onSearchInstructor() {
-//        TODO("Not yet implemented")
+    override fun onGetInstructorDetail(instructorDetail: InstructorDetail) {
+        instructorDetail.image.notNull {
+            binding.imgInstructor.loadImageWithUrl(instructorDetail.image)
+        }
+
+        if (instructorDetail.gender == 1) {
+            binding.tvInstructorGender.text = "Male"
+        } else {
+            binding.tvInstructorGender.text = "Female"
+        }
+        binding.tvInstructorName.text = instructorDetail.instructorName
+        binding.tvInstructorAge.text = instructorDetail.age.toString()
+        binding.tvInstructorDescription.text = instructorDetail.description
+        binding.tvInstructorGraduate.text = instructorDetail.graduate
+        binding.tvInstructorCertification.text = instructorDetail.certificate
+        binding.tvInstructorExperience.text = instructorDetail.yearExperiences.toString()
+        binding.tvInstructorEmail.text = instructorDetail.email
+        binding.tvInstructorPhone.text = instructorDetail.phone
     }
 
     override fun onError(exception: Exception?) {
@@ -68,11 +67,7 @@ class InstructorDetailFragment : BaseViewBindingFragment<FragmentInstructorDetai
     }
 
     companion object {
-        private const val INSTRUCTOR_DETAIL = "INSTRUCTOR_DETAIL"
-
         @JvmStatic
-        fun newInstance(instructorDetail: Instructor) = InstructorDetailFragment().apply {
-            arguments = bundleOf(INSTRUCTOR_DETAIL to instructorDetail)
-        }
+        fun newInstance(id: String) = InstructorDetailFragment(id)
     }
 }

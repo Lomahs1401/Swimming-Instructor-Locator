@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
 import com.example.swimminginstructorlocator.data.model.Center
-import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
@@ -76,6 +75,7 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
 
     private fun handleClickSearchInstructor(searchValue: String) {
         listInstructors?.let { viewMoreInstructorPresenter.searchInstructor(searchValue) }
+        binding.searchInstructor.setQuery("", false)
     }
 
     override fun onCenterImageClick(center: Center) {
@@ -83,7 +83,7 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
     }
 
     override fun onInstructorImageClick(instructor: Instructor) {
-        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor)
+        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor.id)
         addFragment(
             R.id.fragment_home_container,
             instructorDetailFragment,

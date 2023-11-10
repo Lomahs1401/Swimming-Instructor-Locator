@@ -86,7 +86,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onInstructorImageClick(instructor: Instructor) {
-        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor)
+        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor.id)
         addFragment(
             R.id.fragment_home_container,
             instructorDetailFragment,

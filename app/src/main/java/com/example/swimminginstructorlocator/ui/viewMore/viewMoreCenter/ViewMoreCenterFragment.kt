@@ -73,6 +73,7 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
 
     private fun handleClickSearchCenter(searchValue: String) {
         listCenters?.let { viewMoreCenterPresenter.searchCenters(searchValue) }
+        binding.searchCenter.setQuery("", false)
     }
 
     override fun onCenterImageClick(center: Center) {
