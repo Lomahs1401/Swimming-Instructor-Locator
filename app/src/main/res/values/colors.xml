@@ -14,4 +14,6 @@
     <color name="lightDarkLayout">#994E4A4A</color>
     <color name="blue">#618EE9</color>
     <color name="darkLayout">#66000000</color>
+    <color name="lightGray">#F4F6F9</color>
+    <color name="red">#F00A1E</color>
 </resources>
