@@ -70,4 +70,22 @@
     <string name="slogan_3">Swim Smarter, Not Harder</string>
     <string name="slogan_content_3">Swim smarter, refine your technique, and enjoy the water like never before. Your aquatic adventure starts here</string>
     <string name="logo_description">10K+ success stories and counting</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_up_to_get_started">Sign up to get started</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="placeholder_username">john.doe</string>
+    <string name="placeholder_pwd">********</string>
+    <string name="placeholder_email">john.doe@gmail.com</string>
+    <string name="error_field_username">Username is required</string>
+    <string name="required_marked">*</string>
+    <string name="error_field_email">Email is required</string>
+    <string name="error_field_password">Password is required</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_link"><u>Sign In</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or">Or</string>
+    <string name="already_have_an_account">Already have an account?</string>
+
 </resources>
