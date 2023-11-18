@@ -13,4 +13,5 @@
     <color name="darkGray">#7C7979</color>
     <color name="lightDarkLayout">#994E4A4A</color>
     <color name="blue">#618EE9</color>
+    <color name="darkLayout">#66000000</color>
 </resources>

@@ -1,11 +1,15 @@
 package com.example.swimminginstructorlocator
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
+import com.example.swimminginstructorlocator.animation.ZoomOutPageTransformer
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
 import com.example.swimminginstructorlocator.ui.dashboard.DashboardFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
 import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
+import com.example.swimminginstructorlocator.ui.onboarding.OnBoardingActivity
+import com.example.swimminginstructorlocator.utils.DataLocalManager
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
@@ -19,17 +23,31 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     }
 
     override fun initView() {
-        binding.viewPager.adapter = pagerAdapter
-        binding.viewPager.isUserInputEnabled = false
-
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> binding.viewPager.currentItem = 0
-                R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
-                R.id.navigation_notifications -> binding.viewPager.currentItem = 2
+        if (!DataLocalManager.getFirstInstalled()) {
+            DataLocalManager.setFirstInstalled(true)
+            Intent(this, OnBoardingActivity::class.java).also {
+                startActivity(it)
             }
+        } else {
+            binding.viewPager.adapter = pagerAdapter
+            binding.viewPager.isUserInputEnabled = false
+            binding.viewPager.setPageTransformer(
+                ZoomOutPageTransformer(
+                    ActivityMainBinding.inflate(
+                        layoutInflater
+                    )
+                )
+            )
 
-            return@setOnItemSelectedListener true
+            binding.bottomNav.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> binding.viewPager.currentItem = 0
+                    R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
+                    R.id.navigation_notifications -> binding.viewPager.currentItem = 2
+                }
+
+                return@setOnItemSelectedListener true
+            }
         }
     }
 

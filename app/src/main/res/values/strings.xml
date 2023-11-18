@@ -60,4 +60,14 @@
     <string name="swimming_instructor_certification">Swimming Instructor Certification</string>
     <string name="no_center_founded">No Center Founded</string>
     <string name="no_instructor_founded">No Instructor Founded</string>
+    <string name="next">Next</string>
+    <string name="skip_intro">Skip Intro</string>
+    <string name="get_started">Get Started</string>
+    <string name="slogan_1">Dive Into Confidence</string>
+    <string name="slogan_content_1">Unlock your aquatic potential with the perfect swimming instructor. Dive into a world of self-assurance and mastery</string>
+    <string name="slogan_2">Make Waves, Learn Splashes</string>
+    <string name="slogan_content_2">From beginners to advanced, find skilled instructors to help you navigate the waters and make every splash count</string>
+    <string name="slogan_3">Swim Smarter, Not Harder</string>
+    <string name="slogan_content_3">Swim smarter, refine your technique, and enjoy the water like never before. Your aquatic adventure starts here</string>
+    <string name="logo_description">10K+ success stories and counting</string>
 </resources>
