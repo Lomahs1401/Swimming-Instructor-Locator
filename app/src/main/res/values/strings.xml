@@ -84,6 +84,7 @@
     <string name="error_field_password">Password is required</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_in_link"><u>Sign In</u></string>
+    <String name="login">Login</String>
     <string name="sign_up">Sign Up</string>
     <string name="or">Or</string>
     <string name="already_have_an_account">Already have an account?</string>
