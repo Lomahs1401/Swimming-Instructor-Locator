@@ -49,7 +49,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/search_bar_container"
-            android:layout_width="@dimen/dp_280"
+            android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_16"
             android:backgroundTint="@color/white"
@@ -68,15 +68,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:iconifiedByDefault="false"
-
-                app:queryHint="Find Center" />
+                app:queryHint="Find Center"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                app:searchViewStyle="@style/MySearchViewStyle"/>
 
         </androidx.cardview.widget.CardView>
 
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_search"
-            android:layout_width="@dimen/dp_52"
-            android:layout_height="@dimen/dp_50"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_marginEnd="@dimen/dp_20"
             android:backgroundTint="@color/blue"
             android:insetLeft="@dimen/dp_0"
@@ -91,10 +94,10 @@
             app:iconSize="@dimen/dp_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.546"
             app:layout_constraintStart_toEndOf="@id/search_bar_container"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.688"
+            app:layout_constraintVertical_bias="0.72"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

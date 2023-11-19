@@ -39,7 +39,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search_bar_container"
-        android:layout_width="@dimen/dp_280"
+        android:layout_width="@dimen/dp_250"
         android:layout_height="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_16"
         android:backgroundTint="@color/white"
@@ -58,16 +58,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:iconifiedByDefault="false"
-
             app:queryHint="Find Instructor" />
 
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_search"
-        android:layout_width="@dimen/dp_52"
-        android:layout_height="@dimen/dp_50"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginEnd="@dimen/dp_20"
+        android:backgroundTint="@color/blue"
         android:insetLeft="@dimen/dp_0"
         android:insetTop="@dimen/dp_0"
         android:insetRight="@dimen/dp_0"
@@ -78,13 +78,12 @@
         app:iconGravity="textStart"
         app:iconPadding="@dimen/dp_0"
         app:iconSize="@dimen/dp_24"
-        android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toEndOf="@id/search_bar_container"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109"
+        app:layout_constraintVertical_bias="0.112"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
