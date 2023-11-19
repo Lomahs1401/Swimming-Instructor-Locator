@@ -8,7 +8,8 @@
     android:layout_marginBottom="@dimen/dp_12"
     android:layout_marginStart="@dimen/dp_8"
     app:cardCornerRadius="@dimen/dp_16"
-    app:cardElevation="@dimen/dp_2">
+    app:cardElevation="@dimen/dp_2"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,7 +40,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/card_view_img_container"
-            tools:layout_editor_absoluteY="0dp">
+            tools:layout_editor_absoluteY="0dp"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/tv_center_name"

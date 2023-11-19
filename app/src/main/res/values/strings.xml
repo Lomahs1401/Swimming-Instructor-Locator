@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_instructor">Search Instructor</string>
     <string name="instructor_name">Nguyễn Thị Ánh Viên</string>
@@ -84,9 +86,10 @@
     <string name="error_field_password">Password is required</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_in_link"><u>Sign In</u></string>
-    <String name="login">Login</String>
     <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
     <string name="or">Or</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="save">Save</string>
 
 </resources>

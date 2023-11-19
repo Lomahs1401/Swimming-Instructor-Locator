@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Style for SearchView -->
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">#000</item>
+        <!-- Thử thay đổi màu văn bản khi focus -->
+        <item name="android:textColorHint">#000</item>
+    </style>
+</resources>
