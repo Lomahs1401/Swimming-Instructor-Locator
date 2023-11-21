@@ -91,5 +91,12 @@
     <string name="or">Or</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="save">Save</string>
-
+    <string name="validate_username_blank">Username is required</string>
+    <string name="validate_username_length">Username must be between 6 and 18 characters</string>
+    <string name="validate_username_digit">The first character cannot be a numeric character</string>
+    <string name="validate_email_blank">Email is required</string>
+    <string name="validate_email_invalid">Email is not valid</string>
+    <string name="validate_password_blank">Password is required</string>
+    <string name="validate_password_length">Password must be between 8 and 16 characters</string>
+    <string name="validate_password_format">Password must contain 1 uppercase character, 1 alphanumeric character, and 1 special character</string>
 </resources>

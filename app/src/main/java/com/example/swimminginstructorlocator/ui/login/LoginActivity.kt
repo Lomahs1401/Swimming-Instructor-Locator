@@ -1,53 +1,51 @@
 package com.example.swimminginstructorlocator.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.Toast
-import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.LoginRequest
 import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.data.service.AuthService
-import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
+import java.lang.Exception
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var authService: AuthService
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginContract.View {
 
-        authService = AuthService(AuthRepo.getInstance())
+    private lateinit var loginPresenter: LoginPresenter
 
+    override fun createBindingActivity(): ActivityLoginBinding {
+        return ActivityLoginBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        loginPresenter = LoginPresenter(
+            AuthService.getInstance(AuthRepo.getInstance())
+        )
+        loginPresenter.setView(this)
+    }
+
+    override fun initData() {
         binding.btnLogin.setOnClickListener {
-            doLogin()
+            handleClickSignIn()
         }
     }
 
-    fun doLogin() {
+    private fun handleClickSignIn() {
         val email = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
-        if (email.isBlank() || password.isBlank()) {
-            showToast("Email and password cannot be empty")
-        } else {
-            val loginRequest = LoginRequest(email, password)
-            if (::authService.isInitialized) {
-                authService.login(loginRequest, object : OnResultListener<User> {
-                    override fun onSuccess(dataResult: User) {
-                        showToast("Login success")
-                    }
 
-                    override fun onError(exception: Exception?) {
-                        showToast("Login failed")
-                    }
-                })
-            } else {
-                showToast("AuthService has not been initialized")
-            }
+        val loginRequest = LoginRequest(email, password)
+
+        val isValidLoginForm = loginPresenter.validateLoginForm(loginRequest, binding, applicationContext)
+
+        if (isValidLoginForm) {
+            loginPresenter.signIn(loginRequest)
         }
     }
-    fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+    override fun onSignIn() {
+        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
     }
-}
+
+    override fun onError(exception: Exception?) {
+        Toast.makeText(this, exception?.message, Toast.LENGTH_SHORT).show()
+    }

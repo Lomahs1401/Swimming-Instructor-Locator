@@ -8,10 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.size
 import androidx.viewpager2.widget.ViewPager2
-import com.example.swimminginstructorlocator.MainActivity
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.IntroSlideAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityOnBoardingBinding
+import com.example.swimminginstructorlocator.ui.login.LoginActivity
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 
 class OnBoardingActivity : BaseViewBindingActivity<ActivityOnBoardingBinding>() {
@@ -37,14 +37,14 @@ class OnBoardingActivity : BaseViewBindingActivity<ActivityOnBoardingBinding>() 
             if (currentItem + 1 < introSlideAdapter.itemCount) {
                 binding.introSlider.currentItem = currentItem + 1
             } else {
-                Intent(applicationContext, MainActivity::class.java).also {
+                Intent(applicationContext, LoginActivity::class.java).also {
                     startActivity(it)
                 }
             }
         }
 
         binding.tvSkipIntro.setOnClickListener {
-            Intent(applicationContext, MainActivity::class.java).also {
+            Intent(applicationContext, LoginActivity::class.java).also {
                 startActivity(it)
             }
         }

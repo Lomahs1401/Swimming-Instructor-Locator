@@ -9,13 +9,16 @@ data class User(
     @SerializedName("_id")
     val id: String,
     val username: String,
-    val password: String,
-    var avatar: String,
     val email: String,
+    var avatar: String,
     val gender: Int,
     val address: String,
     val phone: String,
     val type: Int,
     val weight: String,
     val height: String,
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("updatedAt")
+    val updatedAt: String
 ) : Parcelable
