@@ -1,17 +1,10 @@
 package com.example.swimminginstructorlocator.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.swimminginstructorlocator.R
 import android.widget.Toast
-import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.LoginRequest
-import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.data.service.AuthService
-import com.example.swimminginstructorlocator.listener.OnResultListener
-import com.example.swimminginstructorlocator.ui.register.RegisterPresenter
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 import java.lang.Exception
 
@@ -56,4 +49,3 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginCont
     override fun onError(exception: Exception?) {
         Toast.makeText(this, exception?.message, Toast.LENGTH_SHORT).show()
     }
-}
