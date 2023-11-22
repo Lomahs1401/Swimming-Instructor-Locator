@@ -1,10 +1,12 @@
 package com.example.swimminginstructorlocator.ui.register
 
+import android.content.Intent
 import android.widget.Toast
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.data.service.AuthService
 import com.example.swimminginstructorlocator.databinding.ActivityRegisterBinding
+import com.example.swimminginstructorlocator.ui.login.LoginActivity
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 import java.lang.Exception
 
@@ -26,6 +28,11 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
     override fun initData() {
         binding.btnSignup.setOnClickListener {
             handleClickSignUp()
+        }
+        binding.tvSignInLink.setOnClickListener {
+            Intent(this, LoginActivity::class.java).also {
+                startActivity(it)
+            }
         }
     }
 
