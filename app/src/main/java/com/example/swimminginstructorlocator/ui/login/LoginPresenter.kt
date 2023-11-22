@@ -42,7 +42,7 @@ class LoginPresenter(
         authService.login(loginRegister, object : OnResultListener<User> {
             override fun onSuccess(dataResult: User) {
                 DataLocalManager.saveUser(dataResult)
-                view?.onSignIn()
+                view?.onSignIn(dataResult)
             }
 
             override fun onError(exception: Exception?) {
