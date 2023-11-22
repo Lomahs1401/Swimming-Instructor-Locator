@@ -84,12 +84,14 @@
     <string name="required_marked">*</string>
     <string name="error_field_email">Email is required</string>
     <string name="error_field_password">Password is required</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_in_link"><u>Sign In</u></string>
     <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_link"><u>Sign In Here</u></string>
+    <string name="sign_up_link"><u>Sign Up Here</u></string>
     <string name="login">Login</string>
     <string name="or">Or</string>
-    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_have_an_account_yet">Don\'t have account yet?</string>
+    <string name="already_have_an_account">Already have account?</string>
     <string name="save">Save</string>
     <string name="validate_username_blank">Username is required</string>
     <string name="validate_username_length">Username must be between 6 and 18 characters</string>

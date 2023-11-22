@@ -30,28 +30,28 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 startActivity(it)
             }
         } else {
-            Intent(this, LoginActivity::class.java).also {
-                startActivity(it)
-            }
-//            binding.viewPager.adapter = pagerAdapter
-//            binding.viewPager.isUserInputEnabled = false
-//            binding.viewPager.setPageTransformer(
-//                ZoomOutPageTransformer(
-//                    ActivityMainBinding.inflate(
-//                        layoutInflater
-//                    )
-//                )
-//            )
-//
-//            binding.bottomNav.setOnItemSelectedListener { item ->
-//                when (item.itemId) {
-//                    R.id.navigation_home -> binding.viewPager.currentItem = 0
-//                    R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
-//                    R.id.navigation_notifications -> binding.viewPager.currentItem = 2
-//                }
-//
-//                return@setOnItemSelectedListener true
+//            Intent(this, LoginActivity::class.java).also {
+//                startActivity(it)
 //            }
+            binding.viewPager.adapter = pagerAdapter
+            binding.viewPager.isUserInputEnabled = false
+            binding.viewPager.setPageTransformer(
+                ZoomOutPageTransformer(
+                    ActivityMainBinding.inflate(
+                        layoutInflater
+                    )
+                )
+            )
+
+            binding.bottomNav.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> binding.viewPager.currentItem = 0
+                    R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
+                    R.id.navigation_notifications -> binding.viewPager.currentItem = 2
+                }
+
+                return@setOnItemSelectedListener true
+            }
         }
     }
 
