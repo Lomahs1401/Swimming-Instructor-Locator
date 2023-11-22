@@ -1,12 +1,14 @@
 package com.example.swimminginstructorlocator.utils
 
 import android.content.Context
+import com.example.swimminginstructorlocator.data.model.User
 
 class DataLocalManager {
     private lateinit var swimmingInstructorLocatorSharedPreferences: SwimmingInstructorLocatorSharedPreferences
 
     companion object {
         private const val SHARED_PREFERENCES_FIRST_INSTALL_KEY = "FIRST_INSTALL"
+        private const val SHARED_PREFERENCES_CREATE_SESSION = "CREATE_SESSION"
 
         private var instance: DataLocalManager? = null
 
@@ -32,6 +34,19 @@ class DataLocalManager {
         fun getFirstInstalled(): Boolean {
             return getInstance().swimmingInstructorLocatorSharedPreferences.getBooleanValue(
                 SHARED_PREFERENCES_FIRST_INSTALL_KEY
+            )
+        }
+
+        fun getUser(): User? {
+            return getInstance().swimmingInstructorLocatorSharedPreferences.getUser(
+                SHARED_PREFERENCES_CREATE_SESSION
+            )
+        }
+
+        fun saveUser(user: User) {
+            return getInstance().swimmingInstructorLocatorSharedPreferences.saveUser(
+                SHARED_PREFERENCES_CREATE_SESSION,
+                user
             )
         }
     }

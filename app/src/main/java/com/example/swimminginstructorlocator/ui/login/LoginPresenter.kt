@@ -2,13 +2,13 @@ package com.example.swimminginstructorlocator.ui.login
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.request.LoginRequest
 import com.example.swimminginstructorlocator.data.service.impl.AuthServiceImpl
 import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.utils.DataLocalManager
 import java.lang.Exception
 
 class LoginPresenter(
@@ -16,7 +16,6 @@ class LoginPresenter(
 ) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
-
     override fun onStart() {
 //        TODO("Not yet implemented")
     }
@@ -36,13 +35,13 @@ class LoginPresenter(
     ): Boolean {
         val isValidEmail = validateEmail(loginRequest.email, binding, context)
         val isValidPassword = validatePassword(loginRequest.password, binding, context)
-
         return isValidEmail && isValidPassword
     }
 
     override fun signIn(loginRegister: LoginRequest) {
         authService.login(loginRegister, object : OnResultListener<User> {
             override fun onSuccess(dataResult: User) {
+                DataLocalManager.saveUser(dataResult)
                 view?.onSignIn()
             }
 

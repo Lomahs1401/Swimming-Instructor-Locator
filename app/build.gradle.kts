@@ -62,5 +62,4 @@ dependencies {
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("cn.pedant.sweetalert:library:1.3")
 }
