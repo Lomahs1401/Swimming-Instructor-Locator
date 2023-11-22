@@ -95,12 +95,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onViewMoreCenters() {
-        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance(listCenters)
-        addFragment(
-            R.id.fragment_home_container,
-            viewMoreCenterFragment,
-            addToBackStack = true
-        )
+
     }
 
     override fun onViewMoreInstructors() {

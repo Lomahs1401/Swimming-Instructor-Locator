@@ -100,6 +100,18 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         }
     }
 
+    fun clearUser(key: String) {
+        val sharedPreferences =
+            context.getSharedPreferences(
+                SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
+
     companion object {
         private const val SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES =
             "SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES"

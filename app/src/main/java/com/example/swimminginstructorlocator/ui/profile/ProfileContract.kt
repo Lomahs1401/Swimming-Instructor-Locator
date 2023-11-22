@@ -11,6 +11,7 @@ class ProfileContract {
      */
     interface View {
         fun onGetCurrentUser(user: User)
+        fun logoutSuccess()
         fun onError(exception: Exception?)
     }
 
@@ -19,5 +20,6 @@ class ProfileContract {
      */
     interface Presenter : BasePresenter<View> {
         fun getCurrentUser()
+        fun logout()
     }
 }

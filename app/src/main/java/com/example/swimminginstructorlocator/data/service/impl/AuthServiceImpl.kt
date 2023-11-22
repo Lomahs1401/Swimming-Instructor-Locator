@@ -8,5 +8,6 @@ import com.example.swimminginstructorlocator.listener.OnResultListener
 interface AuthServiceImpl {
     fun login(loginRequest: LoginRequest, onResultListener: OnResultListener<User>)
     fun register(registerRequest: RegisterRequest, onResultListener: OnResultListener<User>)
+    fun logout(onResultListener: OnResultListener<Boolean>)
     fun getCurrentUser(onResultListener: OnResultListener<User>)
 }
