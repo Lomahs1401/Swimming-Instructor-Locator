@@ -7,6 +7,7 @@ import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.request.LoginRequest
 import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.utils.SwimmingInstructorLocatorSharedPreferences
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

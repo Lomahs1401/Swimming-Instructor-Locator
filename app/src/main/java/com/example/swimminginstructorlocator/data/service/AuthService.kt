@@ -6,6 +6,7 @@ import com.example.swimminginstructorlocator.data.request.LoginRequest
 import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.data.service.impl.AuthServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.utils.DataLocalManager
 
 class AuthService(
     private val authRepo: AuthRepo
@@ -22,6 +23,11 @@ class AuthService(
         onResultListener: OnResultListener<User>
     ) {
         authRepo.register(registerRequest, onResultListener)
+    }
+
+    override fun getCurrentUser(onResultListener: OnResultListener<User>) {
+        val user  = DataLocalManager.getUser()
+        user?.let { onResultListener.onSuccess(it) }
     }
 
     companion object {
