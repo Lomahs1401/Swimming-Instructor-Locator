@@ -15,8 +15,8 @@ data class User(
     val address: String,
     val phone: String,
     val type: Int,
-    val weight: String,
-    val height: String,
+    val weight: String = "",
+    val height: String = "",
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("updatedAt")

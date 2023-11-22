@@ -43,7 +43,7 @@ class LoginPresenter(
     override fun signIn(loginRegister: LoginRequest) {
         authService.login(loginRegister, object : OnResultListener<User> {
             override fun onSuccess(dataResult: User) {
-                view?.onSignIn()
+                view?.onSignIn(dataResult)
             }
 
             override fun onError(exception: Exception?) {
