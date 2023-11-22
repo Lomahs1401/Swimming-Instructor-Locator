@@ -2,14 +2,16 @@ package com.example.swimminginstructorlocator.ui.login
 
 import android.content.Intent
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.MainActivity
+import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.LoginRequest
-import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.data.service.AuthService
+import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.ui.register.RegisterActivity
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
-import java.lang.Exception
+
 
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginContract.View {
 
@@ -51,14 +53,25 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginCont
         }
     }
 
-    override fun onSignIn() {
-        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-        Intent(this, MainActivity::class.java).also {
-            startActivity(it)
+    override fun onSignIn(user: User) {
+        SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).apply {
+            titleText = "Login Successful"
+            contentText = "Welcome back ${user.username}"
+            setConfirmClickListener {
+                Intent(this@LoginActivity, MainActivity::class.java).also {
+                    startActivity(it)
+                }
+                dismissWithAnimation()
+            }
+            show()
         }
     }
 
     override fun onError(exception: Exception?) {
-        Toast.makeText(this, exception?.message, Toast.LENGTH_SHORT).show()
+        SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).apply {
+            titleText = "Login Failed"
+            contentText = exception?.message
+            show()
+        }
     }
 }

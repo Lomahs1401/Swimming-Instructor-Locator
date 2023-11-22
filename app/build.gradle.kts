@@ -62,5 +62,9 @@ dependencies {
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("cn.pedant.sweetalert:library:1.3")
+    implementation("com.afollestad.material-dialogs:core:3.3.0")
+    implementation("com.afollestad.material-dialogs:input:3.3.0")
+    implementation("com.afollestad.material-dialogs:files:3.3.0")
+    implementation("com.afollestad.material-dialogs:color:3.3.0")
+    implementation("com.github.f0ris.sweetalert:library:1.6.2")
 }

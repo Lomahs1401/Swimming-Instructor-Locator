@@ -8,14 +8,18 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthApi {
-    data class ApiResponse(
+    data class ApiSuccessResponse(
         val message: String,
         val user: User
     )
 
+    data class ApiErrorResponse(
+        val error: String
+    )
+
     @POST("auth/login")
-    fun login(@Body loginRequest : LoginRequest): Call<ApiResponse>
+    fun login(@Body loginRequest : LoginRequest): Call<ApiSuccessResponse>
 
     @POST("auth/register")
-    fun register(@Body registerRequest: RegisterRequest): Call<ApiResponse>
+    fun register(@Body registerRequest: RegisterRequest): Call<ApiSuccessResponse>
 }
