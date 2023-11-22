@@ -13,7 +13,7 @@ import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.lang.Exception
 
 class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
-ProfileContract.View{
+    ProfileContract.View {
     private lateinit var profilePresenter: ProfilePresenter
     override fun onGetCurrentUser(user: User) {
         binding.etUsername.setText(user.username)
@@ -23,10 +23,10 @@ ProfileContract.View{
         user.avatar.notNull {
             user.avatar?.let { it1 -> binding.imgUser.loadImageWithUrl(it1) }
         }
+        binding.tvFullname.text = user.username
     }
 
     override fun onError(exception: Exception?) {
-        TODO("Not yet implemented")
         Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
     }
 
@@ -34,12 +34,10 @@ ProfileContract.View{
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentProfileBinding {
-        TODO("Not yet implemented")
         return FragmentProfileBinding.inflate(inflater, container, false)
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
         profilePresenter = ProfilePresenter(
             AuthService.getInstance(AuthRepo.getInstance())
         )
@@ -48,7 +46,6 @@ ProfileContract.View{
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
     }
 
     companion object {

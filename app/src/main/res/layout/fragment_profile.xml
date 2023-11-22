@@ -69,7 +69,7 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                android:id="@+id/tv_instructor_name"
+                android:id="@+id/tv_fullname"
                 android:paddingVertical="@dimen/dp_12"
                 android:layout_width="@dimen/dp_260"
                 android:layout_height="wrap_content"
