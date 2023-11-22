@@ -24,6 +24,20 @@ class ProfilePresenter(
         )
     }
 
+    override fun logout() {
+        authService.logout(object : OnResultListener<Boolean>{
+            override fun onSuccess(dataResult: Boolean) {
+                view?.logoutSuccess()
+            }
+
+            override fun onError(exception: Exception?) {
+                view?.onError(exception)
+            }
+
+        })
+    }
+
+
     override fun onStart() {
     }
 

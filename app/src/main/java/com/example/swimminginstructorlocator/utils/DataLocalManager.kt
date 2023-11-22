@@ -49,5 +49,11 @@ class DataLocalManager {
                 user
             )
         }
+
+        fun removeUser() {
+            return getInstance().swimmingInstructorLocatorSharedPreferences.clearUser(
+                SHARED_PREFERENCES_CREATE_SESSION
+            )
+        }
     }
 }

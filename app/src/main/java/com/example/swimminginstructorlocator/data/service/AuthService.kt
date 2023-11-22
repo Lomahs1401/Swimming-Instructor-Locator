@@ -25,6 +25,11 @@ class AuthService(
         authRepo.register(registerRequest, onResultListener)
     }
 
+    override fun logout(onResultListener: OnResultListener<Boolean>) {
+        DataLocalManager.removeUser()
+        onResultListener.onSuccess(true)
+    }
+
     override fun getCurrentUser(onResultListener: OnResultListener<User>) {
         val user  = DataLocalManager.getUser()
         user?.let { onResultListener.onSuccess(it) }

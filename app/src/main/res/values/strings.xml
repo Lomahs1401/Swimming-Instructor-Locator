@@ -101,4 +101,10 @@
     <string name="validate_password_blank">Password is required</string>
     <string name="validate_password_length">Password must be between 8 and 16 characters</string>
     <string name="validate_password_format">Password must contain 1 uppercase character, 1 alphanumeric character, and 1 special character</string>
+    <string name="address">Address</string>
+    <string name="placeholder_address">Da Nang</string>
+    <string name="genre">Genre</string>
+    <string name="placeholder_genre">Female/Male</string>
+    <string name="teacher">Teacher</string>
+    <string name="instructor">Instructor</string>
 </resources>
