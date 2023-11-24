@@ -9,23 +9,23 @@ import com.example.swimminginstructorlocator.data.model.HomeChild
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.LayoutCenterHomeChildBinding
 import com.example.swimminginstructorlocator.databinding.LayoutInstructorHomeChildBinding
-import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.listener.OnImageClickListener
 import com.example.swimminginstructorlocator.ui.home.HomePresenter
 import com.example.swimminginstructorlocator.utils.base.BaseViewHolder
 
 class HomeChildAdapter(
     private val presenter: HomePresenter,
-    private val itemClickListener: OnItemClickListener,
+    private val imageClickListener: OnImageClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listHomeChild: MutableList<HomeChild> = mutableListOf()
 
     private val centerAdapter: CenterAdapter by lazy {
-        CenterAdapter(itemClickListener)
+        CenterAdapter(imageClickListener)
     }
 
     private val instructorAdapter: InstructorAdapter by lazy {
-        InstructorAdapter(itemClickListener)
+        InstructorAdapter(imageClickListener)
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -1,7 +1,6 @@
 package com.example.swimminginstructorlocator.ui.login
 
 import android.content.Intent
-import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.MainActivity
 import com.example.swimminginstructorlocator.data.model.User
@@ -12,10 +11,10 @@ import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.ui.register.RegisterActivity
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 
-
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginContract.View {
 
     private lateinit var loginPresenter: LoginPresenter
+    private var progressDialog: SweetAlertDialog? = null
 
     override fun createBindingActivity(): ActivityLoginBinding {
         return ActivityLoginBinding.inflate(layoutInflater)
@@ -49,25 +48,28 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginCont
             loginPresenter.validateLoginForm(loginRequest, binding, applicationContext)
 
         if (isValidLoginForm) {
+            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading")
+                .setContentText("Please wait...")
+                .apply {
+                    setCancelable(false)
+                    show()
+                }
+
             loginPresenter.signIn(loginRequest)
         }
     }
 
     override fun onSignIn(user: User) {
-        SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).apply {
-            titleText = "Login Successful"
-            contentText = "Welcome back ${user.username}"
-            setConfirmClickListener {
-                Intent(this@LoginActivity, MainActivity::class.java).also {
-                    startActivity(it)
-                }
-                dismissWithAnimation()
-            }
-            show()
+        progressDialog?.dismissWithAnimation()
+        Intent(this@LoginActivity, MainActivity::class.java).also {
+            startActivity(it)
         }
     }
 
     override fun onError(exception: Exception?) {
+        progressDialog?.dismissWithAnimation()
+
         SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).apply {
             titleText = "Login Failed"
             contentText = exception?.message

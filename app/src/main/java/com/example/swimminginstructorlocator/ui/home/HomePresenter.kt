@@ -1,7 +1,9 @@
 package com.example.swimminginstructorlocator.ui.home
 
 import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.model.CenterDetail
 import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.service.CenterService
 import com.example.swimminginstructorlocator.data.service.impl.InstructorServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
@@ -48,6 +50,36 @@ class HomePresenter(
                 view?.onError(exception)
             }
         })
+    }
+
+    override fun getCenterDetail(id: String) {
+        centerService.getCenterDetail(
+            id,
+            object : OnResultListener<CenterDetail> {
+                override fun onSuccess(dataResult: CenterDetail) {
+                    view?.onGetCenterDetail(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
+    }
+
+    override fun getInstructorDetail(id: String) {
+        instructorService.getInstructorDetail(
+            id,
+            object : OnResultListener<InstructorDetail> {
+                override fun onSuccess(dataResult: InstructorDetail) {
+                    view?.onGetInstructorDetail(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
     }
 
     override fun viewMoreCenters() {

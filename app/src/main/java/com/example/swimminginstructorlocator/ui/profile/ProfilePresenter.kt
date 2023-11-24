@@ -8,7 +8,19 @@ import java.lang.Exception
 class ProfilePresenter(
     private val authService: AuthServiceImpl
 ) : ProfileContract.Presenter {
+
     private var view: ProfileContract.View? = null
+
+    override fun onStart() {
+    }
+
+    override fun onStop() {
+    }
+
+    override fun setView(view: ProfileContract.View?) {
+        this.view = view
+    }
+
     override fun getCurrentUser() {
         authService.getCurrentUser(
             object : OnResultListener<User>{
@@ -27,7 +39,7 @@ class ProfilePresenter(
     override fun logout() {
         authService.logout(object : OnResultListener<Boolean>{
             override fun onSuccess(dataResult: Boolean) {
-                view?.logoutSuccess()
+                view?.onLogout()
             }
 
             override fun onError(exception: Exception?) {
@@ -35,16 +47,5 @@ class ProfilePresenter(
             }
 
         })
-    }
-
-
-    override fun onStart() {
-    }
-
-    override fun onStop() {
-    }
-
-    override fun setView(view: ProfileContract.View?) {
-        this.view = view
     }
 }

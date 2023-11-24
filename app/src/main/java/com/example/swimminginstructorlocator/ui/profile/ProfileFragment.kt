@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.swimminginstructorlocator.MainActivity
 import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.service.AuthService
@@ -19,14 +18,43 @@ import com.example.swimminginstructorlocator.R
 
 class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
     ProfileContract.View {
+
     private lateinit var profilePresenter: ProfilePresenter
+
+    // ----------------------     Base View Binding Fragment     ----------------------
+
+    override fun createBindingFragment(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentProfileBinding {
+        return FragmentProfileBinding.inflate(inflater, container, false)
+    }
+
+    override fun initView() {
+        profilePresenter = ProfilePresenter(
+            AuthService.getInstance(AuthRepo.getInstance())
+        )
+        profilePresenter.setView(this)
+        profilePresenter.getCurrentUser()
+
+        binding.btnLogout.setOnClickListener {
+            handleClickLogout()
+        }
+    }
+
+    override fun initData() {
+        profilePresenter.getCurrentUser()
+    }
+
+    // ----------------------     Get Current Info User     ----------------------
+
     override fun onGetCurrentUser(user: User) {
         binding.etUsername.setText(user.username)
         binding.etEmail.setText(user.email)
         binding.etPhone.setText(user.phone)
         binding.etAddress.setText(user.address)
-        binding.etHeight.setText(user.height)
-        binding.etWeight.setText(user.weight)
+        binding.etHeight.setText(user.height.toString())
+        binding.etWeight.setText(user.weight.toString())
         if (user.gender == 1) {
             binding.etGenre.setText("Male")
             setGenderDrawable(1)
@@ -41,12 +69,12 @@ class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
             binding.tvRole.text = "Student"
         }
 
-
         user.avatar.notNull {
             user.avatar?.let { it1 -> binding.imgUser.loadImageWithUrl(it1) }
         }
         binding.tvFullname.text = user.username
     }
+
     private fun setGenderDrawable(gender: Int) {
         val drawableResId = when (gender) {
             1 -> R.drawable.baseline_male_24
@@ -56,37 +84,13 @@ class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
         binding.etGenre.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableResId, 0)
     }
 
-    override fun onError(exception: Exception?) {
-        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun createBindingFragment(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentProfileBinding {
-        return FragmentProfileBinding.inflate(inflater, container, false)
-    }
-
-    override fun initData() {
-        profilePresenter = ProfilePresenter(
-            AuthService.getInstance(AuthRepo.getInstance())
-        )
-        profilePresenter.setView(this)
-        profilePresenter.getCurrentUser()
-
-        binding.btnLogout.setOnClickListener {
-            handleClickLogout()
-        }
-    }
-
-    override fun initView() {
-    }
+    // ----------------------     Handle Click Logout     ----------------------
 
     private fun handleClickLogout() {
         profilePresenter.logout()
     }
 
-    override fun logoutSuccess() {
+    override fun onLogout() {
         SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE).apply {
             titleText = "Logout Successful"
             contentText = "See you again"
@@ -99,6 +103,12 @@ class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
             }
             show()
         }
+    }
+
+    // ----------------------     Handle Error     ----------------------
+
+    override fun onError(exception: Exception?) {
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

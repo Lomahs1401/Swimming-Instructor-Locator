@@ -8,5 +8,9 @@ data class RegisterRequest(
     @SerializedName("email")
     var email: String,
     @SerializedName("password")
-    var password: String
+    var password: String,
+    @SerializedName("type")
+    var type: Int = 0, // Default Student
+    @SerializedName("student_name")
+    var studentName: String = "Nguyen Van A"
 )

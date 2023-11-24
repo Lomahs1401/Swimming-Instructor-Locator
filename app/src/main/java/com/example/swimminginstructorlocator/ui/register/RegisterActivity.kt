@@ -1,7 +1,7 @@
 package com.example.swimminginstructorlocator.ui.register
 
 import android.content.Intent
-import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.data.service.AuthService
@@ -13,6 +13,8 @@ import java.lang.Exception
 class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), RegisterContract.View {
 
     private lateinit var registerPresenter: RegisterPresenter
+
+    // ----------------------     Base View Binding Activity     ----------------------
 
     override fun createBindingActivity(): ActivityRegisterBinding {
         return ActivityRegisterBinding.inflate(layoutInflater)
@@ -36,6 +38,8 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
         }
     }
 
+    // ----------------------     Handle Register     ----------------------
+
     private fun handleClickSignUp() {
         val username = binding.etUsername.text.toString()
         val email = binding.etEmail.text.toString()
@@ -52,10 +56,26 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
     }
 
     override fun onSignUp() {
-        Toast.makeText(this, "OKE", Toast.LENGTH_SHORT).show()
+        SweetAlertDialog(applicationContext, SweetAlertDialog.SUCCESS_TYPE).apply {
+            setTitleText("Register Successful")
+            .setConfirmClickListener {
+                Intent(this@RegisterActivity, LoginActivity::class.java).also {
+                    startActivity(intent)
+                }
+                finish()
+            }
+            setCancelable(false)
+            show()
+        }
     }
 
+    // ----------------------     Handle Error     ----------------------
+
     override fun onError(exception: Exception?) {
-        Toast.makeText(this, exception?.message, Toast.LENGTH_SHORT).show()
+        SweetAlertDialog(applicationContext, SweetAlertDialog.SUCCESS_TYPE).apply {
+            titleText = exception?.message
+            setCancelable(true)
+            show()
+        }
     }
 }

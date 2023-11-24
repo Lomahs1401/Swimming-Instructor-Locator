@@ -18,8 +18,8 @@ abstract class BaseViewBindingFragment<T : ViewBinding> : Fragment() {
         container: ViewGroup?
     ): T
 
-    abstract fun initData()
     abstract fun initView()
+    abstract fun initData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +33,8 @@ abstract class BaseViewBindingFragment<T : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initData()
         initView()
+        initData()
     }
 
     override fun onDestroy() {
