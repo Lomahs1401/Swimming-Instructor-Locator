@@ -63,8 +63,8 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         editor.putString("address", user.address)
         editor.putString("phone", user.phone)
         user.type?.let { editor.putInt("type", it) }
-        editor.putString("weight", user.weight)
-        editor.putString("height", user.height)
+        editor.putString("weight", user.weight.toString())
+        editor.putString("height", user.height.toString())
         editor.putString("createdAt", user.createdAt)
         editor.putString("updatedAt", user.updatedAt)
         editor.apply()
@@ -78,6 +78,7 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
             )
 
         val id = sharedPreferences.getString("id", null)
+        val fullName = sharedPreferences.getString("fullname", null)
         val username = sharedPreferences.getString("username", null)
         val email = sharedPreferences.getString("email", null)
         val avatar = sharedPreferences.getString("avatar", null)
@@ -90,7 +91,7 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         val createdAt = sharedPreferences.getString("createdAt", null)
         val updatedAt = sharedPreferences.getString("updatedAt", null)
 
-        val user = User(id, username, email, avatar, gender,
+        val user = User(id, username, fullName, email, avatar, gender,
             address, phone, type, weight, height, createdAt, updatedAt)
 
         return if (id != null && username != null) {

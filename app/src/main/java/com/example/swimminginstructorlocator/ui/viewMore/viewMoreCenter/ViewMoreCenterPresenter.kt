@@ -1,6 +1,7 @@
 package com.example.swimminginstructorlocator.ui.viewMore.viewMoreCenter
 
 import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.model.CenterDetail
 import com.example.swimminginstructorlocator.data.service.impl.CenterServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
 import java.lang.Exception
@@ -29,6 +30,21 @@ class ViewMoreCenterPresenter(
             object : OnResultListener<MutableList<Center>> {
                 override fun onSuccess(dataResult: MutableList<Center>) {
                     view?.onSearchCenters(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
+    }
+
+    override fun getCenterDetail(id: String) {
+        centerService.getCenterDetail(
+            id,
+            object : OnResultListener<CenterDetail> {
+                override fun onSuccess(dataResult: CenterDetail) {
+                    view?.onGetCenterDetail(dataResult)
                 }
 
                 override fun onError(exception: Exception?) {

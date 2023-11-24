@@ -22,11 +22,12 @@ class CourseListFragment : BaseViewBindingFragment<FragmentCourseListBinding>(),
         return FragmentCourseListBinding.inflate(inflater, container, false)
     }
 
+    override fun initView() {
+    }
+
     override fun initData() {
     }
 
-    override fun initView() {
-    }
     companion object {
         @JvmStatic
         fun newInstance() = CourseListFragment()

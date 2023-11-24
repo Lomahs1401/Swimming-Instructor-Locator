@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.databinding.ItemViewMoreInstructorBinding
-import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.listener.OnImageClickListener
+import com.example.swimminginstructorlocator.listener.OnInstructorImageClickListener
 import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
 import com.example.swimminginstructorlocator.utils.ext.notNull
 
 class ViewMoreInstructorAdapter(
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnImageClickListener
 ) : RecyclerView.Adapter<ViewMoreInstructorAdapter.ViewMoreInstructorViewHolder>() {
 
     private var listInstructors: MutableList<Instructor> = mutableListOf()
@@ -47,7 +48,7 @@ class ViewMoreInstructorAdapter(
             binding.tvAddress.text = "123 Street, City, State, 00000"
 
             binding.imgInstructor.setOnClickListener {
-                itemClickListener.onInstructorImageClick(instructor)
+                itemClickListener.onImageClick(instructor)
             }
         }
     }

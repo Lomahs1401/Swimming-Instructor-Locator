@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.databinding.ItemCenterBinding
-import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.listener.OnImageClickListener
 import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
 import com.example.swimminginstructorlocator.utils.ext.notNull
 
 class CenterAdapter(
-    private val onItemClickListener: OnItemClickListener
+    private val onItemClickListener: OnImageClickListener
 ) : RecyclerView.Adapter<CenterAdapter.CenterViewHolder>() {
 
     private var listCenters: MutableList<Center> = mutableListOf()
@@ -45,7 +45,7 @@ class CenterAdapter(
                 binding.imgCenter.loadImageWithUrl(it)
             }
             binding.imgCenter.setOnClickListener {
-                onItemClickListener.onCenterImageClick(center)
+                onItemClickListener.onImageClick(center)
             }
         }
     }

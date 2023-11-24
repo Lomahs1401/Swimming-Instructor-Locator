@@ -18,6 +18,8 @@ class OnBoardingActivity : BaseViewBindingActivity<ActivityOnBoardingBinding>() 
 
     private lateinit var introSlideAdapter: IntroSlideAdapter
 
+    // ----------------------     Base View Binding Activity     ----------------------
+
     override fun createBindingActivity(): ActivityOnBoardingBinding {
         return ActivityOnBoardingBinding.inflate(layoutInflater)
     }

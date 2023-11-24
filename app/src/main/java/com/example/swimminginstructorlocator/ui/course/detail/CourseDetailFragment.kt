@@ -14,16 +14,14 @@ class CourseDetailFragment : BaseViewBindingFragment<FragmentCourseDetailBinding
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentCourseDetailBinding {
-        TODO("Not yet implemented")
-    }
-
-    override fun initData() {
-        TODO("Not yet implemented")
+        return FragmentCourseDetailBinding.inflate(inflater, container, false)
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
     }
 
-
+    override fun initData() {
+//        TODO("Not yet implemented")
+    }
 }
