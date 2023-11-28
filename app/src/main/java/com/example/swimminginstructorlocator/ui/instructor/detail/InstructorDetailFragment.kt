@@ -1,5 +1,6 @@
 package com.example.swimminginstructorlocator.ui.instructor.detail
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,12 +15,11 @@ import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.lang.Exception
 
 class InstructorDetailFragment(
-    private val id: String,
+    private val instructorDetail: InstructorDetail
 ) : BaseViewBindingFragment<FragmentInstructorDetailBinding>(),
     InstructorDetailContract.View {
 
     private lateinit var instructorDetailPresenter: InstructorDetailPresenter
-    private var instructorId: String? = null
 
     override fun createBindingFragment(
         inflater: LayoutInflater,
@@ -28,30 +28,15 @@ class InstructorDetailFragment(
         return FragmentInstructorDetailBinding.inflate(inflater, container, false)
     }
 
-    override fun initData() {
+    override fun initView() {
         instructorDetailPresenter = InstructorDetailPresenter(
             InstructorService.getInstance(InstructorRepo.getInstance())
         )
         instructorDetailPresenter.setView(this)
-        instructorDetailPresenter.getInstructorDetail(id)
     }
 
-    override fun initView() {
-        binding.imgBackButton.setOnClickListener {
-            goBackFragment()
-        }
-    }
-
-    override fun onGetInstructorDetail(instructorDetail: InstructorDetail) {
-        instructorDetail.image.notNull {
-            binding.imgInstructor.loadImageWithUrl(instructorDetail.image)
-        }
-
-        if (instructorDetail.gender == 1) {
-            binding.tvInstructorGender.text = "Male"
-        } else {
-            binding.tvInstructorGender.text = "Female"
-        }
+    @SuppressLint("SetTextI18n")
+    override fun initData() {
         binding.tvInstructorName.text = instructorDetail.instructorName
         binding.tvInstructorAge.text = instructorDetail.age.toString()
         binding.tvInstructorDescription.text = instructorDetail.description
@@ -60,6 +45,20 @@ class InstructorDetailFragment(
         binding.tvInstructorExperience.text = instructorDetail.yearExperiences.toString()
         binding.tvInstructorEmail.text = instructorDetail.email
         binding.tvInstructorPhone.text = instructorDetail.phone
+
+        if (instructorDetail.gender == 1) {
+            binding.tvInstructorGender.text = "Male"
+        } else {
+            binding.tvInstructorGender.text = "Female"
+        }
+
+        instructorDetail.image.notNull {
+            binding.imgInstructor.loadImageWithUrl(instructorDetail.image)
+        }
+
+        binding.imgBackButton.setOnClickListener {
+            goBackFragment()
+        }
     }
 
     override fun onError(exception: Exception?) {
@@ -68,6 +67,7 @@ class InstructorDetailFragment(
 
     companion object {
         @JvmStatic
-        fun newInstance(id: String) = InstructorDetailFragment(id)
+        fun newInstance(instructorDetail: InstructorDetail) =
+            InstructorDetailFragment(instructorDetail)
     }
 }

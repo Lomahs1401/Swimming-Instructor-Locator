@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Center(
+data class CenterDetail(
     @SerializedName("_id")
     val id: String,
     @SerializedName("center_name")
@@ -22,4 +22,6 @@ data class Center(
     var image: String,
     @SerializedName("phone_number")
     val phone: String,
+    @SerializedName("teachers")
+    val instructors: MutableList<Instructor>
 ) : Parcelable

@@ -19,11 +19,11 @@ class DashboardFragment : BaseViewBindingFragment<FragmentDashboardBinding>(),
         return FragmentDashboardBinding.inflate(inflater, container, false)
     }
 
-    override fun initData() {
+    override fun initView() {
 //        TODO("Not yet implemented")
     }
 
-    override fun initView() {
+    override fun initData() {
 //        TODO("Not yet implemented")
     }
 

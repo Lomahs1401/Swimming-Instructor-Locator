@@ -10,21 +10,27 @@ import retrofit2.http.Url
 interface InstructorApi {
 
     data class ApiResponse(
+        @SerializedName("message")
         val message: String,
         val data: MutableList<Instructor>
     )
 
     data class InstructorDetailApiResponse(
+        @SerializedName("message")
         val message: String,
+        @SerializedName("data")
         val data: InstructorDetail
     )
 
     data class SearchApiResponse(
+        @SerializedName("message")
         val message: String,
+        @SerializedName("data")
         val data: SearchApiData
     )
 
     data class SearchApiData(
+        @SerializedName("teachers")
         val teachers: MutableList<Instructor>
     )
 

@@ -4,6 +4,7 @@ import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.User
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +13,9 @@ import retrofit2.http.GET
 interface UserApi {
 
     data class ApiResponse(
+        @SerializedName("message")
         val message: String,
+        @SerializedName("users")
         val users: MutableList<User>
     )
 

@@ -11,7 +11,7 @@ class ProfileContract {
      */
     interface View {
         fun onGetCurrentUser(user: User)
-        fun logoutSuccess()
+        fun onLogout()
         fun onError(exception: Exception?)
     }
 

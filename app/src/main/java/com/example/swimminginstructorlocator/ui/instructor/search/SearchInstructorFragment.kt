@@ -16,10 +16,10 @@ class SearchInstructorFragment : BaseViewBindingFragment<FragmentSearchInstructo
         return FragmentSearchInstructorBinding.inflate(inflater, container, false)
     }
 
-    override fun initData() {
+    override fun initView() {
     }
 
-    override fun initView() {
+    override fun initData() {
     }
 
     override fun onSearchInstructor() {

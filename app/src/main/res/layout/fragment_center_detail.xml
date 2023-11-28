@@ -344,7 +344,19 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
 
+                        <TextView
+                            android:id="@+id/tv_no_instructor_found"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_40"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:gravity="bottom"
+                            android:visibility="gone"
+                            android:textSize="@dimen/sp_16"
+                            android:text="@string/no_instructor_founded" />
+
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_instructor"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"

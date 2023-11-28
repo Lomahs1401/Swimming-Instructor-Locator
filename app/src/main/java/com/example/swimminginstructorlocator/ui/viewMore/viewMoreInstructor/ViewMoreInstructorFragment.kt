@@ -3,31 +3,36 @@ package com.example.swimminginstructorlocator.ui.viewMore.viewMoreInstructor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
-import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
+import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
 import com.example.swimminginstructorlocator.data.service.InstructorService
 import com.example.swimminginstructorlocator.databinding.FragmentViewMoreInstructorBinding
-import com.example.swimminginstructorlocator.listener.OnItemClickListener
+import com.example.swimminginstructorlocator.listener.OnInstructorImageClickListener
 import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
 import com.example.swimminginstructorlocator.utils.ext.addFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import java.lang.Exception
 
-class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstructorBinding>(),
-    ViewMoreInstructorContract.View, OnItemClickListener {
+class ViewMoreInstructorFragment(
+    private val listInstructors: MutableList<Instructor>
+) : BaseViewBindingFragment<FragmentViewMoreInstructorBinding>(),
+    ViewMoreInstructorContract.View, OnInstructorImageClickListener {
 
     private lateinit var viewMoreInstructorPresenter: ViewMoreInstructorPresenter
-    private var listInstructors: MutableList<Instructor>? = mutableListOf()
+    private var progressDialog: SweetAlertDialog? = null
 
     private val viewMoreInstructorAdapter: ViewMoreInstructorAdapter by lazy {
         ViewMoreInstructorAdapter(this)
     }
+
+    // ----------------------     Base View Binding Fragment     ----------------------
 
     override fun createBindingFragment(
         inflater: LayoutInflater,
@@ -36,18 +41,15 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
         return FragmentViewMoreInstructorBinding.inflate(inflater, container, false)
     }
 
-    override fun initData() {
+    override fun initView() {
         viewMoreInstructorPresenter = ViewMoreInstructorPresenter(
             InstructorService.getInstance(InstructorRepo.getInstance())
         )
         viewMoreInstructorPresenter.setView(this)
     }
 
-    override fun initView() {
-        arguments?.run {
-            listInstructors = getParcelableArrayList(LIST_INSTRUCTORS)
-        }
-        listInstructors?.let { viewMoreInstructorAdapter.setData(it) }
+    override fun initData() {
+        viewMoreInstructorAdapter.setData(listInstructors)
         binding.rcvInstructor.adapter = viewMoreInstructorAdapter
 
         binding.imgBackButton.setOnClickListener {
@@ -73,22 +75,11 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
         }
     }
 
+    // ----------------------     Handle Search     ----------------------
+
     private fun handleClickSearchInstructor(searchValue: String) {
-        listInstructors?.let { viewMoreInstructorPresenter.searchInstructor(searchValue) }
+        viewMoreInstructorPresenter.searchInstructor(searchValue)
         binding.searchInstructor.setQuery("", false)
-    }
-
-    override fun onCenterImageClick(center: Center) {
-//        TODO("Not yet implemented")
-    }
-
-    override fun onInstructorImageClick(instructor: Instructor) {
-        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructor.id)
-        addFragment(
-            R.id.fragment_home_container,
-            instructorDetailFragment,
-            addToBackStack = true
-        )
     }
 
     override fun onSearchInstructors(listInstructors: MutableList<Instructor>) {
@@ -103,17 +94,45 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
         }
     }
 
+    // ----------------------     On Item Click Listener     ----------------------
+
+    override fun onInstructorImageClick(instructor: Instructor) {
+        progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
+            .setTitleText("Loading...")
+            .apply {
+                setCancelable(false)
+                show()
+            }
+
+        viewMoreInstructorPresenter.getInstructorDetail(instructor.id)
+    }
+
+    override fun onImageClick(item: Any) {
+        if (item is Instructor) {
+            onInstructorImageClick(item)
+        }
+    }
+
+    override fun onGetInstructorDetail(instructorDetail: InstructorDetail) {
+        progressDialog?.dismissWithAnimation()
+
+        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructorDetail)
+        addFragment(
+            R.id.fragment_home_container,
+            instructorDetailFragment,
+            addToBackStack = true
+        )
+    }
+
+    // ----------------------     Handle Error    ----------------------
+
     override fun onError(exception: Exception?) {
-//        TODO("Not yet implemented")
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
-        private const val LIST_INSTRUCTORS = "LIST_INSTRUCTORS"
-
         @JvmStatic
         fun newInstance(listInstructors: MutableList<Instructor>) =
-            ViewMoreInstructorFragment().apply {
-                arguments = bundleOf(LIST_INSTRUCTORS to listInstructors)
-            }
+            ViewMoreInstructorFragment(listInstructors)
     }
 }
