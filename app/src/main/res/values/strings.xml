@@ -107,4 +107,9 @@
     <string name="placeholder_genre">Female/Male</string>
     <string name="teacher">Teacher</string>
     <string name="instructor">Instructor</string>
+    <string name="title_calendar">Calendar\n</string>
+    <string name="appointment">Appointment</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
 </resources>

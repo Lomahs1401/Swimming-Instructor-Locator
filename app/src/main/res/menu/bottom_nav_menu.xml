@@ -21,4 +21,9 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/title_profile" />
+
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="@string/title_calendar" />
 </menu>

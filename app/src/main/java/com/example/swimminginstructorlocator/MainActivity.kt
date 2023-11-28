@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.animation.ZoomOutPageTransformer
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
+import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.ui.dashboard.DashboardFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
-import com.example.swimminginstructorlocator.ui.login.LoginActivity
 import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
 import com.example.swimminginstructorlocator.ui.onboarding.OnBoardingActivity
 import com.example.swimminginstructorlocator.ui.profile.ProfileFragment
@@ -50,6 +50,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     R.id.navigation_dashboard -> binding.viewPager.currentItem = 1
                     R.id.navigation_notifications -> binding.viewPager.currentItem = 2
                     R.id.navigation_profile -> binding.viewPager.currentItem = 3
+                    R.id.navigation_calendar -> binding.viewPager.currentItem = 4
                 }
 
                 return@setOnItemSelectedListener true
@@ -66,7 +67,8 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
             HomeFragment.newInstance(),
             DashboardFragment.newInstance(),
             NotificationsFragment.newInstance(),
-            ProfileFragment.newInstance()
+            ProfileFragment.newInstance(),
+            CalendarFragment.newInstance(),
         )
     }
 }
