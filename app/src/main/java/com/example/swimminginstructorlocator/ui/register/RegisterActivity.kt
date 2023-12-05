@@ -28,6 +28,15 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
     }
 
     override fun initData() {
+        binding.btnFacebook.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
+        binding.btnGoogle.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
+        binding.btnTwitter.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
         binding.btnSignup.setOnClickListener {
             handleClickSignUp()
         }
@@ -35,6 +44,14 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
             Intent(this, LoginActivity::class.java).also {
                 startActivity(it)
             }
+        }
+    }
+
+    private fun handleClickSignInWithSocialMedia() {
+        SweetAlertDialog(applicationContext, SweetAlertDialog.NORMAL_TYPE).apply {
+            titleText = "We'll update this feature soon"
+            setCancelable(true)
+            show()
         }
     }
 

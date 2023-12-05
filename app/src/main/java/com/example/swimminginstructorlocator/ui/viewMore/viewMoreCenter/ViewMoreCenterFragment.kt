@@ -20,9 +20,7 @@ import com.example.swimminginstructorlocator.utils.ext.addFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import java.lang.Exception
 
-class ViewMoreCenterFragment(
-    private val listCenters: MutableList<Center>
-) : BaseViewBindingFragment<FragmentViewMoreCenterBinding>(),
+class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBinding>(),
     ViewMoreCenterContract.View, OnCenterImageClickListener {
 
     private lateinit var viewMoreCenterPresenter: ViewMoreCenterPresenter
@@ -116,7 +114,9 @@ class ViewMoreCenterFragment(
     override fun onGetCenterDetail(centerDetail: CenterDetail) {
         progressDialog?.dismissWithAnimation()
 
-        val centerDetailFragment = CenterDetailFragment.newInstance(centerDetail)
+        CenterDetailFragment.setCenterDetail(centerDetail)
+        val centerDetailFragment = CenterDetailFragment.newInstance()
+
         addFragment(
             R.id.fragment_home_container,
             centerDetailFragment,
@@ -131,7 +131,14 @@ class ViewMoreCenterFragment(
     }
 
     companion object {
+        private var listCenters: MutableList<Center> = mutableListOf()
+
         @JvmStatic
-        fun newInstance(listCenters: MutableList<Center>) = ViewMoreCenterFragment(listCenters)
+        fun newInstance() = ViewMoreCenterFragment()
+
+        @JvmStatic
+        fun setListCenters(centers: MutableList<Center>) {
+            this.listCenters = centers
+        }
     }
 }

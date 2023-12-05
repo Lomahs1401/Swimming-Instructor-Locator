@@ -22,7 +22,7 @@ class CenterAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listCenters.size
+        return minOf(MAX_ITEM_SHOW_REVIEW, listCenters.size)
     }
 
     override fun onBindViewHolder(holder: CenterViewHolder, position: Int) {
@@ -48,5 +48,9 @@ class CenterAdapter(
                 onItemClickListener.onImageClick(center)
             }
         }
+    }
+
+    companion object {
+        private const val MAX_ITEM_SHOW_REVIEW = 5
     }
 }

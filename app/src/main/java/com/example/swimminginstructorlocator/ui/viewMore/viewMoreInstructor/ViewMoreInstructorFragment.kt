@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
+import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
@@ -20,9 +21,7 @@ import com.example.swimminginstructorlocator.utils.ext.addFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import java.lang.Exception
 
-class ViewMoreInstructorFragment(
-    private val listInstructors: MutableList<Instructor>
-) : BaseViewBindingFragment<FragmentViewMoreInstructorBinding>(),
+class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstructorBinding>(),
     ViewMoreInstructorContract.View, OnInstructorImageClickListener {
 
     private lateinit var viewMoreInstructorPresenter: ViewMoreInstructorPresenter
@@ -116,7 +115,8 @@ class ViewMoreInstructorFragment(
     override fun onGetInstructorDetail(instructorDetail: InstructorDetail) {
         progressDialog?.dismissWithAnimation()
 
-        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructorDetail)
+        InstructorDetailFragment.setInstructorDetail(instructorDetail)
+        val instructorDetailFragment = InstructorDetailFragment.newInstance()
         addFragment(
             R.id.fragment_home_container,
             instructorDetailFragment,
@@ -131,8 +131,14 @@ class ViewMoreInstructorFragment(
     }
 
     companion object {
+        private var listInstructors: MutableList<Instructor> = mutableListOf()
+
         @JvmStatic
-        fun newInstance(listInstructors: MutableList<Instructor>) =
-            ViewMoreInstructorFragment(listInstructors)
+        fun newInstance() = ViewMoreInstructorFragment()
+
+        @JvmStatic
+        fun setListInstructors(instructors: MutableList<Instructor>) {
+            this.listInstructors = instructors
+        }
     }
 }
