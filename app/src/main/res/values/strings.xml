@@ -61,6 +61,7 @@
     <string name="experience">Experience:</string>
     <string name="swimming_instructor_certification">Swimming Instructor Certification</string>
     <string name="no_center_founded">No Center Founded</string>
+    <string name="no_course_founded">No Course Founded</string>
     <string name="no_instructor_founded">No Instructor Founded</string>
     <string name="next">Next</string>
     <string name="skip_intro">Skip Intro</string>
@@ -112,7 +113,18 @@
     <string name="date">Date</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
-    <string name="appointment_time">Time: 16:00 - 17:00</string>
+    <string name="appointment_time">Time: 16:00 – 17:00</string>
     <string name="view_all_appointments">All Appointments</string>
     <string name="no_appointment_founded">No Appointments</string>
+    <string name="list_course">List Course</string>
+    <string name="you_are">You are:</string>
+    <string name="student">Student</string>
+    <string name="you_re_not_logged_in_yet">You\'re not logged in yet</string>
+    <string name="manage_account">Manage Account</string>
+    <string name="setting">Setting</string>
+    <string name="english">English</string>
+    <string name="japanese">Japanese</string>
+    <string name="communication">Communication</string>
+    <string name="share">Share</string>
+    <string name="rate_us">Rate Us</string>
 </resources>

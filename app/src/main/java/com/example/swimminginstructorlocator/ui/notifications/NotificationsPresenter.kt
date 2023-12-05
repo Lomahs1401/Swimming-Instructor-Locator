@@ -1,7 +1,5 @@
 package com.example.swimminginstructorlocator.ui.notifications
 
-import com.example.swimminginstructorlocator.ui.dashboard.DashboardContract
-
 class NotificationsPresenter : NotificationsContract.Presenter {
 
     private var view: NotificationsContract.View? = null

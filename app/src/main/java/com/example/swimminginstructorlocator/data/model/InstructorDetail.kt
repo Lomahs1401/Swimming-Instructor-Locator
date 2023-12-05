@@ -24,6 +24,7 @@ data class InstructorDetail(
     val username: String,
     val email: String,
     val gender: Int,
+    var address: String,
     var avatar: String,
     val phone: String,
     val type: Int,

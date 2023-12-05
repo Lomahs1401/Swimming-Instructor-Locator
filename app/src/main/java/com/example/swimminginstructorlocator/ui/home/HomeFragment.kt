@@ -32,7 +32,6 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     private lateinit var homePresenter: HomePresenter
     private var progressDialog: SweetAlertDialog? = null
 
-
     private var listCenters: MutableList<Center> = mutableListOf()
     private var listInstructors: MutableList<Instructor> = mutableListOf()
 
@@ -117,7 +116,9 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     override fun onGetCenterDetail(centerDetail: CenterDetail) {
         progressDialog?.dismissWithAnimation()
 
-        val centerDetailFragment = CenterDetailFragment.newInstance(centerDetail)
+        CenterDetailFragment.setCenterDetail(centerDetail)
+        val centerDetailFragment = CenterDetailFragment.newInstance()
+
         addFragment(
             R.id.fragment_home_container,
             centerDetailFragment,
@@ -128,7 +129,8 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     override fun onGetInstructorDetail(instructorDetail: InstructorDetail) {
         progressDialog?.dismissWithAnimation()
 
-        val instructorDetailFragment = InstructorDetailFragment.newInstance(instructorDetail)
+        InstructorDetailFragment.setInstructorDetail(instructorDetail)
+        val instructorDetailFragment = InstructorDetailFragment.newInstance()
         addFragment(
             R.id.fragment_home_container,
             instructorDetailFragment,
@@ -137,7 +139,9 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onViewMoreCenters() {
-        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance(listCenters)
+        ViewMoreCenterFragment.setListCenters(listCenters)
+        val viewMoreCenterFragment = ViewMoreCenterFragment.newInstance()
+
         addFragment(
             R.id.fragment_home_container,
             viewMoreCenterFragment,
@@ -146,7 +150,9 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
 
     override fun onViewMoreInstructors() {
-        val viewMoreInstructorFragment = ViewMoreInstructorFragment.newInstance(listInstructors)
+        ViewMoreInstructorFragment.setListInstructors(listInstructors)
+        val viewMoreInstructorFragment = ViewMoreInstructorFragment.newInstance()
+
         addFragment(
             R.id.fragment_home_container,
             viewMoreInstructorFragment,

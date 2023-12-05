@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/title_profile">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/manage_account"
+                    android:icon="@drawable/baseline_manage_accounts_24"
+                    android:title="@string/manage_account" />
+                <item
+                    android:id="@+id/login"
+                    android:icon="@drawable/baseline_login_24"
+                    android:title="@string/login" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/setting">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/english"
+                    android:icon="@drawable/baseline_language_24"
+                    android:title="@string/english" />
+                <item
+                    android:id="@+id/japanese"
+                    android:icon="@drawable/baseline_language_24"
+                    android:title="@string/japanese" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/communication">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/share"
+                    android:icon="@drawable/baseline_share_24"
+                    android:title="@string/share" />
+                <item
+                    android:id="@+id/rating"
+                    android:icon="@drawable/baseline_tag_faces_24"
+                    android:title="@string/rate_us" />
+            </group>
+        </menu>
+    </item>
+</menu>

@@ -17,9 +17,7 @@ import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
 import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.lang.Exception
 
-class CenterDetailFragment(
-    private val centerDetail: CenterDetail
-) : BaseViewBindingFragment<FragmentCenterDetailBinding>(),
+class CenterDetailFragment : BaseViewBindingFragment<FragmentCenterDetailBinding>(),
     CenterDetailContract.View, OnInstructorImageClickListener {
 
     private lateinit var centerDetailPresenter: CenterDetailPresenter
@@ -42,28 +40,43 @@ class CenterDetailFragment(
     }
 
     override fun initData() {
-        binding.tvCenterName.text = centerDetail.centerName
-        binding.tvCenterDescription.text = centerDetail.description
-        binding.tvCenterPhone.text = centerDetail.phone
-        binding.tvCenterAddress.text = centerDetail.address
-        binding.tvCenterEmail.text = centerDetail.email
+        binding.tvCenterName.text = centerDetail?.centerName
+        binding.tvCenterDescription.text = centerDetail?.description
+        binding.tvCenterPhone.text = centerDetail?.phone
+        binding.tvCenterAddress.text = centerDetail?.address
+        binding.tvCenterEmail.text = centerDetail?.email
 
         binding.imgBackButton.setOnClickListener {
             goBackFragment()
         }
 
-        centerDetail.image.notNull {
-            centerDetail.image.let { image -> binding.imgCenter.loadImageWithUrl(image) }
+        centerDetail?.image.notNull {
+            centerDetail?.image.let { image ->
+                image?.let { value ->
+                    binding.imgCenter.loadImageWithUrl(
+                        value
+                    )
+                }
+            }
         }
 
-        if (centerDetail.instructors.size == 0) {
+        if (centerDetail?.instructors?.size == 0) {
             binding.rcvInstructor.visibility = View.INVISIBLE
             binding.tvNoInstructorFound.visibility = View.VISIBLE
         } else {
-            instructorAdapter.setData(centerDetail.instructors)
+            centerDetail?.instructors?.let { instructorAdapter.setData(it) }
+            binding.rcvInstructor.adapter = instructorAdapter
             binding.rcvInstructor.visibility = View.VISIBLE
             binding.tvNoInstructorFound.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onInstructorImageClick(instructor: Instructor) {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onImageClick(item: Any) {
+//        TODO("Not yet implemented")
     }
 
     override fun onError(exception: Exception?) {
@@ -71,15 +84,14 @@ class CenterDetailFragment(
     }
 
     companion object {
+        private var centerDetail: CenterDetail? = null
+
         @JvmStatic
-        fun newInstance(centerDetail: CenterDetail) = CenterDetailFragment(centerDetail)
-    }
+        fun newInstance() = CenterDetailFragment()
 
-    override fun onInstructorImageClick(instructor: Instructor) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onImageClick(item: Any) {
-        TODO("Not yet implemented")
+        @JvmStatic
+        fun setCenterDetail(centers: CenterDetail) {
+            this.centerDetail = centers
+        }
     }
 }
