@@ -5,8 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.databinding.ItemCourseBinding
+import com.example.swimminginstructorlocator.listener.OnImageClickListener
+import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
+import com.example.swimminginstructorlocator.utils.ext.notNull
 
-class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
+class CourseAdapter(
+    private val onItemClickListener: OnImageClickListener
+) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
     private var listCourse: MutableList<Course> = mutableListOf()
 
@@ -23,9 +28,20 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
         holder.bindData(listCourse[position])
     }
 
+    fun setData(listCourse: MutableList<Course>) {
+        this.listCourse = listCourse
+    }
+
     inner class CourseViewHolder(private val binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(course: Course) {
+            binding.tvCourseName.text = course.courseName
+            binding.tvCourseInstructor.text = course.instructor.instructorName
+            binding.tvCourseDate.text = course.schedule
+            binding.tvCourseDescription.text = course.description
 
+            course.image.notNull {
+                binding.courseImg.loadImageWithUrl(course.image)
+            }
         }
     }
 }

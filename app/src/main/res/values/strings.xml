@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">SwimmingInstructorLocator</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_instructor">Search Instructor</string>
     <string name="instructor_name">Nguyễn Thị Ánh Viên</string>
     <string name="detail">Detail</string>
@@ -14,10 +11,10 @@
     <string name="popular_course">Popular Course</string>
     <string name="see_all">See all ➜</string>
     <string name="course_name">Beginner Swim Class</string>
-    <string name="course_instructor">Instructor: John Doe</string>
-    <string name="course_date">Date: 2023-10-30</string>
+    <string name="course_instructor">John Doe</string>
+    <string name="course_date">2023-10-30</string>
     <string name="course_locator">Location: Community Pool</string>
-    <string name="course_description">Description: Learn the basics of swimming.</string>
+    <string name="course_description">Learn the basics of swimming.</string>
     <string name="top_instructors">Top Instructors</string>
     <string name="top_centers">Top Centers</string>
     <string name="center_name">Trung tâm dạy bơi kèm Đà Nẵng BP - Swimming Center</string>
@@ -127,4 +124,15 @@
     <string name="communication">Communication</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate Us</string>
+    <string name="tv_instructor">Instructor:</string>
+    <string name="tv_schedule">Schedule:</string>
+    <string name="tv_description">Description:</string>
+    <string name="find_center">Find Center</string>
+    <string name="find_course">Find Course</string>
+    <string name="find_instructor">Find Instructor</string>
+    <string name="find_your_appointment">Find your appointment</string>
+    <string name="update_soon">We\'ll update this feature soon</string>
+    <string name="register_successful">Register Successful</string>
+    <string name="back_to_home_page">Back to Home Page</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

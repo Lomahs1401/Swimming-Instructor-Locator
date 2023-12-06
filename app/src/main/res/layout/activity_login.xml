@@ -192,7 +192,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="@dimen/dp_150"
+        android:layout_width="@dimen/dp_130"
         android:layout_height="@dimen/dp_1"
         android:layout_marginStart="28dp"
         android:background="@color/gray"
@@ -217,7 +217,7 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="@dimen/dp_150"
+        android:layout_width="@dimen/dp_130"
         android:layout_height="@dimen/dp_1"
         android:layout_marginEnd="28dp"
         android:background="@color/gray"
@@ -303,14 +303,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/don_t_have_an_account_yet"
-        android:textSize="@dimen/sp_14"
         android:textColor="@color/black"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintVertical_bias="0.928" />
+
+    <TextView
+        android:id="@+id/tv_back_to_homepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_home_page"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
 
     <TextView
         android:id="@+id/tv_sign_up_link"
@@ -322,9 +337,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.739"
-        app:layout_constraintStart_toStartOf="@+id/tv_dont_have_an_account_yet"
+        app:layout_constraintHorizontal_bias="0.856"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintVertical_bias="0.977" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.swimminginstructorlocator.ui.login
 import android.content.Intent
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.MainActivity
+import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.model.User
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.LoginRequest
@@ -31,10 +32,32 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>(), LoginCont
         binding.btnLogin.setOnClickListener {
             handleClickSignIn()
         }
+        binding.btnFacebook.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
+        binding.btnGoogle.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
+        binding.btnTwitter.setOnClickListener {
+            handleClickSignInWithSocialMedia()
+        }
         binding.tvSignUpLink.setOnClickListener {
             Intent(this, RegisterActivity::class.java).also {
                 startActivity(it)
             }
+        }
+        binding.tvBackToHomepage.setOnClickListener {
+            Intent(this, MainActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+    }
+
+    private fun handleClickSignInWithSocialMedia() {
+        SweetAlertDialog(this@LoginActivity, SweetAlertDialog.NORMAL_TYPE).apply {
+            setTitleText(R.string.update_soon)
+            setCancelable(true)
+            show()
         }
     }
 

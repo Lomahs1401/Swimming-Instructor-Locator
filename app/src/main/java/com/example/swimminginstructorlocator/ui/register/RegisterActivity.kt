@@ -2,6 +2,7 @@ package com.example.swimminginstructorlocator.ui.register
 
 import android.content.Intent
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.repo.AuthRepo
 import com.example.swimminginstructorlocator.data.request.RegisterRequest
 import com.example.swimminginstructorlocator.data.service.AuthService
@@ -48,8 +49,8 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
     }
 
     private fun handleClickSignInWithSocialMedia() {
-        SweetAlertDialog(applicationContext, SweetAlertDialog.NORMAL_TYPE).apply {
-            titleText = "We'll update this feature soon"
+        SweetAlertDialog(this@RegisterActivity, SweetAlertDialog.NORMAL_TYPE).apply {
+            setTitleText(R.string.update_soon)
             setCancelable(true)
             show()
         }
@@ -74,7 +75,7 @@ class RegisterActivity : BaseViewBindingActivity<ActivityRegisterBinding>(), Reg
 
     override fun onSignUp() {
         SweetAlertDialog(applicationContext, SweetAlertDialog.SUCCESS_TYPE).apply {
-            setTitleText("Register Successful")
+            setTitleText("")
             .setConfirmClickListener {
                 Intent(this@RegisterActivity, LoginActivity::class.java).also {
                     startActivity(intent)

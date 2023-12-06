@@ -6,6 +6,7 @@ import com.example.swimminginstructorlocator.api.InstructorApi
 import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.CenterDetail
+import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.listener.OnResultListener
 import retrofit2.Call
@@ -43,6 +44,41 @@ class CenterRepo {
             }
 
             override fun onFailure(call: Call<CenterApi.ApiResponse>, t: Throwable) {
+                val ex = Exception("Oops.. Please try again")
+                listener.onError(ex)
+                Log.e(Constant.TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    fun getCenterDetail(id: String, listener: OnResultListener<CenterDetail>) {
+        val api = Retrofit.Builder()
+            .baseUrl(Constant.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CenterApi::class.java)
+
+        // Xây dựng URL đầy đủ với path và query parameter
+        val url = "center/${id}"
+
+        api.getCenterDetail(url).enqueue(object : Callback<CenterApi.ApiDetailResponse> {
+            override fun onResponse(
+                call: Call<CenterApi.ApiDetailResponse>,
+                response: Response<CenterApi.ApiDetailResponse>
+            ) {
+                val centerResponse = response.body()
+                if (response.isSuccessful) {
+                    centerResponse?.let {
+                        val centerDetail = it.data
+                        listener.onSuccess(centerDetail)
+                    }
+                    centerResponse?.let { Log.i(Constant.TAG, it.message) }
+                } else {
+                    centerResponse?.let { Log.i(Constant.TAG, it.message) }
+                }
+            }
+
+            override fun onFailure(call: Call<CenterApi.ApiDetailResponse>, t: Throwable) {
                 val ex = Exception("Oops.. Please try again")
                 listener.onError(ex)
                 Log.e(Constant.TAG, "onFailure: ${t.message}")
@@ -89,7 +125,7 @@ class CenterRepo {
         }
     }
 
-    fun getCenterDetail(id: String, listener: OnResultListener<CenterDetail>) {
+    fun getCourseOfInstructor(instructorId: String, listener: OnResultListener<MutableList<Course>>) {
         val api = Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -97,26 +133,26 @@ class CenterRepo {
             .create(CenterApi::class.java)
 
         // Xây dựng URL đầy đủ với path và query parameter
-        val url = "center/${id}"
+        val url = "course/course-of-teacher/${instructorId}"
 
-        api.getCenterDetail(url).enqueue(object : Callback<CenterApi.ApiDetailResponse> {
+        api.getCourseOfInstructor(url).enqueue(object : Callback<CenterApi.ListCourseResponse> {
             override fun onResponse(
-                call: Call<CenterApi.ApiDetailResponse>,
-                response: Response<CenterApi.ApiDetailResponse>
+                call: Call<CenterApi.ListCourseResponse>,
+                response: Response<CenterApi.ListCourseResponse>
             ) {
-                val centerResponse = response.body()
+                val courseResponse = response.body()
                 if (response.isSuccessful) {
-                    centerResponse?.let {
-                        val centerDetail = it.data
-                        listener.onSuccess(centerDetail)
+                    courseResponse?.let {
+                        val listCourse = it.data
+                        listener.onSuccess(listCourse)
                     }
-                    centerResponse?.let { Log.i(Constant.TAG, it.message) }
+                    courseResponse?.let { Log.i(Constant.TAG, it.message) }
                 } else {
-                    centerResponse?.let { Log.i(Constant.TAG, it.message) }
+                    courseResponse?.let { Log.i(Constant.TAG, it.message) }
                 }
             }
 
-            override fun onFailure(call: Call<CenterApi.ApiDetailResponse>, t: Throwable) {
+            override fun onFailure(call: Call<CenterApi.ListCourseResponse>, t: Throwable) {
                 val ex = Exception("Oops.. Please try again")
                 listener.onError(ex)
                 Log.e(Constant.TAG, "onFailure: ${t.message}")
