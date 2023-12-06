@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
+import com.example.swimminginstructorlocator.ui.appointment.list.AppointmentListFragment
 import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
 import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
@@ -146,7 +147,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     private fun getFragmentList(): List<Fragment> {
         return listOf(
             HomeFragment.newInstance(),
-            CalendarFragment.newInstance(),
+            AppointmentListFragment.newInstance(),
             ProfileFragment.newInstance(),
             NotificationsFragment.newInstance(),
         )

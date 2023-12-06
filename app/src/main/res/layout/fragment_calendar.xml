@@ -164,145 +164,158 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintBottom_toTopOf="@+id/et_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.482" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/required_marked"
-        android:textColor="@color/red"
-        app:layout_constraintTop_toTopOf="@+id/tv_date"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_date"
-        app:layout_constraintStart_toEndOf="@+id/tv_date"
-        app:layout_constraintHorizontal_bias="0.05" />
-
-    <EditText
-        android:id="@+id/et_date"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
-        android:drawableEnd="@drawable/baseline_date_range_24"
-        android:hint="Date"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:paddingHorizontal="@dimen/dp_12"
-        android:paddingVertical="@dimen/dp_8"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_date" />
-
-    <TextView
-        android:id="@+id/tv_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/start_time"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_date" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/required_marked"
-        android:textColor="@color/red"
-        app:layout_constraintTop_toTopOf="@+id/tv_start_time"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_start_time"
-        app:layout_constraintStart_toEndOf="@+id/tv_start_time"
-        app:layout_constraintHorizontal_bias="0.05" />
-
-    <EditText
-        android:id="@+id/et_start_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/edit_text_background"
-        android:drawableEnd="@drawable/baseline_access_time_24"
-        android:hint="@string/start_time"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:paddingHorizontal="@dimen/dp_12"
-        android:paddingVertical="@dimen/dp_8"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_start_time" />
-
-    <TextView
-        android:id="@+id/tv_end_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/end_time"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintBottom_toTopOf="@+id/et_end_time"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_start_time"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/required_marked"
-        android:textColor="@color/red"
-        app:layout_constraintTop_toTopOf="@+id/tv_end_time"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_end_time"
-        app:layout_constraintStart_toEndOf="@+id/tv_end_time"
-        app:layout_constraintHorizontal_bias="0.05" />
-
-    <EditText
-        android:id="@+id/et_end_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/edit_text_background"
-        android:drawableEnd="@drawable/baseline_access_time_24"
-        android:hint="@string/end_time"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:paddingHorizontal="@dimen/dp_12"
-        android:paddingVertical="@dimen/dp_8"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintBottom_toTopOf="@+id/btn_book"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_book"
-        android:layout_width="@dimen/dp_200"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/blue"
-        android:text="Book"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/card_view_course_container"
+        app:layout_constraintVertical_bias="0.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_course_container">
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintBottom_toTopOf="@+id/et_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.482" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/required_marked"
+                android:textColor="@color/red"
+                app:layout_constraintTop_toTopOf="@+id/tv_date"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                app:layout_constraintStart_toEndOf="@+id/tv_date"
+                app:layout_constraintHorizontal_bias="0.05" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableEnd="@drawable/baseline_date_range_24"
+                android:hint="Date"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:paddingVertical="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+            <TextView
+                android:id="@+id/tv_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/start_time"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+
+                app:layout_constraintHorizontal_bias="0.008"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/required_marked"
+                android:textColor="@color/red"
+                app:layout_constraintTop_toTopOf="@+id/tv_start_time"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_start_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_start_time"
+                app:layout_constraintHorizontal_bias="0.05" />
+
+            <EditText
+                android:id="@+id/et_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableEnd="@drawable/baseline_access_time_24"
+                android:hint="@string/start_time"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:paddingVertical="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_start_time" />
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/end_time"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintBottom_toTopOf="@+id/et_end_time"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_start_time"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/required_marked"
+                android:textColor="@color/red"
+                app:layout_constraintTop_toTopOf="@+id/tv_end_time"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_end_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_end_time"
+                app:layout_constraintHorizontal_bias="0.05" />
+
+            <EditText
+                android:id="@+id/et_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableEnd="@drawable/baseline_access_time_24"
+                android:hint="@string/end_time"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:paddingVertical="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintBottom_toTopOf="@+id/btn_book"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_book"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/blue"
+                android:text="Book"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
