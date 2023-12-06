@@ -1,60 +1,102 @@
 package com.example.swimminginstructorlocator.ui.appointment.list
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
+import com.example.swimminginstructorlocator.adapter.AppointmentAdapter
+import com.example.swimminginstructorlocator.data.model.Appointment
+import com.example.swimminginstructorlocator.data.repo.AppointmentRepo
+import com.example.swimminginstructorlocator.data.service.AppointmentService
+import com.example.swimminginstructorlocator.databinding.FragmentAppointmentListBinding
+import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class AppointmentListFragment : BaseViewBindingFragment<FragmentAppointmentListBinding>(),
+    AppointmentListContract.View, OnResultListener<Appointment> {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AppointmentListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AppointmentListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var appointmentListPresenter: AppointmentListPresenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private  val appointmentListAdapter: AppointmentAdapter by lazy {
+        AppointmentAdapter(this)
+    }
+    companion object {
+        private var listAppointments: MutableList<Appointment> = mutableListOf()
+        @JvmStatic
+        fun newInstance() =
+            AppointmentListFragment()
+    }
+
+    override fun onAppointmentList(listAppointment: MutableList<Appointment>) {
+       if (listAppointment.size > 0){
+           appointmentListAdapter.setData(listAppointment)
+           binding.rcvAppointmentList.adapter = appointmentListAdapter
+           binding.tvNoAppointmentFound.visibility = View.GONE
+           binding.rcvAppointmentList.visibility = View.VISIBLE
+       } else {
+           binding.tvNoAppointmentFound.visibility = View.VISIBLE
+           binding.rcvAppointmentList.visibility = View.GONE
+       }
+    }
+
+    override fun onDeletedAppointment(boolean: Boolean) {
+        if (boolean) {
+            SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Deleted!")
+                .setContentText("Your appointment has been deleted!")
+                .show()
+            appointmentListPresenter.appointmentList()
+        } else
+        {
+            SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Oops...")
+                .setContentText("Something went wrong!")
+                .show()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appointment_list, container, false)
+    override fun onSuccess(dataResult: Appointment) {
+        SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+            .setTitleText("Are you sure?")
+            .setContentText("You won't be able to recover this appointment!")
+            .setConfirmText("Yes, delete it!")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                appointmentListPresenter.deleteAppointment(dataResult.id)
+            }
+            .show()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AppointmentListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AppointmentListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onError(exception: Exception?) {
+        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun createBindingFragment(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentAppointmentListBinding {
+        return FragmentAppointmentListBinding.inflate(inflater, container, false)
+    }
+
+    override fun initView() {
+        appointmentListPresenter = AppointmentListPresenter(
+            AppointmentService.getInstance(AppointmentRepo.getInstance())
+        )
+        appointmentListPresenter.setView(this)
+        appointmentListPresenter.appointmentList()
+    }
+
+    override fun initData() {
+        appointmentListAdapter.setData(listAppointments)
+        binding.rcvAppointmentList.adapter = appointmentListAdapter
+
+
     }
 }

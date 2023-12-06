@@ -8,11 +8,12 @@ import kotlinx.parcelize.Parcelize
 data class Appointment (
     @SerializedName("_id")
     val id: String,
-    val instructor: User,
-    val student: User,
-    val course: Course,
+    @SerializedName("date")
     val date: String,
+    @SerializedName("startTime")
     val startTime: String,
+    @SerializedName("endTime")
     val endTime: String,
+    @SerializedName("status")
     val status: String,
 ) : Parcelable
