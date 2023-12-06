@@ -15,6 +15,7 @@ import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.lang.Exception
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
+import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 
 class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
     ProfileContract.View {
@@ -36,14 +37,14 @@ class ProfileFragment : BaseViewBindingFragment<FragmentProfileBinding>(),
         )
         profilePresenter.setView(this)
         profilePresenter.getCurrentUser()
-
-        binding.btnLogout.setOnClickListener {
-            handleClickLogout()
-        }
     }
 
     override fun initData() {
         profilePresenter.getCurrentUser()
+
+        binding.imgBackButton.setOnClickListener {
+            goBackFragment()
+        }
     }
 
     // ----------------------     Get Current Info User     ----------------------

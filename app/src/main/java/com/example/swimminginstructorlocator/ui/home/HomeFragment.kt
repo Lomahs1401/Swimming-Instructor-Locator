@@ -64,7 +64,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
         binding.rcvHomeParent.adapter = homeChildAdapter
 
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading...")
+            .setTitleText(R.string.loading)
             .apply {
                 setCancelable(false)
                 show()
@@ -75,7 +75,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
 
     override fun onCenterImageClick(center: Center) {
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading...")
+            .setTitleText(R.string.loading)
             .apply {
                 setCancelable(false)
                 show()
@@ -85,7 +85,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>(), HomeContrac
     }
     override fun onInstructorImageClick(instructor: Instructor) {
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading...")
+            .setTitleText(R.string.loading)
             .apply {
                 setCancelable(false)
                 show()

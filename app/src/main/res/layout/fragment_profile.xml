@@ -30,16 +30,16 @@
             android:padding="@dimen/dp_10">
 
             <ImageView
-                android:id="@+id/btn_logout"
+                android:id="@+id/img_back_button"
                 android:layout_width="@dimen/dp_34"
                 android:layout_height="@dimen/dp_34"
-                android:src="@drawable/baseline_logout_24"
+                android:src="@drawable/baseline_arrow_back_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.042"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.019"
+                app:layout_constraintVertical_bias="0.022"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -48,28 +48,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/profile"
+                android:textColor="#000000"
                 android:textSize="@dimen/sp_26"
                 android:textStyle="bold"
-                android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.02" />
-
-            <ImageView
-                android:id="@+id/img_notification"
-                android:layout_width="@dimen/dp_34"
-                android:layout_height="@dimen/dp_34"
-                android:src="@drawable/ic_notifications_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.957"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.022"
-                tools:ignore="ContentDescription" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_profile"
@@ -83,10 +70,10 @@
                 app:cardElevation="@dimen/dp_4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.225"
+                app:layout_constraintHorizontal_bias="0.527"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_instructor_profile"
-                app:layout_constraintVertical_bias="0.169">
+                app:layout_constraintVertical_bias="0.784">
 
                 <TextView
                     android:id="@+id/tv_role"
@@ -105,30 +92,33 @@
                 android:id="@+id/img_user"
                 android:layout_width="260dp"
                 android:layout_height="173dp"
+                android:layout_marginTop="@dimen/dp_4"
                 android:src="@drawable/instructor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_instructor_profile"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_fullname"
-                android:paddingVertical="@dimen/dp_12"
-                android:layout_width="@dimen/dp_260"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
                 android:ellipsize="marquee"
+                android:gravity="center"
+                android:paddingVertical="@dimen/dp_12"
                 android:text="@string/instructor_name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_25"
                 android:textStyle="bold"
-                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_user"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -151,6 +141,21 @@
             android:paddingVertical="@dimen/dp_20">
 
             <!-- Username -->
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue"
+                android:padding="@dimen/dp_10"
+                android:text="@string/update_profile"
+                android:textSize="@dimen/sp_13"
+                app:layout_constraintBottom_toTopOf="@+id/tv_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
             <TextView
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
@@ -160,7 +165,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                app:layout_constraintVertical_bias="0.082" />
 
             <EditText
                 android:id="@+id/et_username"

@@ -10,11 +10,14 @@ import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
 import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
+import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
+import com.example.swimminginstructorlocator.ui.login.LoginActivity
 import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
 import com.example.swimminginstructorlocator.ui.onboarding.OnBoardingActivity
 import com.example.swimminginstructorlocator.ui.profile.ProfileFragment
 import com.example.swimminginstructorlocator.utils.DataLocalManager
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
+import com.example.swimminginstructorlocator.utils.ext.addFragment
 import java.util.Locale
 
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
@@ -54,13 +57,21 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
             binding.navigationView.setNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.manage_account -> {
-                        Toast.makeText(this@MainActivity, "Toast 1", Toast.LENGTH_SHORT).show()
+                        val profileFragment = ProfileFragment.newInstance()
+                        addFragment(
+                            R.id.fragment_home_container,
+                            profileFragment,
+                            addToBackStack = true
+                        )
                         closeDrawer()
                         // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.login -> {
-                        Toast.makeText(this@MainActivity, "Toast 1", Toast.LENGTH_SHORT).show()
+                        Intent(this, LoginActivity::class.java).also {
+                            startActivity(it)
+                            finish()
+                        }
                         closeDrawer()
                         // Xử lý khi chọn Menu Item 2
                         true
@@ -68,33 +79,29 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     R.id.english -> {
                         setLocale("en")
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.japanese -> {
                         setLocale("jp")
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.share -> {
                         SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
-                            titleText = "We'll update this feature soon"
+                            setTitleText(R.string.update_soon)
                             setCancelable(true)
                             show()
                         }
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.rating -> {
                         SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
-                            titleText = "We'll update this feature soon"
+                            setTitleText(R.string.update_soon)
                             setCancelable(true)
                             show()
                         }
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     else -> false

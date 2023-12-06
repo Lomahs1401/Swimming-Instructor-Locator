@@ -70,7 +70,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 app:iconifiedByDefault="false"
-                app:queryHint="Find Center"
+                app:queryHint="@string/find_center"
                 app:searchViewStyle="@style/MySearchViewStyle" />
 
         </androidx.cardview.widget.CardView>

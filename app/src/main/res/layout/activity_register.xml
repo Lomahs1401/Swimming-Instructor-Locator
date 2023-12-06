@@ -286,7 +286,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:layout_width="@dimen/dp_140"
+        android:layout_width="@dimen/dp_130"
         android:layout_height="@dimen/dp_1"
         android:layout_marginStart="@dimen/dp_40"
         android:background="@color/black"
@@ -311,7 +311,7 @@
         app:layout_constraintVertical_bias="0.038" />
 
     <View
-        android:layout_width="@dimen/dp_140"
+        android:layout_width="@dimen/dp_130"
         android:layout_height="@dimen/dp_1"
         android:layout_marginEnd="@dimen/dp_40"
         android:background="@color/black"
@@ -402,10 +402,9 @@
         android:textSize="@dimen/sp_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869" />
+        app:layout_constraintVertical_bias="0.866" />
 
     <TextView
         android:id="@+id/tv_sign_in_link"
@@ -417,9 +416,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869" />
+        app:layout_constraintVertical_bias="0.922" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

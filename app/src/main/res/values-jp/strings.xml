@@ -3,8 +3,6 @@
     <string name="title_home">ホームページ</string>
     <string name="title_notifications">通知</string>
     <string name="title_profile">プローファイル</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_instructor">教師検索</string>
     <string name="instructor_name">Nguyễn Thị Ánh Viên 先生</string>
     <string name="detail">詳細</string>
@@ -27,7 +25,7 @@
     <string name="instructor_address">TP.Cần Thơ</string>
     <string name="view_all_centers">全てのセンターを見る</string>
     <string name="center_email">bpswimming@gmail.com</string>
-    <string name="center_detail">詳細センター</string>
+    <string name="center_detail">センターの詳細</string>
     <string name="center_image_desc">Center Image</string>
     <string name="world_swimming_center">World Swimming Center</string>
     <string name="rating">5 Star</string>
@@ -37,15 +35,15 @@
     <string name="book_a_class">Book a class</string>
     <string name="our_instructors">我々の教師</string>
     <string name="instructor_profile">教師プローファイル</string>
-    <string name="profile">Profile</string>
-    <string name="gender">Gender:</string>
+    <string name="profile">プローファイル</string>
+    <string name="gender">性別:</string>
     <string name="female">Female</string>
     <string name="age_value">26</string>
-    <string name="age">Age:</string>
+    <string name="age">年齢:</string>
     <string name="height_value">175 cm</string>
     <string name="weight_value">70 kg</string>
-    <string name="weight">Weight:</string>
-    <string name="height">Height:</string>
+    <string name="weight">体重:</string>
+    <string name="height">身長:</string>
     <string name="background_information">教育情報</string>
     <string name="contact">コンタクト</string>
     <string name="since">以来:</string>
@@ -126,4 +124,15 @@
     <string name="communication">コミュニケーション</string>
     <string name="share">シェア</string>
     <string name="rate_us">評価</string>
+    <string name="tv_instructor">教師:</string>
+    <string name="tv_schedule">スケジュール:</string>
+    <string name="tv_description">内容:</string>
+    <string name="find_center">センターを探す</string>
+    <string name="find_course">コースを探す</string>
+    <string name="find_instructor">教師を探す</string>
+    <string name="find_your_appointment">あなたの予約を探す</string>
+    <string name="update_soon">この機能は間もなく更新されます</string>
+    <string name="register_successful">登録成功</string>
+    <string name="back_to_home_page">ホームページを戻る</string>
+    <string name="update_profile">個人情報更新</string>
 </resources>

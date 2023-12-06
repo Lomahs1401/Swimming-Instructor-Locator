@@ -2,6 +2,7 @@ package com.example.swimminginstructorlocator.data.service
 
 import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.CenterDetail
+import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.repo.CenterRepo
 import com.example.swimminginstructorlocator.data.service.impl.CenterServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
@@ -19,6 +20,13 @@ class CenterService(
 
     override fun searchCenters(searchValue: String, listener: OnResultListener<MutableList<Center>>) {
         centerRepo.searchCenters(searchValue, listener)
+    }
+
+    override fun getCourseOfInstructor(
+        instructorId: String,
+        listener: OnResultListener<MutableList<Course>>
+    ) {
+        centerRepo.getCourseOfInstructor(instructorId, listener)
     }
 
     companion object {
