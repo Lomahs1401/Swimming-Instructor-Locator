@@ -8,7 +8,6 @@ import androidx.appcompat.widget.SearchView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.adapter.ViewMoreInstructorAdapter
-import com.example.swimminginstructorlocator.data.model.Center
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo

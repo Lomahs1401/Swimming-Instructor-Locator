@@ -135,4 +135,7 @@
     <string name="register_successful">Register Successful</string>
     <string name="back_to_home_page">Back to Home Page</string>
     <string name="update_profile">Update Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_appointment">Edit Appointment</string>
 </resources>

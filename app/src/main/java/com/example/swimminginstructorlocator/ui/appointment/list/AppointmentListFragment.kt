@@ -1,13 +1,8 @@
 package com.example.swimminginstructorlocator.ui.appointment.list
 
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.R
@@ -16,11 +11,13 @@ import com.example.swimminginstructorlocator.data.model.Appointment
 import com.example.swimminginstructorlocator.data.repo.AppointmentRepo
 import com.example.swimminginstructorlocator.data.service.AppointmentService
 import com.example.swimminginstructorlocator.databinding.FragmentAppointmentListBinding
-import com.example.swimminginstructorlocator.listener.OnResultListener
+import com.example.swimminginstructorlocator.listener.OnAppointmentItemClickListener
+import com.example.swimminginstructorlocator.ui.appointment.edit.AppointmentEditFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import com.example.swimminginstructorlocator.utils.ext.addFragment
 
 class AppointmentListFragment : BaseViewBindingFragment<FragmentAppointmentListBinding>(),
-    AppointmentListContract.View, OnResultListener<Appointment> {
+    AppointmentListContract.View, OnAppointmentItemClickListener {
 
     private lateinit var appointmentListPresenter: AppointmentListPresenter
 
@@ -62,14 +59,25 @@ class AppointmentListFragment : BaseViewBindingFragment<FragmentAppointmentListB
         }
     }
 
-    override fun onSuccess(dataResult: Appointment) {
+
+    override fun onAppointmentItemEditClick(appointment: Appointment) {
+        val appointmentEditFragment = AppointmentEditFragment.newInstance()
+        AppointmentEditFragment.setAppointmentDetail(appointment)
+        addFragment(
+            R.id.container,
+            appointmentEditFragment,
+            addToBackStack = true
+        )
+    }
+
+    override fun onAppointmentItemDeleteClick(appointment: Appointment) {
         SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
             .setTitleText("Are you sure?")
             .setContentText("You won't be able to recover this appointment!")
             .setConfirmText("Yes, delete it!")
             .setConfirmClickListener {
                 it.dismissWithAnimation()
-                appointmentListPresenter.deleteAppointment(dataResult.id)
+                appointmentListPresenter.deleteAppointment(appointment.id)
             }
             .show()
     }
@@ -96,7 +104,5 @@ class AppointmentListFragment : BaseViewBindingFragment<FragmentAppointmentListB
     override fun initData() {
         appointmentListAdapter.setData(listAppointments)
         binding.rcvAppointmentList.adapter = appointmentListAdapter
-
-
     }
 }

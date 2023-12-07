@@ -7,11 +7,12 @@ import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swimminginstructorlocator.data.model.Appointment
 import com.example.swimminginstructorlocator.databinding.ItemAppointmentBinding
+import com.example.swimminginstructorlocator.listener.OnAppointmentItemClickListener
 import com.example.swimminginstructorlocator.listener.OnImageClickListener
 import com.example.swimminginstructorlocator.listener.OnResultListener
 
 class AppointmentAdapter(
-    private val onItemClickListener: OnResultListener<Appointment>
+    private val onItemClickListener: OnAppointmentItemClickListener
 ): RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>() {
 
     private var listAppointments: MutableList<Appointment> = mutableListOf()
@@ -44,7 +45,11 @@ class AppointmentAdapter(
             binding.tvAppointmentLocation.text = "Location: " + appointment.centerAddress
 
             binding.btnDelete.setOnClickListener{
-                onItemClickListener.onSuccess(appointment)
+                onItemClickListener.onAppointmentItemDeleteClick(appointment)
+            }
+
+            binding.btnEdit.setOnClickListener{
+                onItemClickListener.onAppointmentItemEditClick(appointment)
             }
         }
     }
