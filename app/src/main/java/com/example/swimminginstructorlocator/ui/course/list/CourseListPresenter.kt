@@ -1,6 +1,13 @@
 package com.example.swimminginstructorlocator.ui.course.list
 
-class CourseListPresenter : CourseListContract.Presenter {
+import com.example.swimminginstructorlocator.data.model.Course
+import com.example.swimminginstructorlocator.data.model.CourseDetail
+import com.example.swimminginstructorlocator.data.service.impl.CourseServiceImpl
+import com.example.swimminginstructorlocator.listener.OnResultListener
+
+class CourseListPresenter(
+    private val courseService: CourseServiceImpl
+) : CourseListContract.Presenter {
 
     private var view: CourseListContract.View? = null
 
@@ -18,5 +25,20 @@ class CourseListPresenter : CourseListContract.Presenter {
 
     override fun searchInstructor() {
 //        TODO("Not yet implemented")
+    }
+
+    override fun getCourseDetail(id: String) {
+        courseService.getCourseDetail(
+            id,
+            object : OnResultListener<CourseDetail> {
+                override fun onSuccess(dataResult: CourseDetail) {
+                    view?.onGetCourseDetail(dataResult)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
     }
 }

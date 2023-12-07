@@ -15,10 +15,15 @@ interface AppointmentApi {
         @SerializedName("data")
         val data: MutableList<Appointment>
     )
+    data class ApiResponseDelete(
+        @SerializedName("message")
+        val message: String
+    )
+
     @GET
     fun getAppointmentByUserId(@Url userId: String): Call<ApiResponse>
 
     @DELETE
-    fun deleteAppointment(@Url appointmentId: String): Call<ApiResponse>
+    fun deleteAppointment(@Url appointmentId: String): Call<ApiResponseDelete>
 
 }

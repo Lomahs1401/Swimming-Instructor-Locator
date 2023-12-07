@@ -44,7 +44,7 @@ class CenterAdapter(
             center.image.notNull {
                 binding.imgCenter.loadImageWithUrl(it)
             }
-            binding.imgCenter.setOnClickListener {
+            binding.root.setOnClickListener {
                 onItemClickListener.onImageClick(center)
             }
         }
