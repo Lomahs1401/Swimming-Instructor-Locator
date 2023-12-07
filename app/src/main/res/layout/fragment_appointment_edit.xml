@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:paddingHorizontal="@dimen/dp_10"
-    tools:context=".ui.calendar.CalendarFragment">
+    tools:context=".ui.appointment.edit.AppointmentEditFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_header"
@@ -35,7 +35,7 @@
             android:layout_width="@dimen/dp_280"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/appointment"
+            android:text="@string/edit_appointment"
             android:textSize="@dimen/sp_26"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -155,14 +155,6 @@
                     android:layout_height="wrap_content"
                     android:text="Location: Community Pool"
                     android:textColor="#9B9CA1"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_course_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description: Learn the basics of swimming."
-                    android:textColor="#020203"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
@@ -302,18 +294,18 @@
                 android:paddingVertical="@dimen/dp_8"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_20"
-                app:layout_constraintBottom_toTopOf="@+id/btn_book"
+                app:layout_constraintBottom_toTopOf="@+id/btn_save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.473"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_book"
+                android:id="@+id/btn_save"
                 android:layout_width="@dimen/dp_200"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/blue"
-                android:text="Book"
+                android:text="Save"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -321,4 +313,4 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
