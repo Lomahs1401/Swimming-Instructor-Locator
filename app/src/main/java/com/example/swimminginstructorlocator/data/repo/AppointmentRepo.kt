@@ -52,14 +52,15 @@ class AppointmentRepo {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AppointmentApi::class.java)
-        val url = "appoiment/$appointmentId"
-        api.deleteAppointment(url).enqueue(object : retrofit2.Callback<AppointmentApi.ApiResponse> {
+        val url = "appoiment/delete/$appointmentId"
+        api.deleteAppointment(url).enqueue(object : retrofit2.Callback<AppointmentApi.ApiResponseDelete> {
             override fun onResponse(
-                call: retrofit2.Call<AppointmentApi.ApiResponse>,
-                response: retrofit2.Response<AppointmentApi.ApiResponse>
+                call: retrofit2.Call<AppointmentApi.ApiResponseDelete>,
+                response: retrofit2.Response<AppointmentApi.ApiResponseDelete>
             ) {
                 val appointmentResponse = response.body()
                 if (response.isSuccessful) {
+                    Log.d("Appointment", "Successfully delete appointment")
                     appointmentResponse?.let {
                         listener.onSuccess(true)
                     }
@@ -71,7 +72,7 @@ class AppointmentRepo {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<AppointmentApi.ApiResponse>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<AppointmentApi.ApiResponseDelete>, t: Throwable) {
                 val ex = Exception("Oops.. Please try again")
                 listener.onError(ex)
                 println("onFailure: ${t.message}")

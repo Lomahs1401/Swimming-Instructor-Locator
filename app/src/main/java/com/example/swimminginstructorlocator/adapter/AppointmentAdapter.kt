@@ -37,9 +37,11 @@ class AppointmentAdapter(
     inner class AppointmentViewHolder(private val binding: ItemAppointmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(appointment: Appointment) {
+            binding.tvCourseName.text = appointment.courseName
+            binding.tvCourseInstructor.text = appointment.teacherName
             binding.tvAppointmentDate.text = "Date: " + appointment.date
             binding.tvAppointmentTime.text = "Time: " + appointment.startTime + " - " + appointment.endTime
-            binding.tvAppointmentLocation.text = "Location: "
+            binding.tvAppointmentLocation.text = "Location: " + appointment.centerAddress
 
             binding.btnDelete.setOnClickListener{
                 onItemClickListener.onSuccess(appointment)

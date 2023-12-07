@@ -42,6 +42,10 @@ class CourseAdapter(
             course.image.notNull {
                 binding.courseImg.loadImageWithUrl(course.image)
             }
+
+            binding.root.setOnClickListener {
+                onItemClickListener.onImageClick(course)
+            }
         }
     }
 }

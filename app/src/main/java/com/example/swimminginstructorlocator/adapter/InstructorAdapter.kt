@@ -44,7 +44,7 @@ class InstructorAdapter(
                 binding.instructorImg.loadImageWithUrl(it)
             }
 
-            binding.instructorImg.setOnClickListener {
+            binding.root.setOnClickListener {
                 itemClickListener.onImageClick(instructor)
             }
         }
