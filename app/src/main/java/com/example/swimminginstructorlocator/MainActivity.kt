@@ -47,8 +47,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 when (item.itemId) {
                     R.id.navigation_home -> binding.viewPager.currentItem = 0
                     R.id.navigation_calendar -> binding.viewPager.currentItem = 1
-                    R.id.navigation_profile -> binding.viewPager.currentItem = 2
-                    R.id.navigation_notifications -> binding.viewPager.currentItem = 3
+                    R.id.navigation_notifications -> binding.viewPager.currentItem = 2
                 }
 
                 return@setOnItemSelectedListener true
@@ -65,7 +64,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                             addToBackStack = true
                         )
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.login -> {
@@ -74,7 +72,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                             finish()
                         }
                         closeDrawer()
-                        // Xử lý khi chọn Menu Item 2
                         true
                     }
                     R.id.english -> {
@@ -148,7 +145,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         return listOf(
             HomeFragment.newInstance(),
             AppointmentListFragment.newInstance(),
-            ProfileFragment.newInstance(),
             NotificationsFragment.newInstance(),
         )
     }

@@ -57,7 +57,7 @@ class CourseListFragment : BaseViewBindingFragment<FragmentCourseListBinding>(),
     override fun onImageClick(item: Any) {
         if (item is Course) {
             progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Loading...")
+                .setTitleText(R.string.loading)
                 .apply {
                     setCancelable(false)
                     show()

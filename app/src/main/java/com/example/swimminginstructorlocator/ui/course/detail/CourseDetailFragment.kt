@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.model.CourseDetail
+import com.example.swimminginstructorlocator.databinding.FragmentCalendarBinding
 import com.example.swimminginstructorlocator.databinding.FragmentCourseDetailBinding
+import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment
+import com.example.swimminginstructorlocator.utils.ext.addFragment
 import com.example.swimminginstructorlocator.utils.ext.goBackFragment
 import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
 import com.example.swimminginstructorlocator.utils.ext.notNull
@@ -43,6 +46,16 @@ class CourseDetailFragment : BaseViewBindingFragment<FragmentCourseDetailBinding
 
         binding.imgBackButton.setOnClickListener {
             goBackFragment()
+        }
+
+        binding.imgCalendar.setOnClickListener {
+
+            val fragmentCalendarBinding = CalendarFragment.newInstance()
+            addFragment(
+                R.id.fragment_home_container,
+                fragmentCalendarBinding,
+                addToBackStack = true
+            )
         }
     }
 
