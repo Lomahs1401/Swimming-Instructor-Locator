@@ -4,7 +4,6 @@ import com.example.swimminginstructorlocator.data.model.Appointment
 import com.example.swimminginstructorlocator.data.repo.AppointmentRepo
 import com.example.swimminginstructorlocator.data.service.impl.AppointmentServiceImpl
 import com.example.swimminginstructorlocator.listener.OnResultListener
-import com.example.swimminginstructorlocator.ui.appointment.list.AppointmentListContract
 
 class AppointmentService(
     private val appointmentRepo: AppointmentRepo
@@ -14,6 +13,17 @@ class AppointmentService(
         listener: OnResultListener<MutableList<Appointment>>
     ) {
         appointmentRepo.getAppointmentByUserId(userId, listener)
+    }
+
+    override fun createAppointment(
+        date: String,
+        startTime: String,
+        endTime: String,
+        userId: String,
+        instructorId: String,
+        listener: OnResultListener<Appointment>
+    ) {
+        appointmentRepo.createAppointment(date, startTime, endTime, userId, instructorId, listener)
     }
 
     override fun deleteAppointment(appointmentId: String, listener: OnResultListener<Boolean>) {

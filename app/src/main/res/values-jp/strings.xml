@@ -135,4 +135,10 @@
     <string name="register_successful">登録成功</string>
     <string name="back_to_home_page">ホームページを戻る</string>
     <string name="update_profile">個人情報更新</string>
+    <string name="edit_appointment">アポイント更新</string>
+    <string name="course_detail">コースの詳細</string>
+    <string name="rate">レート:</string>
+    <string name="location">場所:</string>
+    <string name="booking_successful">予約が完了しました:</string>
+    <string name="session_booking_message">%1$sの%2$sから%3$sまでのセッションを予約しました</string>
 </resources>
