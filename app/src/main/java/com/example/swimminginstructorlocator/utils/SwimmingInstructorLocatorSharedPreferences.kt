@@ -1,7 +1,12 @@
 package com.example.swimminginstructorlocator.utils
 
 import android.content.Context
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.model.User
+import com.google.android.material.navigation.NavigationView
 
 class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
     fun putBooleanValue(key: String, value: Boolean) {
@@ -26,25 +31,23 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         return sharedPreferences.getBoolean(key, false)
     }
 
-    fun putStringValue(key: String, value: String) {
-        val sharedPreferences =
-            context.getSharedPreferences(
-                SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            )
+    fun setIsLoggedIn(key: String, value: Boolean) {
+        val sharedPreferences = context.getSharedPreferences(
+            SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+
         val editor = sharedPreferences.edit()
-        editor.putString(key, value)
+        editor.putBoolean(key, value)
         editor.apply()
     }
 
-    fun getStringValue(key: String): String {
-        val sharedPreferences =
-            context.getSharedPreferences(
-                SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            )
-
-        return sharedPreferences.getString(key, "").toString()
+    fun isLoggedIn(key: String): Boolean {
+        val sharedPreferences = context.getSharedPreferences(
+            SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+        return sharedPreferences.getBoolean(key, false)
     }
 
     fun saveUser(key: String, user: User) {
@@ -70,7 +73,7 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         editor.apply()
     }
 
-    fun getUser(key: String): User?{
+    fun getUser(key: String): User? {
         val sharedPreferences =
             context.getSharedPreferences(
                 SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
@@ -91,8 +94,10 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         val createdAt = sharedPreferences.getString("createdAt", null)
         val updatedAt = sharedPreferences.getString("updatedAt", null)
 
-        val user = User(id, username, fullName, email, avatar, gender,
-            address, phone, type, weight, height, createdAt, updatedAt)
+        val user = User(
+            id, username, fullName, email, avatar, gender,
+            address, phone, type, weight, height, createdAt, updatedAt
+        )
 
         return if (id != null && username != null) {
             user
@@ -101,7 +106,7 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
         }
     }
 
-    fun clearUser(key: String) {
+    fun clearUser() {
         val sharedPreferences =
             context.getSharedPreferences(
                 SWIMMING_INSTRUCTOR_LOCATOR_SHARED_PREFERENCES,
@@ -109,7 +114,21 @@ class SwimmingInstructorLocatorSharedPreferences(private val context: Context) {
             )
 
         val editor = sharedPreferences.edit()
-        editor.clear()
+
+        editor.remove("id")
+        editor.remove("username")
+        editor.remove("fullname")
+        editor.remove("email")
+        editor.remove("avatar")
+        editor.remove("gender")
+        editor.remove("address")
+        editor.remove("phone")
+        editor.remove("type")
+        editor.remove("weight")
+        editor.remove("height")
+        editor.remove("createdAt")
+        editor.remove("updatedAt")
+
         editor.apply()
     }
 

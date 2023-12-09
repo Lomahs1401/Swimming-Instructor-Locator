@@ -2,6 +2,10 @@ package com.example.swimminginstructorlocator
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -9,16 +13,17 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.swimminginstructorlocator.adapter.MainPagerAdapter
 import com.example.swimminginstructorlocator.databinding.ActivityMainBinding
 import com.example.swimminginstructorlocator.ui.appointment.list.AppointmentListFragment
-import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.ui.home.HomeFragment
-import com.example.swimminginstructorlocator.ui.instructor.detail.InstructorDetailFragment
 import com.example.swimminginstructorlocator.ui.login.LoginActivity
 import com.example.swimminginstructorlocator.ui.notifications.NotificationsFragment
 import com.example.swimminginstructorlocator.ui.onboarding.OnBoardingActivity
 import com.example.swimminginstructorlocator.ui.profile.ProfileFragment
 import com.example.swimminginstructorlocator.utils.DataLocalManager
+import com.example.swimminginstructorlocator.utils.SwimmingInstructorLocatorSharedPreferences
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingActivity
 import com.example.swimminginstructorlocator.utils.ext.addFragment
+import com.example.swimminginstructorlocator.utils.ext.loadImageWithUrl
+import com.example.swimminginstructorlocator.utils.ext.notNull
 import java.util.Locale
 
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
@@ -27,9 +32,12 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         MainPagerAdapter(this, getFragmentList())
     }
 
+    private lateinit var sharedPreferences: SwimmingInstructorLocatorSharedPreferences
     private var isDrawerOpen = false
 
     override fun createBindingActivity(): ActivityMainBinding {
+        sharedPreferences = SwimmingInstructorLocatorSharedPreferences(applicationContext)
+
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
@@ -43,6 +51,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
             binding.viewPager.adapter = pagerAdapter
             binding.viewPager.isUserInputEnabled = false
 
+            val bottomNavMenu = binding.bottomNav.menu
+            bottomNavMenu.findItem(R.id.navigation_calendar)?.isVisible = DataLocalManager.isLoggedIn()
+
             binding.bottomNav.setOnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.navigation_home -> binding.viewPager.currentItem = 0
@@ -52,68 +63,131 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
                 return@setOnItemSelectedListener true
             }
-
-            // Xử lý khi chọn mục từ left sidebar
-            binding.navigationView.setNavigationItemSelectedListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.manage_account -> {
-                        val profileFragment = ProfileFragment.newInstance()
-                        addFragment(
-                            R.id.fragment_home_container,
-                            profileFragment,
-                            addToBackStack = true
-                        )
-                        closeDrawer()
-                        true
-                    }
-                    R.id.login -> {
-                        Intent(this, LoginActivity::class.java).also {
-                            startActivity(it)
-                            finish()
-                        }
-                        closeDrawer()
-                        true
-                    }
-                    R.id.english -> {
-                        setLocale("en")
-                        closeDrawer()
-                        true
-                    }
-                    R.id.japanese -> {
-                        setLocale("jp")
-                        closeDrawer()
-                        true
-                    }
-                    R.id.share -> {
-                        SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
-                            setTitleText(R.string.update_soon)
-                            setCancelable(true)
-                            show()
-                        }
-                        closeDrawer()
-                        true
-                    }
-                    R.id.rating -> {
-                        SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
-                            setTitleText(R.string.update_soon)
-                            setCancelable(true)
-                            show()
-                        }
-                        closeDrawer()
-                        true
-                    }
-                    else -> false
-                }
-            }
-
-            binding.userImg.setOnClickListener {
-                toggleDrawer()
-            }
         }
     }
 
     override fun initData() {
+        binding.userImg.setOnClickListener {
+            toggleDrawer()
+        }
 
+        if (DataLocalManager.isLoggedIn()) {
+            val user = DataLocalManager.getUser()
+            binding.tvLoginStatus.text = getString(R.string.welcome_back, user?.username)
+            user?.avatar.notNull {
+                user?.avatar?.let { it1 -> binding.userImg.loadImageWithUrl(it1) }
+            }
+        } else {
+            binding.tvLoginStatus.text = getString(R.string.you_re_not_logged_in_yet)
+        }
+
+        updateSidebarContent()
+
+        // Xử lý khi chọn mục từ left sidebar
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.manage_account -> {
+                    val profileFragment = ProfileFragment.newInstance()
+                    addFragment(
+                        R.id.fragment_home_container,
+                        profileFragment,
+                        addToBackStack = true
+                    )
+                    closeDrawer()
+                    true
+                }
+
+                R.id.login -> {
+                    Intent(this, LoginActivity::class.java).also {
+                        startActivity(it)
+                        finish()
+                    }
+                    closeDrawer()
+                    true
+                }
+
+                R.id.logout -> {
+                    DataLocalManager.removeUser()
+                    DataLocalManager.setIsLoggedIn(false)
+                    Intent(this, LoginActivity::class.java).also {
+                        startActivity(it)
+                        finish()
+                    }
+                    true
+                }
+
+                R.id.english -> {
+                    setLocale("en")
+                    closeDrawer()
+                    true
+                }
+
+                R.id.japanese -> {
+                    setLocale("jp")
+                    closeDrawer()
+                    true
+                }
+
+                R.id.share -> {
+                    SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
+                        setTitleText(R.string.update_soon)
+                        setCancelable(true)
+                        show()
+                    }
+                    closeDrawer()
+                    true
+                }
+
+                R.id.rating -> {
+                    SweetAlertDialog(this@MainActivity, SweetAlertDialog.NORMAL_TYPE).apply {
+                        setTitleText(R.string.update_soon)
+                        setCancelable(true)
+                        show()
+                    }
+                    closeDrawer()
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun updateSidebarContent() {
+        val isLoggedIn = DataLocalManager.isLoggedIn()
+
+        // Tìm các TextView trong sidebar_template.xml
+        val headerLayout = binding.navigationView.getHeaderView(0)
+        val tvNotLoggedIn: TextView = headerLayout.findViewById(R.id.tv_not_logged_in_yet)
+        val tvFullName: TextView = headerLayout.findViewById(R.id.name)
+        val tvEmail: TextView = headerLayout.findViewById(R.id.email)
+
+        // Kiểm tra xem có tồn tại NavigationView trong view không
+        binding.navigationView.let {
+            val menu = it.menu
+            val menuLogin = menu.findItem(R.id.login)
+            val menuLogout = menu.findItem(R.id.logout)
+
+            if (isLoggedIn) {
+                menuLogin.isVisible = false
+                menuLogout.isVisible = true
+
+                tvNotLoggedIn.visibility = View.GONE
+                tvFullName.visibility = View.VISIBLE
+                tvEmail.visibility = View.VISIBLE
+
+                val user = DataLocalManager.getUser()
+                tvFullName.text = user?.fullName
+                tvEmail.text = user?.email
+            } else {
+                menuLogin.isVisible = true
+                menuLogout.isVisible = false
+
+                tvNotLoggedIn.visibility = View.VISIBLE
+                tvFullName.visibility = View.GONE
+                tvEmail.visibility = View.GONE
+            }
+        }
     }
 
     private fun toggleDrawer() {
@@ -141,11 +215,66 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         recreate()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
+        // Inflate left_sidebar_menu into the main menu
+//        menuInflater.inflate(R.menu.left_sidebar_menu, menu)
+//
+//        val loginMenuItem = menu?.findItem(R.id.login)
+//        // Kiểm tra trạng thái đăng nhập và cập nhật nội dung MenuItem
+//        if (!DataLocalManager.isLoggedIn()) {
+//            loginMenuItem?.setTitle(R.string.logout)
+//        } else {
+//            loginMenuItem?.setTitle(R.string.login)
+//        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.login -> {
+                // Kiểm tra trạng thái đăng nhập và thực hiện hành động tương ứng
+                if (DataLocalManager.isLoggedIn()) {
+                    // Đăng xuất
+                    // ...
+                    // Cập nhật trạng thái đăng nhập
+                    DataLocalManager.removeUser()
+                    // Cập nhật lại menu
+                    invalidateOptionsMenu()
+                    // Hiển thị Toast thay vì SweetAlertDialog
+                    Toast.makeText(this, "Đang mở màn hình đăng nhập", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Hiển thị Toast thay vì SweetAlertDialog
+                    Toast.makeText(this, "Đang mở màn hình đăng nhập", Toast.LENGTH_SHORT).show()
+//                    SweetAlertDialog(applicationContext, SweetAlertDialog.PROGRESS_TYPE)
+//                        .setTitleText("Cac to")
+//                        .apply {
+//                            setCancelable(false)
+//                            show()
+//                        }
+                    // Mở màn hình đăng nhập
+                    val loginIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(loginIntent)
+                }
+                return true
+            }
+            // Xử lý các menu item khác nếu cần
+            // ...
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun getFragmentList(): List<Fragment> {
-        return listOf(
-            HomeFragment.newInstance(),
-            AppointmentListFragment.newInstance(),
-            NotificationsFragment.newInstance(),
-        )
+        return if (DataLocalManager.isLoggedIn()) {
+            listOf(
+                HomeFragment.newInstance(),
+                AppointmentListFragment.newInstance(),
+                NotificationsFragment.newInstance(),
+            )
+        } else {
+            listOf(
+                HomeFragment.newInstance(),
+                NotificationsFragment.newInstance(),
+            )
+        }
     }
 }

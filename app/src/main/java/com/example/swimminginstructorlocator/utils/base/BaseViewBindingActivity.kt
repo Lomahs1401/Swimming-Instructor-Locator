@@ -18,8 +18,8 @@ abstract class BaseViewBindingActivity<T : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = createBindingActivity()
         setContentView(binding.root)
-        initData()
         initView()
+        initData()
     }
 
     override fun onDestroy() {

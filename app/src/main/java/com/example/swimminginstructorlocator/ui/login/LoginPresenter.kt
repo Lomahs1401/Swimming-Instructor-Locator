@@ -8,7 +8,6 @@ import com.example.swimminginstructorlocator.data.request.LoginRequest
 import com.example.swimminginstructorlocator.data.service.impl.AuthServiceImpl
 import com.example.swimminginstructorlocator.databinding.ActivityLoginBinding
 import com.example.swimminginstructorlocator.listener.OnResultListener
-import com.example.swimminginstructorlocator.utils.DataLocalManager
 import java.lang.Exception
 
 class LoginPresenter(
@@ -41,7 +40,6 @@ class LoginPresenter(
     override fun signIn(loginRegister: LoginRequest) {
         authService.login(loginRegister, object : OnResultListener<User> {
             override fun onSuccess(dataResult: User) {
-                DataLocalManager.saveUser(dataResult)
                 view?.onSignIn(dataResult)
             }
 
