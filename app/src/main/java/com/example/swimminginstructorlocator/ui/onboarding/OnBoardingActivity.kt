@@ -26,11 +26,11 @@ class OnBoardingActivity : BaseViewBindingActivity<ActivityOnBoardingBinding>() 
         return ActivityOnBoardingBinding.inflate(layoutInflater)
     }
 
-    override fun initData() {
+    override fun initView() {
         introSlideAdapter = getIntroSlideAdapter()
     }
 
-    override fun initView() {
+    override fun initData() {
         binding.introSlider.adapter = introSlideAdapter
         // Đặt PageTransformer
         binding.introSlider.setPageTransformer(ZoomOutPageTransformer())

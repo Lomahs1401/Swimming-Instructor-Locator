@@ -87,6 +87,7 @@
     <string name="sign_in_link"><u>こちらでサインイン</u></string>
     <string name="sign_up_link"><u>こちらでサインアップ</u></string>
     <string name="login">ログイン</string>
+    <string name="logout">ログアウト</string>
     <string name="or">または</string>
     <string name="don_t_have_an_account_yet">アカウントはまだですか？</string>
     <string name="already_have_an_account">アカウントはもうありますか？</string>
@@ -141,4 +142,8 @@
     <string name="location">場所:</string>
     <string name="booking_successful">予約が完了しました:</string>
     <string name="session_booking_message">%1$sの%2$sから%3$sまでのセッションを予約しました</string>
+    <string name="please_wait">お待ちください…</string>
+    <string name="login_failed">ログインに失敗しました</string>
+    <string name="try_again">時間をおいて再度お試しください</string>
+    <string name="welcome_back">%1$sさん、おかえり</string>
 </resources>

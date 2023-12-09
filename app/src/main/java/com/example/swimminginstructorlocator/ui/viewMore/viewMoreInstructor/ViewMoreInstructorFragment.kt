@@ -96,7 +96,7 @@ class ViewMoreInstructorFragment : BaseViewBindingFragment<FragmentViewMoreInstr
 
     override fun onInstructorImageClick(instructor: Instructor) {
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading...")
+            .setTitleText(R.string.loading)
             .apply {
                 setCancelable(false)
                 show()

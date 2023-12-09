@@ -96,7 +96,7 @@ class ViewMoreCenterFragment : BaseViewBindingFragment<FragmentViewMoreCenterBin
 
     override fun onCenterImageClick(center: Center) {
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading...")
+            .setTitleText(R.string.loading)
             .apply {
                 setCancelable(false)
                 show()

@@ -7,8 +7,10 @@ class DataLocalManager {
     private lateinit var swimmingInstructorLocatorSharedPreferences: SwimmingInstructorLocatorSharedPreferences
 
     companion object {
-        private const val SHARED_PREFERENCES_FIRST_INSTALL_KEY = "FIRST_INSTALL"
-        private const val SHARED_PREFERENCES_CREATE_SESSION = "CREATE_SESSION"
+        const val SHARED_PREFERENCES_FIRST_INSTALL_KEY = "FIRST_INSTALL"
+        const val SHARED_PREFERENCES_LOGIN_SESSION = "LOGIN_SESSION"
+        const val SHARED_PREFERENCES_USER_INFO = "USER_INFO"
+        const val SHARED_PREFERENCES_INSTALL_STATUS = "INSTALL_STATUS"
 
         private var instance: DataLocalManager? = null
 
@@ -37,23 +39,33 @@ class DataLocalManager {
             )
         }
 
+        fun setIsLoggedIn(value: Boolean) {
+            getInstance().swimmingInstructorLocatorSharedPreferences.setIsLoggedIn(
+                SHARED_PREFERENCES_LOGIN_SESSION, value
+            )
+        }
+
+        fun isLoggedIn(): Boolean {
+            return getInstance().swimmingInstructorLocatorSharedPreferences.isLoggedIn(
+                SHARED_PREFERENCES_LOGIN_SESSION
+            )
+        }
+
         fun getUser(): User? {
             return getInstance().swimmingInstructorLocatorSharedPreferences.getUser(
-                SHARED_PREFERENCES_CREATE_SESSION
+                SHARED_PREFERENCES_USER_INFO
             )
         }
 
         fun saveUser(user: User) {
-            return getInstance().swimmingInstructorLocatorSharedPreferences.saveUser(
-                SHARED_PREFERENCES_CREATE_SESSION,
+            getInstance().swimmingInstructorLocatorSharedPreferences.saveUser(
+                SHARED_PREFERENCES_USER_INFO,
                 user
             )
         }
 
         fun removeUser() {
-            return getInstance().swimmingInstructorLocatorSharedPreferences.clearUser(
-                SHARED_PREFERENCES_CREATE_SESSION
-            )
+            getInstance().swimmingInstructorLocatorSharedPreferences.clearUser()
         }
     }
 }
