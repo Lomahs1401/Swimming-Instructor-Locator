@@ -78,8 +78,8 @@
     <string name="placeholder_username">john.doe</string>
     <string name="placeholder_pwd">********</string>
     <string name="placeholder_email">john.doe@gmail.com</string>
-    <string name="error_field_username">Username is required</string>
     <string name="required_marked">*</string>
+    <string name="error_field_username">Username is required</string>
     <string name="error_field_email">Email is required</string>
     <string name="error_field_password">Password is required</string>
     <string name="sign_up">Sign Up</string>
