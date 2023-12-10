@@ -215,54 +215,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         recreate()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-        // Inflate left_sidebar_menu into the main menu
-//        menuInflater.inflate(R.menu.left_sidebar_menu, menu)
-//
-//        val loginMenuItem = menu?.findItem(R.id.login)
-//        // Kiểm tra trạng thái đăng nhập và cập nhật nội dung MenuItem
-//        if (!DataLocalManager.isLoggedIn()) {
-//            loginMenuItem?.setTitle(R.string.logout)
-//        } else {
-//            loginMenuItem?.setTitle(R.string.login)
-//        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.login -> {
-                // Kiểm tra trạng thái đăng nhập và thực hiện hành động tương ứng
-                if (DataLocalManager.isLoggedIn()) {
-                    // Đăng xuất
-                    // ...
-                    // Cập nhật trạng thái đăng nhập
-                    DataLocalManager.removeUser()
-                    // Cập nhật lại menu
-                    invalidateOptionsMenu()
-                    // Hiển thị Toast thay vì SweetAlertDialog
-                    Toast.makeText(this, "Đang mở màn hình đăng nhập", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Hiển thị Toast thay vì SweetAlertDialog
-                    Toast.makeText(this, "Đang mở màn hình đăng nhập", Toast.LENGTH_SHORT).show()
-//                    SweetAlertDialog(applicationContext, SweetAlertDialog.PROGRESS_TYPE)
-//                        .setTitleText("Cac to")
-//                        .apply {
-//                            setCancelable(false)
-//                            show()
-//                        }
-                    // Mở màn hình đăng nhập
-                    val loginIntent = Intent(this, LoginActivity::class.java)
-                    startActivity(loginIntent)
-                }
-                return true
-            }
-            // Xử lý các menu item khác nếu cần
-            // ...
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun getFragmentList(): List<Fragment> {
         return if (DataLocalManager.isLoggedIn()) {
             listOf(

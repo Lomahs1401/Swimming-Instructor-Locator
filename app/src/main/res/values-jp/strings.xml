@@ -78,8 +78,8 @@
     <string name="placeholder_username">john.doe</string>
     <string name="placeholder_pwd">********</string>
     <string name="placeholder_email">john.doe@gmail.com</string>
-    <string name="error_field_username">ユーザー名は必須</string>
     <string name="required_marked">*</string>
+    <string name="error_field_username">ユーザー名は必須</string>
     <string name="error_field_email">メールは必須</string>
     <string name="error_field_password">パスワードは必須</string>
     <string name="sign_up">サインアップ</string>
