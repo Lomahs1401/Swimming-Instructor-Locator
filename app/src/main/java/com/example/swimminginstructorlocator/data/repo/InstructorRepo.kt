@@ -5,6 +5,7 @@ import com.example.swimminginstructorlocator.api.CenterApi
 import com.example.swimminginstructorlocator.api.InstructorApi
 import com.example.swimminginstructorlocator.constant.Constant
 import com.example.swimminginstructorlocator.data.model.Center
+import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.listener.OnResultListener
@@ -118,6 +119,41 @@ class InstructorRepo {
             }
 
             override fun onFailure(call: Call<InstructorApi.InstructorDetailApiResponse>, t: Throwable) {
+                val ex = Exception("Oops.. Please try again")
+                listener.onError(ex)
+                Log.e(Constant.TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    fun getListCourse(instructorId: String, listener: OnResultListener<MutableList<Course>>) {
+        val api = Retrofit.Builder()
+            .baseUrl(Constant.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(InstructorApi::class.java)
+
+        // Xây dựng URL đầy đủ với path và query parameter
+        val url = "course/course-of-teacher/${instructorId}"
+
+        api.getListCourse(url).enqueue(object : Callback<InstructorApi.ListCourseResponse> {
+            override fun onResponse(
+                call: Call<InstructorApi.ListCourseResponse>,
+                response: Response<InstructorApi.ListCourseResponse>
+            ) {
+                val courseResponse = response.body()
+                if (response.isSuccessful) {
+                    courseResponse?.let {
+                        val listCourse = it.data
+                        listener.onSuccess(listCourse)
+                    }
+                    courseResponse?.let { Log.i(Constant.TAG, it.message) }
+                } else {
+                    courseResponse?.let { Log.i(Constant.TAG, it.message) }
+                }
+            }
+
+            override fun onFailure(call: Call<InstructorApi.ListCourseResponse>, t: Throwable) {
                 val ex = Exception("Oops.. Please try again")
                 listener.onError(ex)
                 Log.e(Constant.TAG, "onFailure: ${t.message}")

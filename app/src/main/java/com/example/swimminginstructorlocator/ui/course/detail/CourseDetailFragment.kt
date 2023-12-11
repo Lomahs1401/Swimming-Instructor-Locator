@@ -1,15 +1,11 @@
 package com.example.swimminginstructorlocator.ui.course.detail
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.swimminginstructorlocator.R
 import com.example.swimminginstructorlocator.data.model.CourseDetail
-import com.example.swimminginstructorlocator.databinding.FragmentCalendarBinding
 import com.example.swimminginstructorlocator.databinding.FragmentCourseDetailBinding
 import com.example.swimminginstructorlocator.ui.calendar.CalendarFragment
 import com.example.swimminginstructorlocator.utils.base.BaseViewBindingFragment

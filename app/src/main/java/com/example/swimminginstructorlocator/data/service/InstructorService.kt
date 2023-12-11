@@ -1,5 +1,6 @@
 package com.example.swimminginstructorlocator.data.service
 
+import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.example.swimminginstructorlocator.data.repo.InstructorRepo
@@ -19,6 +20,13 @@ class InstructorService(
 
     override fun searchInstructor(searchValue: String, listener: OnResultListener<MutableList<Instructor>>) {
         instructorRepo.searchInstructors(searchValue, listener)
+    }
+
+    override fun getListCourse(
+        instructorId: String,
+        listener: OnResultListener<MutableList<Course>>
+    ) {
+        instructorRepo.getListCourse(instructorId, listener)
     }
 
     companion object {

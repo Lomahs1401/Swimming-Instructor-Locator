@@ -1,5 +1,6 @@
 package com.example.swimminginstructorlocator.api
 
+import com.example.swimminginstructorlocator.data.model.Course
 import com.example.swimminginstructorlocator.data.model.Instructor
 import com.example.swimminginstructorlocator.data.model.InstructorDetail
 import com.google.gson.annotations.SerializedName
@@ -34,6 +35,13 @@ interface InstructorApi {
         val teachers: MutableList<Instructor>
     )
 
+    data class ListCourseResponse(
+        @SerializedName("message")
+        val message: String,
+        @SerializedName("data")
+        val data: MutableList<Course>
+    )
+
     @GET("teacher")
     fun getInstructors(): Call<ApiResponse>
 
@@ -42,4 +50,7 @@ interface InstructorApi {
 
     @GET
     fun searchInstructors(@Url searchValue: String): Call<SearchApiResponse>
+
+    @GET
+    fun getListCourse(@Url instructorId: String): Call<ListCourseResponse>
 }

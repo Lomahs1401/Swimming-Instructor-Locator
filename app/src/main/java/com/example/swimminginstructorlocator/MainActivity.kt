@@ -2,11 +2,8 @@ package com.example.swimminginstructorlocator
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -165,10 +162,12 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         // Kiểm tra xem có tồn tại NavigationView trong view không
         binding.navigationView.let {
             val menu = it.menu
+            val menuManageAccount = menu.findItem(R.id.manage_account)
             val menuLogin = menu.findItem(R.id.login)
             val menuLogout = menu.findItem(R.id.logout)
 
             if (isLoggedIn) {
+                menuManageAccount.isVisible = true
                 menuLogin.isVisible = false
                 menuLogout.isVisible = true
 
@@ -180,6 +179,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 tvFullName.text = user?.fullName
                 tvEmail.text = user?.email
             } else {
+                menuManageAccount.isVisible = false
                 menuLogin.isVisible = true
                 menuLogout.isVisible = false
 
