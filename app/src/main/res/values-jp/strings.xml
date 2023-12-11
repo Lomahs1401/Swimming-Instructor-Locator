@@ -146,4 +146,5 @@
     <string name="login_failed">ログインに失敗しました</string>
     <string name="try_again">時間をおいて再度お試しください</string>
     <string name="welcome_back">%1$sさん、おかえり</string>
+    <string name="certification">資格:</string>
 </resources>
