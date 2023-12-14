@@ -147,8 +147,10 @@
     <string name="try_again">Try again</string>
     <string name="welcome_back">Welcome back, %1$s</string>
     <string name="certification">Certification:</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send">Send</string>
     <string name="type_a_message">Type a message...</string>
+    <string name="health">Health</string>
+    <string name="bmi_chart">BMI Chart</string>
+    <string name="month">December</string>
 </resources>
