@@ -67,4 +67,5 @@ dependencies {
     implementation("com.afollestad.material-dialogs:files:3.3.0")
     implementation("com.afollestad.material-dialogs:color:3.3.0")
     implementation("com.github.f0ris.sweetalert:library:1.6.2")
+    implementation("com.jjoe64:graphview:4.2.2")
 }

@@ -147,4 +147,8 @@
     <string name="try_again">時間をおいて再度お試しください</string>
     <string name="welcome_back">%1$sさん、おかえり</string>
     <string name="certification">資格:</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send">送信</string>
+    <string name="type_a_message">メッセージを入力してください...</string>
+    <string name="health">健康</string>
 </resources>
